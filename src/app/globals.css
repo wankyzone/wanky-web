@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --wanky-pink: #ff7ac8;
+  --wanky-bg: #fff5fb;
+  --wanky-text: #3a3a3a;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  color: var(--wanky-text);
+  background: var(--wanky-bg);
+}
