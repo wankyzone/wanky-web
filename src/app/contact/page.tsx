@@ -11,7 +11,7 @@ export default function ContactPage() {
           <div className="rounded-xl border border-wanky-border bg-wanky-bg p-4">
             <p className="text-sm font-semibold">Email</p>
             <p className="mt-1 text-sm text-wanky-muted">
-              hello@wanky.dev (replace with your real inbox once domain is connected)
+              hello.wanky@gmail.com
             </p>
           </div>
 
