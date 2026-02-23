@@ -1,16 +1,6 @@
 import Link from "next/link";
 
-<div className="p-6 bg-red-500 text-white font-bold">
-  Tailwind test banner
-</div>
-
-function Card({
-  title,
-  desc,
-}: {
-  title: string;
-  desc: string;
-}) {
+function Card({ title, desc }: { title: string; desc: string }) {
   return (
     <div className="rounded-xl2 border border-wanky-border bg-white p-6 shadow-soft">
       <h3 className="text-base font-semibold tracking-tight">{title}</h3>
@@ -23,15 +13,17 @@ export default function HomePage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-14">
       {/* Hero */}
-      <section className="rounded-xl2 border border-wanky-border bg-gradient-to-b from-wanky-pinkSoft/60 to-white p-10 shadow-soft">
+      <section className="rounded-xl2 border border-wanky-border/80 bg-white/70 p-10 shadow-soft backdrop-blur">
         <div className="max-w-3xl">
           <p className="text-sm font-medium text-wanky-muted">Wanky</p>
-          <h1 className="mt-3 text-4xl font-semibold tracking-tight">
+
+          <h1 className="mt-3 text-5xl font-semibold tracking-tight">
             Internal systems and cloud software for modern businesses.
           </h1>
+
           <p className="mt-4 text-base text-wanky-muted">
-            We design and ship production-ready admin dashboards, internal tools, and automation systems
-            that replace spreadsheets and manual workflows.
+            We design and ship production-ready admin dashboards, internal tools, and automation
+            systems that replace spreadsheets and manual workflows.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -41,6 +33,7 @@ export default function HomePage() {
             >
               Talk to us
             </Link>
+
             <Link
               href="/systems"
               className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-wanky-text shadow-sm ring-1 ring-wanky-border hover:shadow"
@@ -74,22 +67,34 @@ export default function HomePage() {
       {/* Proof / Philosophy */}
       <section className="mt-12 rounded-xl2 border border-wanky-border bg-white p-10 shadow-soft">
         <h2 className="text-2xl font-semibold tracking-tight">How we work</h2>
+
         <div className="mt-6 grid gap-6 md:grid-cols-4">
           <div>
             <p className="text-sm font-semibold">Clarity</p>
-            <p className="mt-2 text-sm text-wanky-muted">Fixed scope and a delivery plan you can trust.</p>
+            <p className="mt-2 text-sm text-wanky-muted">
+              Fixed scope and a delivery plan you can trust.
+            </p>
           </div>
+
           <div>
             <p className="text-sm font-semibold">Reliability</p>
-            <p className="mt-2 text-sm text-wanky-muted">Systems that survive real usage, not demos.</p>
+            <p className="mt-2 text-sm text-wanky-muted">
+              Systems that survive real usage, not demos.
+            </p>
           </div>
+
           <div>
             <p className="text-sm font-semibold">Speed</p>
-            <p className="mt-2 text-sm text-wanky-muted">Ship in weeks, iterate with intention.</p>
+            <p className="mt-2 text-sm text-wanky-muted">
+              Ship in weeks, iterate with intention.
+            </p>
           </div>
+
           <div>
             <p className="text-sm font-semibold">Durability</p>
-            <p className="mt-2 text-sm text-wanky-muted">Maintainable code and documentation.</p>
+            <p className="mt-2 text-sm text-wanky-muted">
+              Maintainable code and documentation.
+            </p>
           </div>
         </div>
       </section>

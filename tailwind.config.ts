@@ -14,7 +14,8 @@ export default {
           bg: "#FFF5FB",
           text: "#3A3A3A",
           muted: "#6B7280",
-          border: "#EDEDED",
+          border: "#F1F1F4",
+          letterspacig: { tight2: "-0.03em"}
         },
       },
       boxShadow: {

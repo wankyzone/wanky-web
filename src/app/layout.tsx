@@ -1,3 +1,4 @@
+import { WankyMark } from "@/components/WankyMark";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -19,7 +20,7 @@ function Nav() {
     <header className="sticky top-0 z-50 border-b border-wanky-border bg-wanky-bg/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
         <Link href="/" className="flex items-center gap-3">
-          <div className="h-9 w-9 rounded-xl bg-wanky-pink shadow-sm" aria-hidden />
+        <WankyMark size={36} />
           <span className="text-sm font-semibold tracking-tight">Wanky</span>
         </Link>
 
