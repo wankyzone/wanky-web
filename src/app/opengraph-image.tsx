@@ -1,51 +1,65 @@
 import { ImageResponse } from "next/og";
 
-export const size = { width: 1200, height: 630 };
+export const size = {
+  width: 1200,
+  height: 630,
+};
+
 export const contentType = "image/png";
 
-export default function OG() {
+export default function OpenGraphImage() {
   return new ImageResponse(
     (
       <div
         style={{
-          width: "1200px",
-          height: "630px",
           display: "flex",
-          background: "#FFF5FB",
-          padding: "72px",
-          fontFamily: "Inter, system-ui, -apple-system, Segoe UI, Roboto",
-          alignItems: "center",
-          justifyContent: "space-between",
+          width: "100%",
+          height: "100%",
+          background: "#f3edf2",
+          color: "#1f1f1f",
+          padding: "60px",
+          flexDirection: "column",
+          justifyContent: "center",
         }}
       >
-        <div style={{ maxWidth: 720 }}>
-          <div style={{ fontSize: 22, color: "#6B7280", marginBottom: 12 }}>
-            Wanky Systems
-          </div>
-          <div style={{ fontSize: 64, fontWeight: 700, color: "#222" }}>
-            Cloud-first internal systems for modern businesses.
-          </div>
-          <div style={{ fontSize: 22, color: "#374151", marginTop: 18 }}>
-            Admin dashboards · Internal tools · Automation
-          </div>
+        <div
+          style={{
+            display: "flex",
+            fontSize: 28,
+            marginBottom: 24,
+            fontWeight: 600,
+          }}
+        >
+          Wanky
         </div>
 
         <div
           style={{
-            width: 210,
-            height: 210,
-            borderRadius: 56,
-            background: "#FF7AC8",
             display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            boxShadow: "0 18px 40px rgba(0,0,0,0.12)",
+            fontSize: 72,
+            lineHeight: 1.05,
+            fontWeight: 700,
+            maxWidth: 900,
+            marginBottom: 24,
           }}
         >
-          <div style={{ width: 130, height: 130, borderRadius: 40, background: "white" }} />
+          Internal systems and cloud software for modern businesses.
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            fontSize: 28,
+            maxWidth: 850,
+            color: "#444",
+          }}
+        >
+          Admin dashboards, internal tools, and automation systems.
         </div>
       </div>
     ),
-    size
+    {
+      ...size,
+    }
   );
 }
