@@ -1,5 +1,13 @@
 export default function Home() {
   return (
+    <div style={{background: "red", height: "100vh"}}>
+      <h1>TEST PAGE</h1>
+    </div>
+  );
+}
+
+export default function Home() {
+  return (
     <main className="min-h-screen bg-black text-white p-10">
       <h1 className="text-5xl font-bold mb-6">Wanky</h1>
 
@@ -26,4 +34,4 @@ export default function Home() {
       </section>
     </main>
   );
-}
+} 
