@@ -12,7 +12,7 @@ export default function SystemsPage() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="rounded-xl2 border border-wanky-border bg-white p-10 shadow-soft"
+        className="rounded-xl2 border border-wanky-border bg-white p-10 shadow-sm hover:shadow-xl transition-all duration-300"
       >
         <p className="text-sm font-medium text-wanky-muted">Wanky Systems</p>
 
@@ -28,19 +28,22 @@ export default function SystemsPage() {
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/pricing"
-            className="rounded-xl bg-black px-6 py-3 text-sm font-semibold text-white shadow-soft hover:scale-105 hover:opacity-90 transition"
+            className="rounded-xl bg-black px-6 py-3 text-sm font-semibold text-white shadow-sm
+            transition-all duration-200 hover:scale-105 hover:opacity-90 active:scale-95"
           >
             View pricing
           </Link>
 
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center rounded-full border border-black px-6 py-3 text-sm font-medium text-black transition duration-300 hover:-translate-y-0.5 hover:bg-black hover:text-white hover:shadow-md"
+            className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-black shadow-sm
+            ring-1 ring-wanky-border transition-all duration-200
+            hover:scale-105 hover:shadow-lg active:scale-95"
           >
-            Talk to us 
-         </Link>
-       </div> 
-     </motion.section>  
+            Talk to us
+          </Link>
+        </div>
+      </motion.section>
 
       {/* WHAT WE BUILD */}
       <section className="grid gap-6 md:grid-cols-3">
@@ -64,7 +67,8 @@ export default function SystemsPage() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.15 }}
             viewport={{ once: true }}
-            className="rounded-xl2 border border-wanky-border bg-white p-6 shadow-soft hover:shadow-xl hover:-translate-y-1 transition"
+            className="rounded-xl2 border border-wanky-border bg-white p-6 shadow-sm
+            hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
           >
             <h3 className="text-lg font-semibold">{item.title}</h3>
             <p className="mt-2 text-sm text-wanky-muted">{item.desc}</p>
@@ -77,7 +81,7 @@ export default function SystemsPage() {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="rounded-xl2 border border-wanky-border bg-white p-8 shadow-soft"
+        className="rounded-xl2 border border-wanky-border bg-white p-8 shadow-sm hover:shadow-xl transition-all duration-300"
       >
         <h2 className="text-2xl font-semibold tracking-tight">Who this is for</h2>
 
@@ -103,7 +107,7 @@ export default function SystemsPage() {
       </motion.section>
 
       {/* HOW WE WORK */}
-      <section className="rounded-xl2 border border-wanky-border bg-white p-8 shadow-soft">
+      <section className="rounded-xl2 border border-wanky-border bg-white p-8 shadow-sm hover:shadow-xl transition-all duration-300">
         <h2 className="text-2xl font-semibold tracking-tight">How we work</h2>
 
         <div className="mt-6 grid gap-6 md:grid-cols-4">
@@ -131,7 +135,7 @@ export default function SystemsPage() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: i * 0.1 }}
               viewport={{ once: true }}
-              className="hover:translate-y-[-2px] transition"
+              className="hover:-translate-y-1 transition-all duration-300"
             >
               <p className="font-semibold">{item.title}</p>
               <p className="mt-2 text-sm text-wanky-muted">{item.desc}</p>
@@ -145,7 +149,7 @@ export default function SystemsPage() {
         initial={{ opacity: 0, scale: 0.98 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
-        className="rounded-xl2 border border-wanky-border bg-black p-10 text-center text-white shadow-soft"
+        className="rounded-xl2 border border-wanky-border bg-black p-10 text-center text-white shadow-lg"
       >
         <h2 className="text-2xl font-semibold tracking-tight">
           Need a system for your business?
@@ -158,7 +162,8 @@ export default function SystemsPage() {
         <div className="mt-6">
           <Link
             href="/contact"
-            className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-black shadow-soft hover:scale-105 transition"
+            className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-black
+            transition-all duration-200 hover:scale-105 hover:shadow-lg active:scale-95"
           >
             Talk to us
           </Link>
