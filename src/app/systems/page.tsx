@@ -39,9 +39,10 @@ export default function SystemsPage() {
             transition-all duration-200
             hover:scale-105 hover:shadow-lg active:scale-95"
           >
-            Talk to us
-          </Link>
-        </motion.section>  
+            Talk to us 
+         </Link>
+       </div> 
+     </motion.section>  
 
       {/* WHAT WE BUILD */}
       <section className="grid gap-6 md:grid-cols-3">
