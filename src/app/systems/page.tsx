@@ -1,11 +1,19 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function SystemsPage() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-14 space-y-10">
-      
+    <div className="mx-auto max-w-6xl px-4 py-14 space-y-16">
+
       {/* HERO */}
-      <section className="rounded-xl2 border border-wanky-border bg-white p-10 shadow-soft">
+      <motion.section
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="rounded-xl2 border border-wanky-border bg-white p-10 shadow-soft"
+      >
         <p className="text-sm font-medium text-wanky-muted">Wanky Systems</p>
 
         <h1 className="mt-3 text-4xl font-semibold tracking-tight leading-tight">
@@ -20,26 +28,19 @@ export default function SystemsPage() {
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/pricing"
-            className="rounded-xl bg-black px-6 py-3 text-sm font-semibold text-white shadow-soft hover:opacity-90 transition"
+            className="rounded-xl bg-black px-6 py-3 text-sm font-semibold text-white shadow-soft hover:scale-105 hover:opacity-90 transition"
           >
             View pricing
           </Link>
 
           <Link
             href="/contact"
-            className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-wanky-text ring-1 ring-wanky-border hover:shadow transition"
+            className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-wanky-text ring-1 ring-wanky-border hover:shadow-md transition"
           >
             Talk to us
           </Link>
         </div>
-
-        <div className="mt-6 flex flex-wrap gap-4 text-xs text-wanky-muted">
-          <span>Admin dashboards</span>
-          <span>Internal tools</span>
-          <span>Automation systems</span>
-          <span>Cloud-ready builds</span>
-        </div>
-      </section>
+      </motion.section>
 
       {/* WHAT WE BUILD */}
       <section className="grid gap-6 md:grid-cols-3">
@@ -56,47 +57,50 @@ export default function SystemsPage() {
             title: "Automation",
             desc: "Replace repetitive manual processes with structured automation, alerts, and system-driven workflows.",
           },
-        ].map((item) => (
-          <div
+        ].map((item, i) => (
+          <motion.div
             key={item.title}
-            className="rounded-xl2 border border-wanky-border bg-white p-6 shadow-soft hover:shadow-md transition"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.15 }}
+            viewport={{ once: true }}
+            className="rounded-xl2 border border-wanky-border bg-white p-6 shadow-soft hover:shadow-xl hover:-translate-y-1 transition"
           >
             <h3 className="text-lg font-semibold">{item.title}</h3>
             <p className="mt-2 text-sm text-wanky-muted">{item.desc}</p>
-          </div>
+          </motion.div>
         ))}
       </section>
 
       {/* WHO IT'S FOR */}
-      <section className="rounded-xl2 border border-wanky-border bg-white p-8 shadow-soft">
+      <motion.section
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="rounded-xl2 border border-wanky-border bg-white p-8 shadow-soft"
+      >
         <h2 className="text-2xl font-semibold tracking-tight">Who this is for</h2>
 
         <div className="mt-6 grid gap-6 md:grid-cols-2">
-          <div>
-            <p className="text-sm text-wanky-muted">
-              Businesses currently running operations through spreadsheets, WhatsApp, or disconnected tools.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-sm text-wanky-muted">
-              Teams that need better visibility, accountability, and structure across their internal processes.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-sm text-wanky-muted">
-              Founders and operators who want systems that scale with growth — not break under pressure.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-sm text-wanky-muted">
-              Companies ready to move from manual coordination to real operational infrastructure.
-            </p>
-          </div>
+          {[
+            "Businesses running operations via spreadsheets or WhatsApp",
+            "Teams needing better visibility and accountability",
+            "Founders scaling operations without chaos",
+            "Companies transitioning to structured systems",
+          ].map((text, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="text-sm text-wanky-muted"
+            >
+              {text}
+            </motion.div>
+          ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* HOW WE WORK */}
       <section className="rounded-xl2 border border-wanky-border bg-white p-8 shadow-soft">
@@ -106,48 +110,60 @@ export default function SystemsPage() {
           {[
             {
               title: "Clarity",
-              desc: "We define scope, workflows, and system structure before writing code.",
+              desc: "We define scope and structure before writing code.",
             },
             {
               title: "Reliability",
-              desc: "We build systems for real usage — not demos or surface-level prototypes.",
+              desc: "Built for real-world usage, not demos.",
             },
             {
               title: "Speed",
-              desc: "Tight iteration cycles with fast, production-focused delivery.",
+              desc: "Fast iteration and delivery cycles.",
             },
             {
               title: "Durability",
-              desc: "Maintainable systems designed to scale as your business grows.",
+              desc: "Systems designed to scale long-term.",
             },
-          ].map((item) => (
-            <div key={item.title}>
+          ].map((item, i) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="hover:translate-y-[-2px] transition"
+            >
               <p className="font-semibold">{item.title}</p>
               <p className="mt-2 text-sm text-wanky-muted">{item.desc}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
 
       {/* CTA */}
-      <section className="rounded-xl2 border border-wanky-border bg-white p-10 shadow-soft text-center">
+      <motion.section
+        initial={{ opacity: 0, scale: 0.98 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        className="rounded-xl2 border border-wanky-border bg-black p-10 text-center text-white shadow-soft"
+      >
         <h2 className="text-2xl font-semibold tracking-tight">
           Need a system for your business?
         </h2>
 
-        <p className="mt-3 text-sm text-wanky-muted">
+        <p className="mt-3 text-sm text-white/70">
           Let’s design something structured, scalable, and built for real operations.
         </p>
 
         <div className="mt-6">
           <Link
             href="/contact"
-            className="rounded-xl bg-black px-6 py-3 text-sm font-semibold text-white shadow-soft hover:opacity-90 transition"
+            className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-black shadow-soft hover:scale-105 transition"
           >
             Talk to us
           </Link>
         </div>
-      </section>
+      </motion.section>
 
     </div>
   );
