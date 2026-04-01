@@ -35,9 +35,7 @@ export default function SystemsPage() {
 
           <Link
             href="/contact"
-            className="rounded-xl bg-black px-6 py-3 text-sm font-semibold text-black shadow-soft
-            transition-all duration-200
-            hover:scale-105 hover:shadow-lg active:scale-95"
+            className="inline-flex items-center justify-center rounded-full border border-black px-6 py-3 text-sm font-medium text-black transition duration-300 hover:-translate-y-0.5 hover:bg-black hover:text-white hover:shadow-md"
           >
             Talk to us 
          </Link>
