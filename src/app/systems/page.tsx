@@ -35,12 +35,13 @@ export default function SystemsPage() {
 
           <Link
             href="/contact"
-            className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-wanky-text ring-1 ring-wanky-border hover:shadow-md transition"
+            className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-black shadow-soft
+            transition-all duration-200
+            hover:scale-105 hover:shadow-lg active:scale-95"
           >
             Talk to us
           </Link>
-        </div>
-      </motion.section>
+        </motion.section>  
 
       {/* WHAT WE BUILD */}
       <section className="grid gap-6 md:grid-cols-3">
