@@ -14,3 +14,7 @@ body {
   color: var(--wanky-text);
   background: var(--wanky-bg);
 }
+
+body {
+  background: radial-gradient(circle at top, #fce7f3, #ffffff 40%);
+}
