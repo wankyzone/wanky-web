@@ -5,22 +5,22 @@ import { motion } from "framer-motion";
 
 export default function SystemsPage() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-14 space-y-16 bg-gradient-to-b from-white via-gray-50 to-white">
+    <div className="mx-auto max-w-6xl px-4 py-16 space-y-20 bg-gradient-to-b from-white via-gray-50 to-white">
 
-      {/* HERO */}
+      {/* HERO (OPEN — no box) */}
       <motion.section
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-        className="rounded-xl2 border border-wanky-border bg-white p-10 shadow-sm hover:shadow-xl transition-all duration-300"
+        transition={{ duration: 0.7 }}
+        className="py-10"
       >
         <p className="text-sm font-medium text-wanky-muted">Wanky Systems</p>
 
-        <h1 className="mt-3 text-4xl font-semibold tracking-tight leading-tight">
+        <h1 className="mt-4 text-5xl font-semibold tracking-tight leading-tight max-w-3xl">
           Internal software systems that help businesses operate with clarity and control.
         </h1>
 
-        <p className="mt-4 max-w-2xl text-base text-wanky-muted">
+        <p className="mt-6 max-w-2xl text-base text-wanky-muted">
           We design and build structured internal tools — dashboards, workflows, and automation systems —
           that replace spreadsheets, reduce manual work, and give teams full visibility into operations.
         </p>
@@ -28,8 +28,8 @@ export default function SystemsPage() {
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/pricing"
-            className="rounded-xl bg-black px-6 py-3 text-sm font-semibold text-white shadow-sm
-            transition-all duration-200 hover:scale-105 hover:opacity-90 active:scale-95"
+            className="rounded-full bg-black px-6 py-3 text-sm font-semibold text-white
+            transition-all duration-300 hover:-translate-y-1 hover:shadow-xl active:scale-95"
           >
             View pricing
           </Link>
@@ -43,87 +43,70 @@ export default function SystemsPage() {
           </Link>
         </div>
       </motion.section>
-      
-      <section className="rounded-xl2 border border-wanky-border bg-black p-8 shadow-lg">
-  <h2 className="text-2xl font-semibold tracking-tight text-white">
-    System capabilities
-  </h2>
 
-  <p className="mt-2 text-sm text-white/70 max-w-xl">
-    Every system we build is structured into modular components — giving your business clarity, control, and scalability.
-  </p>
+      {/* SYSTEM CAPABILITIES (DARK BLOCK — GOOD) */}
+      <section className="rounded-2xl bg-black p-10 text-white">
+        <h2 className="text-2xl font-semibold">System capabilities</h2>
 
-  <div className="mt-8 grid gap-6 md:grid-cols-3">
-    {[
-      {
-        title: "Admin Dashboard",
-        desc: "Central control panel for managing users, workflows, and operations.",
-      },
-      {
-        title: "Dispatch System",
-        desc: "Assign, track, and manage tasks or operations in real-time.",
-      },
-      {
-        title: "Payments & Payouts",
-        desc: "Track transactions, automate payouts, and manage financial flows.",
-      },
-      {
-        title: "Audit Logs",
-        desc: "Full visibility into system actions, changes, and user activity.",
-      },
-      {
-        title: "Automation Engine",
-        desc: "Trigger workflows, alerts, and processes without manual input.",
-      },
-      {
-        title: "Notifications",
-        desc: "Real-time updates via push, email, or in-app messaging.",
-      },
-    ].map((item, i) => (
-      <motion.div
-        key={item.title}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: i * 0.1 }}
-        viewport={{ once: true }}
-        className="group relative rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
-      >
-        {/* Glow */}
-        <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
+        <p className="mt-2 text-sm text-white/70 max-w-xl">
+          Every system we build is structured into modular components — giving your business clarity, control, and scalability.
+        </p>
 
-        <h3 className="text-white font-semibold">{item.title}</h3>
-        <p className="mt-2 text-sm text-white/70">{item.desc}</p>
-      </motion.div>
-    ))}
-  </div>
-</section>
-      {/* WHAT WE BUILD */}
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
+          {[
+            "Admin Dashboard",
+            "Dispatch System",
+            "Payments & Payouts",
+            "Audit Logs",
+            "Automation Engine",
+            "Notifications",
+          ].map((title, i) => (
+            <motion.div
+              key={title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.08 }}
+              viewport={{ once: true }}
+              className="group relative rounded-xl border border-white/10 bg-white/5 p-6
+              transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+            >
+              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition bg-gradient-to-br from-white/10 to-transparent" />
+
+              <h3 className="font-semibold">{title}</h3>
+              <p className="mt-2 text-sm text-white/70">
+                Built as part of a structured, scalable system architecture.
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* WHAT WE BUILD (CARDS — GOOD USE) */}
       <section className="grid gap-6 md:grid-cols-3">
         {[
           {
             title: "Admin dashboards",
-            desc: "Control panels for operations — manage users, workflows, approvals, and system activity in one place.",
+            desc: "Control panels for operations — manage users, workflows, approvals, and system activity.",
           },
           {
             title: "Internal tools",
-            desc: "Custom tools tailored to your business — inventory, requests, dispatch, finance, and reporting systems.",
+            desc: "Custom tools tailored to your business — inventory, requests, dispatch, finance, and reporting.",
           },
           {
             title: "Automation",
-            desc: "Replace repetitive manual processes with structured automation, alerts, and system-driven workflows.",
+            desc: "Replace manual processes with structured automation, alerts, and workflows.",
           },
         ].map((item, i) => (
           <motion.div
             key={item.title}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.15 }}
+            transition={{ delay: i * 0.1 }}
             viewport={{ once: true }}
-            className="group relative rounded-xl2 border border-wanky-border bg-white p-6 shadow-sm
-            transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+            className="group relative rounded-xl border border-wanky-border bg-white p-6
+            transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
           >
-            {/* Glow effect */}
-            <div className="absolute inset-0 rounded-xl2 opacity-0 group-hover:opacity-100 transition pointer-events-none bg-gradient-to-br from-black/5 to-transparent" />
+            <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition bg-gradient-to-br from-black/5 to-transparent" />
 
             <h3 className="text-lg font-semibold">{item.title}</h3>
             <p className="mt-2 text-sm text-wanky-muted">{item.desc}</p>
@@ -131,14 +114,14 @@ export default function SystemsPage() {
         ))}
       </section>
 
-      {/* WHO IT'S FOR */}
+      {/* WHO IT'S FOR (OPEN — no box) */}
       <motion.section
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="rounded-xl2 border border-wanky-border bg-white p-8 shadow-sm hover:shadow-xl transition-all duration-300"
+        className="py-6"
       >
-        <h2 className="text-2xl font-semibold tracking-tight">Who this is for</h2>
+        <h2 className="text-2xl font-semibold">Who this is for</h2>
 
         <div className="mt-6 grid gap-6 md:grid-cols-2">
           {[
@@ -151,7 +134,7 @@ export default function SystemsPage() {
               key={i}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.1 }}
+              transition={{ delay: i * 0.08 }}
               viewport={{ once: true }}
               className="text-sm text-wanky-muted"
             >
@@ -161,52 +144,41 @@ export default function SystemsPage() {
         </div>
       </motion.section>
 
-      {/* HOW WE WORK */}
-      <section className="rounded-xl2 border border-wanky-border bg-white p-8 shadow-sm hover:shadow-xl transition-all duration-300">
-        <h2 className="text-2xl font-semibold tracking-tight">How we work</h2>
+      {/* HOW WE WORK (MINIMAL) */}
+      <section className="py-6">
+        <h2 className="text-2xl font-semibold">How we work</h2>
 
         <div className="mt-6 grid gap-6 md:grid-cols-4">
           {[
-            {
-              title: "Clarity",
-              desc: "We define scope and structure before writing code.",
-            },
-            {
-              title: "Reliability",
-              desc: "Built for real-world usage, not demos.",
-            },
-            {
-              title: "Speed",
-              desc: "Fast iteration and delivery cycles.",
-            },
-            {
-              title: "Durability",
-              desc: "Systems designed to scale long-term.",
-            },
-          ].map((item, i) => (
+            "Clarity",
+            "Reliability",
+            "Speed",
+            "Durability",
+          ].map((title, i) => (
             <motion.div
-              key={item.title}
+              key={title}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: i * 0.1 }}
+              transition={{ delay: i * 0.08 }}
               viewport={{ once: true }}
-              className="hover:-translate-y-1 transition-all duration-300"
             >
-              <p className="font-semibold">{item.title}</p>
-              <p className="mt-2 text-sm text-wanky-muted">{item.desc}</p>
+              <p className="font-semibold">{title}</p>
+              <p className="mt-2 text-sm text-wanky-muted">
+                Built with strong system thinking and execution.
+              </p>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* CTA */}
+      {/* CTA (KEEP STRONG) */}
       <motion.section
         initial={{ opacity: 0, scale: 0.98 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
-        className="rounded-xl2 border border-wanky-border bg-black p-10 text-center text-white shadow-lg"
+        className="rounded-2xl bg-black p-10 text-center text-white"
       >
-        <h2 className="text-2xl font-semibold tracking-tight">
+        <h2 className="text-2xl font-semibold">
           Need a system for your business?
         </h2>
 
