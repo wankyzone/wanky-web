@@ -43,7 +43,60 @@ export default function SystemsPage() {
           </Link>
         </div>
       </motion.section>
+      
+      <section className="rounded-xl2 border border-wanky-border bg-black p-8 shadow-lg">
+  <h2 className="text-2xl font-semibold tracking-tight text-white">
+    System capabilities
+  </h2>
 
+  <p className="mt-2 text-sm text-white/70 max-w-xl">
+    Every system we build is structured into modular components — giving your business clarity, control, and scalability.
+  </p>
+
+  <div className="mt-8 grid gap-6 md:grid-cols-3">
+    {[
+      {
+        title: "Admin Dashboard",
+        desc: "Central control panel for managing users, workflows, and operations.",
+      },
+      {
+        title: "Dispatch System",
+        desc: "Assign, track, and manage tasks or operations in real-time.",
+      },
+      {
+        title: "Payments & Payouts",
+        desc: "Track transactions, automate payouts, and manage financial flows.",
+      },
+      {
+        title: "Audit Logs",
+        desc: "Full visibility into system actions, changes, and user activity.",
+      },
+      {
+        title: "Automation Engine",
+        desc: "Trigger workflows, alerts, and processes without manual input.",
+      },
+      {
+        title: "Notifications",
+        desc: "Real-time updates via push, email, or in-app messaging.",
+      },
+    ].map((item, i) => (
+      <motion.div
+        key={item.title}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: i * 0.1 }}
+        viewport={{ once: true }}
+        className="group relative rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
+      >
+        {/* Glow */}
+        <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
+
+        <h3 className="text-white font-semibold">{item.title}</h3>
+        <p className="mt-2 text-sm text-white/70">{item.desc}</p>
+      </motion.div>
+    ))}
+  </div>
+</section>
       {/* WHAT WE BUILD */}
       <section className="grid gap-6 md:grid-cols-3">
         {[
