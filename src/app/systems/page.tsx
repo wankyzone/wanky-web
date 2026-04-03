@@ -5,13 +5,13 @@ import { motion } from "framer-motion";
 
 export default function SystemsPage() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-14 space-y-16">
+    <div className="mx-auto max-w-6xl px-4 py-14 space-y-16 bg-gradient-to-b from-white via-gray-50 to-white">
 
       {/* HERO */}
       <motion.section
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
         className="rounded-xl2 border border-wanky-border bg-white p-10 shadow-sm hover:shadow-xl transition-all duration-300"
       >
         <p className="text-sm font-medium text-wanky-muted">Wanky Systems</p>
@@ -36,9 +36,8 @@ export default function SystemsPage() {
 
           <Link
             href="/contact"
-            className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-black shadow-sm
-            ring-1 ring-wanky-border transition-all duration-200
-            hover:scale-105 hover:shadow-lg active:scale-95"
+            className="rounded-full border border-black px-6 py-3 text-sm font-semibold text-black
+            transition-all duration-300 hover:-translate-y-1 hover:bg-black hover:text-white hover:shadow-xl active:scale-95"
           >
             Talk to us
           </Link>
@@ -67,9 +66,12 @@ export default function SystemsPage() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.15 }}
             viewport={{ once: true }}
-            className="rounded-xl2 border border-wanky-border bg-white p-6 shadow-sm
-            hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            className="group relative rounded-xl2 border border-wanky-border bg-white p-6 shadow-sm
+            transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
           >
+            {/* Glow effect */}
+            <div className="absolute inset-0 rounded-xl2 opacity-0 group-hover:opacity-100 transition pointer-events-none bg-gradient-to-br from-black/5 to-transparent" />
+
             <h3 className="text-lg font-semibold">{item.title}</h3>
             <p className="mt-2 text-sm text-wanky-muted">{item.desc}</p>
           </motion.div>
@@ -162,8 +164,8 @@ export default function SystemsPage() {
         <div className="mt-6">
           <Link
             href="/contact"
-            className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-black
-            transition-all duration-200 hover:scale-105 hover:shadow-lg active:scale-95"
+            className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-black
+            transition-all duration-300 hover:-translate-y-1 hover:shadow-xl active:scale-95"
           >
             Talk to us
           </Link>
