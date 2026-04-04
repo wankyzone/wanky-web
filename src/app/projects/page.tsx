@@ -2,158 +2,131 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowUpRight, ShieldCheck, Zap, BarChart3 } from "lucide-react"; // I recommend adding lucide-react
 
 export default function ProjectsPage() {
   return (
-    <div className="relative mx-auto max-w-6xl px-4 py-16 space-y-20 bg-gradient-to-b from-white via-gray-50 to-white">
-
-      {/* BACKGROUND GLOW */}
+    <div className="relative mx-auto max-w-6xl px-4 py-24 space-y-32 bg-white text-slate-900">
+      
+      {/* 1. PREMIUM BACKGROUND MESH */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-[-120px] left-1/2 h-[320px] w-[600px] -translate-x-1/2 rounded-full bg-black/5 blur-3xl" />
+        <div className="absolute top-0 left-1/4 h-[500px] w-[500px] rounded-full bg-blue-50/50 blur-[120px]" />
+        <div className="absolute top-20 right-1/4 h-[400px] w-[400px] rounded-full bg-indigo-50/40 blur-[100px]" />
       </div>
 
-      {/* HERO */}
+      {/* 2. REFINED HERO */}
       <motion.section
-        initial="hidden"
-        animate="visible"
-        variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
-        className="text-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center space-y-6"
       >
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-5xl font-semibold tracking-tight"
-        >
-          Systems we’ve designed and built
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mt-4 text-wanky-muted max-w-2xl mx-auto"
-        >
-          Real systems built for real operations — dashboards, workflows, and automation platforms.
-        </motion.p>
+        <span className="px-4 py-1.5 rounded-full bg-slate-100 text-xs font-bold uppercase tracking-widest text-slate-500">
+          Selected Works
+        </span>
+        <h1 className="text-6xl font-bold tracking-tight lg:text-7xl">
+          Architecting <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-500">Efficiency.</span>
+        </h1>
+        <p className="mt-4 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+          We don't just build apps. We build the digital nervous systems for businesses that have outgrown spreadsheets.
+        </p>
       </motion.section>
 
-      {/* FEATURED PROJECT — ERS */}
-      <section className="space-y-12">
+      {/* 3. FEATURED PROJECT — THE "NARRATIVE" APPROACH */}
+      <section className="relative">
+        <div className="grid lg:grid-cols-12 gap-12 items-start">
+          
+          {/* Left Side: Context */}
+          <div className="lg:col-span-5 space-y-8 sticky top-24">
+            <div>
+              <h2 className="text-4xl font-bold italic tracking-tighter">ERS</h2>
+              <p className="text-xl font-medium text-slate-600 mt-2">Errand Runner System</p>
+            </div>
 
-  {/* PROBLEM → SOLUTION */}
-  <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    className="rounded-2xl border border-wanky-border bg-white p-10 shadow-sm"
-  >
-    <p className="text-sm text-wanky-muted">Case study</p>
+            <div className="space-y-4 text-slate-500 leading-relaxed">
+              <p>
+                <strong className="text-slate-900">The Friction:</strong> Operations were trapped in WhatsApp chats and verbal updates. Scalability was impossible because data lived in people's heads, not a system.
+              </p>
+              <p>
+                <strong className="text-slate-900">The Architecture:</strong> A centralized command center that handles dispatch, automated payment reconciliation, and real-time runner telemetry.
+              </p>
+            </div>
 
-    <h2 className="mt-2 text-3xl font-semibold">
-      ERS — Errand Runner System
-    </h2>
+            {/* Metrics as "Outcome" */}
+            <div className="grid grid-cols-2 gap-4 border-t border-slate-100 pt-8">
+              <div>
+                <p className="text-2xl font-bold text-slate-900">Zero</p>
+                <p className="text-sm text-slate-500">Lost Requests</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-slate-900">100%</p>
+                <p className="text-sm text-slate-500">Audit Trail</p>
+              </div>
+            </div>
 
-    <p className="mt-4 text-wanky-muted max-w-2xl">
-      Many logistics and errand businesses operate through WhatsApp, calls, and manual coordination —
-      leading to missed requests, poor tracking, and lack of visibility.
-    </p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-8 py-4 text-sm font-semibold text-white transition-all hover:bg-slate-800 hover:shadow-lg active:scale-95"
+            >
+              Request a Workflow Audit <ArrowUpRight size={18} />
+            </Link>
+          </div>
 
-    <p className="mt-4 text-wanky-muted max-w-2xl">
-      ERS was designed as a structured system to centralize operations, automate workflows,
-      and give full control over dispatch, payments, and real-time activity.
-    </p>
+          {/* Right Side: Visual Proof */}
+          <div className="lg:col-span-7 space-y-6">
+            <div className="aspect-video rounded-3xl bg-slate-900 border-[8px] border-slate-100 shadow-2xl overflow-hidden relative group">
+                {/* Mockup Placeholder: Replace with a high-res screenshot or a nice SVG pattern */}
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-transparent group-hover:scale-105 transition-transform duration-700" />
+                <div className="absolute bottom-10 left-10 right-10 top-10 border border-white/10 rounded-xl bg-white/5 backdrop-blur-sm p-6">
+                    <div className="h-4 w-1/3 bg-white/20 rounded mb-4" />
+                    <div className="grid grid-cols-3 gap-4">
+                        <div className="h-20 bg-white/10 rounded-lg" />
+                        <div className="h-20 bg-white/10 rounded-lg" />
+                        <div className="h-20 bg-white/10 rounded-lg" />
+                    </div>
+                </div>
+            </div>
 
-    {/* METRICS STYLE (EVEN IF PLACEHOLDER FOR NOW) */}
-    <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6">
-      {[
-        { label: "Dispatch visibility", value: "Real-time" },
-        { label: "Manual work", value: "Reduced" },
-        { label: "System control", value: "Centralized" },
-        { label: "Scalability", value: "High" },
-      ].map((item, i) => (
-        <div key={i}>
-          <p className="text-lg font-semibold">{item.value}</p>
-          <p className="text-xs text-wanky-muted">{item.label}</p>
+            {/* Feature Pills */}
+            <div className="grid grid-cols-2 gap-4">
+               {[
+                 { title: "Dispatch Engine", icon: <Zap size={16} /> },
+                 { title: "Security First", icon: <ShieldCheck size={16} /> },
+                 { title: "Live Analytics", icon: <BarChart3 size={16} /> },
+                 { title: "Auto-Payments", icon: <ArrowUpRight size={16} /> },
+               ].map((f) => (
+                 <div key={f.title} className="flex items-center gap-3 p-4 rounded-2xl border border-slate-100 bg-slate-50/50">
+                   <div className="text-slate-900">{f.icon}</div>
+                   <span className="text-sm font-medium text-slate-700">{f.title}</span>
+                 </div>
+               ))}
+            </div>
+          </div>
         </div>
-      ))}
-    </div>
-  </motion.div>
+      </section>
 
-  {/* SYSTEM MODULES */}
-  <div className="grid gap-6 md:grid-cols-3">
-    {[
-      {
-        title: "Admin Dashboard",
-        desc: "Control users, jobs, and system activity from a central panel.",
-      },
-      {
-        title: "Dispatch Engine",
-        desc: "Assign and track errands in real-time with full visibility.",
-      },
-      {
-        title: "Payments System",
-        desc: "Manage transactions, payouts, and financial flows.",
-      },
-      {
-        title: "Real-time Tracking",
-        desc: "Live updates for job status and runner activity.",
-      },
-      {
-        title: "Automation",
-        desc: "Trigger alerts, updates, and workflows automatically.",
-      },
-      {
-        title: "Analytics",
-        desc: "Track performance, earnings, and system usage.",
-      },
-    ].map((item, i) => (
-      <motion.div
-        key={item.title}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: i * 0.08 }}
-        viewport={{ once: true }}
-        className="group relative rounded-xl border border-wanky-border bg-white p-6
-        transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
-      >
-        <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition bg-gradient-to-br from-black/5 to-transparent" />
-
-        <h3 className="font-semibold">{item.title}</h3>
-        <p className="mt-2 text-sm text-wanky-muted">{item.desc}</p>
-      </motion.div>
-    ))}
-  </div>
-
-  {/* VISUAL PREVIEW */}
-  <div className="rounded-2xl bg-black p-8 text-white">
-    <p className="text-sm text-white/70">System preview</p>
-
-    <div className="mt-6 grid gap-4 md:grid-cols-3">
-      <div className="h-36 rounded-lg bg-white/10" />
-      <div className="h-36 rounded-lg bg-white/10" />
-      <div className="h-36 rounded-lg bg-white/10" />
-    </div>
-  </div>
-
-  {/* CTA */}
-  <div>
-    <Link
-      href="/contact"
-      className="rounded-full bg-black px-6 py-3 text-sm font-semibold text-white
-      transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-    >
-      Build a system like this
-    </Link>
-  </div>
-
-</section>  
-
-      {/* MORE PROJECTS (PLACEHOLDER FOR FUTURE) */}
-      <section>
-        <h3 className="text-xl font-semibold">More systems coming</h3>
-
-        <p className="mt-2 text-sm text-wanky-muted">
-          Additional systems and case studies will be added as we continue building.
-        </p>
+      {/* 4. THE "PROCESS" SECTION (Replaces lack of social proof) */}
+      <section className="rounded-[3rem] bg-slate-50 p-12 lg:p-20 border border-slate-100">
+        <div className="max-w-3xl">
+          <h2 className="text-3xl font-bold tracking-tight">How we operate.</h2>
+          <p className="mt-4 text-slate-500 leading-relaxed">
+            Since we build mission-critical systems, we don't guess. We follow a rigorous 3-step 
+            deployment cycle for every project.
+          </p>
+        </div>
+        
+        <div className="mt-12 grid md:grid-cols-3 gap-8">
+            {["Discovery & Mapping", "Stress-Tested Build", "Seamless Migration"].map((step, i) => (
+                <div key={step} className="space-y-3">
+                    <div className="text-slate-300 font-mono text-xl">0{i+1}</div>
+                    <h3 className="font-bold text-lg text-slate-900">{step}</h3>
+                    <p className="text-sm text-slate-500 leading-relaxed">
+                        {i === 0 && "We map your current chaos and identify exactly where revenue is leaking."}
+                        {i === 1 && "We build your system with modern tech that handles thousands of requests without breaking."}
+                        {i === 2 && "We move your data from spreadsheets to the new system with zero downtime."}
+                    </p>
+                </div>
+            ))}
+        </div>
       </section>
 
     </div>
