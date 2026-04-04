@@ -5,31 +5,53 @@ import { motion } from "framer-motion";
 
 export default function SystemsPage() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-16 space-y-20 bg-gradient-to-b from-white via-gray-50 to-white">
+    <div className="relative mx-auto max-w-6xl px-4 py-16 space-y-20 bg-gradient-to-b from-white via-gray-50 to-white">
 
-      {/* HERO (OPEN — no box) */}
+      {/* BACKGROUND GLOW */}
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute top-[-120px] left-1/2 h-[320px] w-[600px] -translate-x-1/2 rounded-full bg-black/5 blur-3xl" />
+      </div>
+
+      {/* HERO */}
       <motion.section
-        initial={{ opacity: 0, y: 60 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: {},
+          visible: { transition: { staggerChildren: 0.15 } },
+        }}
         className="py-10"
       >
-        <p className="text-sm font-medium text-wanky-muted">Wanky Systems</p>
+        <motion.p
+          variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+          className="text-sm font-medium text-wanky-muted"
+        >
+          Wanky Systems
+        </motion.p>
 
-        <h1 className="mt-4 text-5xl font-semibold tracking-tight leading-tight max-w-3xl">
+        <motion.h1
+          variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
+          className="mt-4 text-5xl font-semibold tracking-tight leading-tight max-w-3xl"
+        >
           Internal software systems that help businesses operate with clarity and control.
-        </h1>
+        </motion.h1>
 
-        <p className="mt-6 max-w-2xl text-base text-wanky-muted">
+        <motion.p
+          variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
+          className="mt-6 max-w-2xl text-base text-wanky-muted"
+        >
           We design and build structured internal tools — dashboards, workflows, and automation systems —
           that replace spreadsheets, reduce manual work, and give teams full visibility into operations.
-        </p>
+        </motion.p>
 
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+        <motion.div
+          variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+          className="mt-8 flex flex-col gap-3 sm:flex-row"
+        >
           <Link
             href="/pricing"
             className="rounded-full bg-black px-6 py-3 text-sm font-semibold text-white
-            transition-all duration-300 hover:-translate-y-1 hover:shadow-xl active:scale-95"
+            transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:opacity-90 active:scale-95"
           >
             View pricing
           </Link>
@@ -41,10 +63,10 @@ export default function SystemsPage() {
           >
             Talk to us
           </Link>
-        </div>
+        </motion.div>
       </motion.section>
 
-      {/* SYSTEM CAPABILITIES (DARK BLOCK — GOOD) */}
+      {/* SYSTEM CAPABILITIES */}
       <section className="rounded-2xl bg-black p-10 text-white">
         <h2 className="text-2xl font-semibold">System capabilities</h2>
 
@@ -67,10 +89,14 @@ export default function SystemsPage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.08 }}
               viewport={{ once: true }}
-              className="group relative rounded-xl border border-white/10 bg-white/5 p-6
-              transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+              className="group relative rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-md
+              transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
             >
-              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition bg-gradient-to-br from-white/10 to-transparent" />
+              {/* GLOW */}
+              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition duration-500">
+                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent" />
+                <div className="absolute -inset-1 rounded-xl blur-xl bg-white/10 opacity-0 group-hover:opacity-100 transition" />
+              </div>
 
               <h3 className="font-semibold">{title}</h3>
               <p className="mt-2 text-sm text-white/70">
@@ -81,7 +107,7 @@ export default function SystemsPage() {
         </div>
       </section>
 
-      {/* WHAT WE BUILD (CARDS — GOOD USE) */}
+      {/* WHAT WE BUILD */}
       <section className="grid gap-6 md:grid-cols-3">
         {[
           {
@@ -106,7 +132,11 @@ export default function SystemsPage() {
             className="group relative rounded-xl border border-wanky-border bg-white p-6
             transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
           >
-            <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition bg-gradient-to-br from-black/5 to-transparent" />
+            {/* GLOW */}
+            <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none">
+              <div className="absolute inset-0 bg-gradient-to-br from-black/5 via-transparent to-transparent" />
+              <div className="absolute -inset-1 rounded-xl blur-xl bg-black/5 opacity-0 group-hover:opacity-100 transition" />
+            </div>
 
             <h3 className="text-lg font-semibold">{item.title}</h3>
             <p className="mt-2 text-sm text-wanky-muted">{item.desc}</p>
@@ -114,7 +144,7 @@ export default function SystemsPage() {
         ))}
       </section>
 
-      {/* WHO IT'S FOR (OPEN — no box) */}
+      {/* WHO IT'S FOR */}
       <motion.section
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -144,17 +174,12 @@ export default function SystemsPage() {
         </div>
       </motion.section>
 
-      {/* HOW WE WORK (MINIMAL) */}
+      {/* HOW WE WORK */}
       <section className="py-6">
         <h2 className="text-2xl font-semibold">How we work</h2>
 
         <div className="mt-6 grid gap-6 md:grid-cols-4">
-          {[
-            "Clarity",
-            "Reliability",
-            "Speed",
-            "Durability",
-          ].map((title, i) => (
+          {["Clarity", "Reliability", "Speed", "Durability"].map((title, i) => (
             <motion.div
               key={title}
               initial={{ opacity: 0, scale: 0.95 }}
@@ -171,7 +196,7 @@ export default function SystemsPage() {
         </div>
       </section>
 
-      {/* CTA (KEEP STRONG) */}
+      {/* CTA */}
       <motion.section
         initial={{ opacity: 0, scale: 0.98 }}
         whileInView={{ opacity: 1, scale: 1 }}
