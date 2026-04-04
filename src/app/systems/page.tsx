@@ -5,221 +5,140 @@ import { motion } from "framer-motion";
 
 export default function SystemsPage() {
   return (
-    <div className="relative mx-auto max-w-6xl px-4 py-16 space-y-20 bg-gradient-to-b from-white via-gray-50 to-white">
-
-      {/* BACKGROUND GLOW */}
-      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-[-120px] left-1/2 h-[320px] w-[600px] -translate-x-1/2 rounded-full bg-black/5 blur-3xl" />
-      </div>
-
-      {/* HERO */}
+    <div className="relative mx-auto max-w-6xl px-6 py-24 lg:py-32 bg-white text-black font-sans space-y-32">
+      
+      {/* 1. HERO SECTION */}
       <motion.section
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: {},
-          visible: { transition: { staggerChildren: 0.15 } },
-        }}
-        className="py-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="max-w-4xl"
       >
-        <motion.p
-          variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-          className="text-sm font-medium text-wanky-muted"
-        >
-          Wanky Systems
-        </motion.p>
+        <span className="px-3 py-1 rounded-full border border-black/10 bg-slate-50 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
+          Core Capabilities
+        </span>
+        <h1 className="mt-6 text-5xl font-bold tracking-tight lg:text-7xl leading-[1.1]">
+          Software built for <span className="text-slate-400 font-medium italic">Operating.</span>
+        </h1>
+        <p className="mt-8 text-xl text-slate-500 max-w-2xl leading-relaxed">
+          We replace fragile spreadsheets and chaotic WhatsApp workflows with 
+          modular, production-ready internal systems.
+        </p>
 
-        <motion.h1
-          variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-          className="mt-4 text-5xl font-semibold tracking-tight leading-tight max-w-3xl"
-        >
-          Internal software systems that help businesses operate with clarity and control.
-        </motion.h1>
-
-        <motion.p
-          variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-          className="mt-6 max-w-2xl text-base text-wanky-muted"
-        >
-          We design and build structured internal tools — dashboards, workflows, and automation systems —
-          that replace spreadsheets, reduce manual work, and give teams full visibility into operations.
-        </motion.p>
-
-        <motion.div
-          variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-          className="mt-8 flex flex-col gap-3 sm:flex-row"
-        >
+        <div className="mt-10 flex flex-wrap gap-4">
+          <Link
+            href="/contact"
+            className="rounded-full bg-black px-8 py-4 text-sm font-bold text-white transition-all hover:bg-zinc-800 hover:scale-[1.02] active:scale-95"
+          >
+            Request a System Audit
+          </Link>
           <Link
             href="/pricing"
-            className="rounded-full bg-black px-6 py-3 text-sm font-semibold text-white
-            transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:opacity-90 active:scale-95"
+            className="rounded-full border border-slate-200 px-8 py-4 text-sm font-bold text-black transition-all hover:bg-slate-50"
           >
-            View pricing
+            Engagement Models
           </Link>
-
-          <Link
-            href="/contact"
-            className="rounded-full border border-black px-6 py-3 text-sm font-semibold text-black
-            transition-all duration-300 hover:-translate-y-1 hover:bg-black hover:text-white hover:shadow-xl active:scale-95"
-          >
-            Talk to us
-          </Link>
-        </motion.div>
+        </div>
       </motion.section>
 
-      {/* SYSTEM CAPABILITIES */}
-      <section className="rounded-2xl bg-black p-10 text-white">
-        <h2 className="text-2xl font-semibold">System capabilities</h2>
+      {/* 2. SYSTEM ARCHITECTURE (Dark Section) */}
+      <section className="rounded-[3rem] bg-zinc-900 p-10 lg:p-20 text-white overflow-hidden relative">
+        <div className="relative z-10">
+          <div className="flex flex-col lg:flex-row justify-between items-start gap-8 mb-16">
+            <h2 className="text-3xl font-bold tracking-tight uppercase italic">The Modular Engine</h2>
+            <p className="text-zinc-400 max-w-md text-sm leading-relaxed">
+              Every build is structured into mission-critical modules that provide 
+              centralized control and high-fidelity audit trails.
+            </p>
+          </div>
 
-        <p className="mt-2 text-sm text-white/70 max-w-xl">
-          Every system we build is structured into modular components — giving your business clarity, control, and scalability.
-        </p>
-
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
-          {[
-            "Admin Dashboard",
-            "Dispatch System",
-            "Payments & Payouts",
-            "Audit Logs",
-            "Automation Engine",
-            "Notifications",
-          ].map((title, i) => (
-            <motion.div
-              key={title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.08 }}
-              viewport={{ once: true }}
-              className="group relative rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-md
-              transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
-            >
-              {/* GLOW */}
-              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition duration-500">
-                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent" />
-                <div className="absolute -inset-1 rounded-xl blur-xl bg-white/10 opacity-0 group-hover:opacity-100 transition" />
-              </div>
-
-              <h3 className="font-semibold">{title}</h3>
-              <p className="mt-2 text-sm text-white/70">
-                Built as part of a structured, scalable system architecture.
-              </p>
-            </motion.div>
-          ))}
+          <div className="grid gap-4 md:grid-cols-3">
+            {[
+              { title: "Admin Dashboards", desc: "Centralized command for user management and global settings." },
+              { title: "Dispatch Engines", desc: "Real-time task allocation with automated priority routing." },
+              { title: "Financial Hubs", desc: "Automated payouts, invoicing, and payment reconciliation." },
+              { title: "Audit Protocols", desc: "Immutable logs of every action taken within the system." },
+              { title: "Automation Logic", desc: "Event-driven workflows that eliminate manual data entry." },
+              { title: "Telemetry & Reporting", desc: "Live visualization of operational health and efficiency." },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                className="p-8 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-colors"
+              >
+                <div className="h-1 w-8 bg-zinc-700 mb-6" />
+                <h3 className="font-bold text-lg mb-2 tracking-tight">{item.title}</h3>
+                <p className="text-zinc-500 text-sm leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
+        <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-white/5 blur-[120px] rounded-full" />
       </section>
 
-      {/* WHAT WE BUILD */}
-      <section className="grid gap-6 md:grid-cols-3">
-        {[
-          {
-            title: "Admin dashboards",
-            desc: "Control panels for operations — manage users, workflows, approvals, and system activity.",
-          },
-          {
-            title: "Internal tools",
-            desc: "Custom tools tailored to your business — inventory, requests, dispatch, finance, and reporting.",
-          },
-          {
-            title: "Automation",
-            desc: "Replace manual processes with structured automation, alerts, and workflows.",
-          },
-        ].map((item, i) => (
-          <motion.div
-            key={item.title}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
-            viewport={{ once: true }}
-            className="group relative rounded-xl border border-wanky-border bg-white p-6
-            transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
-          >
-            {/* GLOW */}
-            <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none">
-              <div className="absolute inset-0 bg-gradient-to-br from-black/5 via-transparent to-transparent" />
-              <div className="absolute -inset-1 rounded-xl blur-xl bg-black/5 opacity-0 group-hover:opacity-100 transition" />
+      {/* 3. IDEAL USE CASES (The "Who it's for") */}
+      <section className="grid lg:grid-cols-12 gap-16 items-center">
+        <div className="lg:col-span-5">
+            <h2 className="text-4xl font-bold tracking-tighter mb-6">Built for the <br/>Infrastructure-Minded.</h2>
+            <p className="text-slate-500 leading-relaxed mb-8">
+                We don't build "fancy" apps for the sake of it. We build for founders and operators 
+                who are tired of their systems breaking as they grow.
+            </p>
+            <div className="space-y-4">
+                {[
+                    "Transitioning from Sheets to Software",
+                    "Scaling Operations beyond 10+ people",
+                    "Managing high-frequency logistics/errands",
+                    "Requiring strict data accountability"
+                ].map((text, i) => (
+                    <div key={i} className="flex items-center gap-4 text-sm font-bold uppercase tracking-widest text-slate-400">
+                        <div className="h-px w-6 bg-slate-200" />
+                        {text}
+                    </div>
+                ))}
             </div>
-
-            <h3 className="text-lg font-semibold">{item.title}</h3>
-            <p className="mt-2 text-sm text-wanky-muted">{item.desc}</p>
-          </motion.div>
-        ))}
-      </section>
-
-      {/* WHO IT'S FOR */}
-      <motion.section
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="py-6"
-      >
-        <h2 className="text-2xl font-semibold">Who this is for</h2>
-
-        <div className="mt-6 grid gap-6 md:grid-cols-2">
-          {[
-            "Businesses running operations via spreadsheets or WhatsApp",
-            "Teams needing better visibility and accountability",
-            "Founders scaling operations without chaos",
-            "Companies transitioning to structured systems",
-          ].map((text, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.08 }}
-              viewport={{ once: true }}
-              className="text-sm text-wanky-muted"
-            >
-              {text}
-            </motion.div>
-          ))}
         </div>
-      </motion.section>
 
-      {/* HOW WE WORK */}
-      <section className="py-6">
-        <h2 className="text-2xl font-semibold">How we work</h2>
-
-        <div className="mt-6 grid gap-6 md:grid-cols-4">
-          {["Clarity", "Reliability", "Speed", "Durability"].map((title, i) => (
-            <motion.div
-              key={title}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: i * 0.08 }}
-              viewport={{ once: true }}
-            >
-              <p className="font-semibold">{title}</p>
-              <p className="mt-2 text-sm text-wanky-muted">
-                Built with strong system thinking and execution.
-              </p>
-            </motion.div>
-          ))}
+        <div className="lg:col-span-7 grid grid-cols-2 gap-4">
+            <div className="aspect-square rounded-3xl bg-slate-50 border border-slate-100 p-8 flex flex-col justify-end">
+                <span className="text-4xl font-bold italic mb-2">01.</span>
+                <p className="font-bold text-xs uppercase tracking-tighter">Eliminate Slack Chaos</p>
+            </div>
+            <div className="aspect-square rounded-3xl bg-zinc-900 text-white p-8 flex flex-col justify-end">
+                <span className="text-4xl font-bold italic mb-2">02.</span>
+                <p className="font-bold text-xs uppercase tracking-tighter text-zinc-400">Automate Reporting</p>
+            </div>
+            <div className="aspect-square rounded-3xl bg-zinc-900 text-white p-8 flex flex-col justify-end">
+                <span className="text-4xl font-bold italic mb-2">03.</span>
+                <p className="font-bold text-xs uppercase tracking-tighter text-zinc-400">Centralize Data</p>
+            </div>
+            <div className="aspect-square rounded-3xl bg-slate-50 border border-slate-100 p-8 flex flex-col justify-end">
+                <span className="text-4xl font-bold italic mb-2">04.</span>
+                <p className="font-bold text-xs uppercase tracking-tighter">Scale Payouts</p>
+            </div>
         </div>
       </section>
 
-      {/* CTA */}
+      {/* 4. CALL TO ACTION */}
       <motion.section
-        initial={{ opacity: 0, scale: 0.98 }}
-        whileInView={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="rounded-2xl bg-black p-10 text-center text-white"
+        className="py-20 border-t border-slate-100 text-center space-y-8"
       >
-        <h2 className="text-2xl font-semibold">
-          Need a system for your business?
-        </h2>
-
-        <p className="mt-3 text-sm text-white/70">
-          Let’s design something structured, scalable, and built for real operations.
+        <h2 className="text-4xl font-bold tracking-tight">Stop building on sand.</h2>
+        <p className="text-slate-500 max-w-xl mx-auto leading-relaxed">
+          If your current business systems feel like they're held together by tape, 
+          it's time for a professional architecture.
         </p>
-
-        <div className="mt-6">
-          <Link
+        <Link
             href="/contact"
-            className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-black
-            transition-all duration-300 hover:-translate-y-1 hover:shadow-xl active:scale-95"
-          >
-            Talk to us
-          </Link>
-        </div>
+            className="inline-block rounded-full bg-black px-12 py-5 text-sm font-bold text-white transition-all hover:bg-zinc-800"
+        >
+            Start the Transition
+        </Link>
       </motion.section>
 
     </div>
