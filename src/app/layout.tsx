@@ -31,6 +31,9 @@ function Nav() {
           <Link className="text-wanky-muted hover:text-wanky-text" href="/pricing">
             Pricing
           </Link>
+          <Link className="text-sm text-wanky-muted hover:text-black transition" href="/projects">
+            Projects
+          </Link>
           <Link className="text-wanky-muted hover:text-wanky-text" href="/principles">
             Principles
           </Link>
