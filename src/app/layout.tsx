@@ -8,10 +8,34 @@ const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   title: "Wanky — Software for High-Stakes Operations",
-  description:
-    "We engineer internal tools, admin engines, and automated workflows for modern businesses.",
+  description: "We engineer internal tools, admin engines, and automated workflows for modern businesses.",
+  metadataBase: new URL('https://wankysoftware.com'),
+  alternates: {
+    canonical: '/',
+  },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png' },
+    ],
+  },
+  openGraph: {
+    title: 'Wanky Software',
+    description: 'Internal systems and cloud software for modern businesses.',
+    url: 'https://wankysoftware.com',
+    siteName: 'Wanky',
+    images: [
+      {
+        url: '/og-image.png', // You should create a 1200x630 version of your logo for social sharing
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
   },
 };
 
