@@ -1,155 +1,127 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function PricingPage() {
   return (
-    <div className="relative mx-auto max-w-6xl px-4 py-16 space-y-20 bg-gradient-to-b from-white via-gray-50 to-white">
-
-      {/* BACKGROUND GLOW */}
-      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-[-120px] left-1/2 h-[320px] w-[600px] -translate-x-1/2 rounded-full bg-black/5 blur-3xl" />
-      </div>
-
+    <div className="relative mx-auto max-w-6xl px-6 py-24 lg:py-32 bg-white text-black font-sans">
+      
       {/* HERO */}
-      <motion.section
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: {},
-          visible: { transition: { staggerChildren: 0.15 } },
-        }}
-        className="text-center"
+      <motion.section 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center mb-20"
       >
-        <motion.h1
-          variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-          className="text-5xl font-semibold tracking-tight"
-        >
-          Pricing for structured business systems
-        </motion.h1>
-
-        <motion.p
-          variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-          className="mt-4 text-wanky-muted max-w-2xl mx-auto"
-        >
-          Choose a plan based on your business stage. Every system is built for real operations — not templates.
-        </motion.p>
+        <span className="px-3 py-1 rounded-full border border-black/10 bg-slate-50 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
+          Engagement Models
+        </span>
+        <h1 className="mt-6 text-5xl font-bold tracking-tight lg:text-7xl">
+          Investment in <span className="text-slate-400 font-medium">Clarity.</span>
+        </h1>
+        <p className="mt-8 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+          We don't bill by the hour. We price based on the value and efficiency 
+          our systems bring to your bottom line.
+        </p>
       </motion.section>
 
       {/* PRICING CARDS */}
-      <section className="grid gap-6 md:grid-cols-3">
-
-        {/* STARTER */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="rounded-2xl border border-wanky-border bg-white p-8 shadow-sm"
+      <div className="grid md:grid-cols-2 gap-8 items-start">
+        
+        {/* MODEL 1: FIXED SCOPE */}
+        <motion.div 
+          whileHover={{ y: -5 }}
+          className="p-10 rounded-[2.5rem] border border-slate-100 bg-slate-50/30 space-y-8"
         >
-          <h3 className="text-lg font-semibold">Starter</h3>
-          <p className="mt-2 text-sm text-wanky-muted">For small businesses getting structured</p>
+          <div>
+            <h3 className="text-2xl font-bold uppercase tracking-tighter">Fixed-Scope Build</h3>
+            <p className="text-slate-500 mt-2 text-sm italic">Perfect for defined projects like ERS or Custom Dashboards.</p>
+          </div>
+          
+          <div className="space-y-4">
+            {[
+              "End-to-end system architecture",
+              "UI/UX Design focused on utility",
+              "Database & API integration",
+              "30 days of post-launch support",
+              "Full code ownership"
+            ].map((feature, i) => (
+              <div key={i} className="flex items-center gap-3">
+                <div className="h-1.5 w-1.5 rounded-full bg-black" />
+                <p className="text-sm font-medium text-slate-700">{feature}</p>
+              </div>
+            ))}
+          </div>
 
-          <p className="mt-6 text-3xl font-semibold">₦150k – ₦300k</p>
-
-          <ul className="mt-6 space-y-2 text-sm text-wanky-muted">
-            <li>Basic admin dashboard</li>
-            <li>Simple workflow system</li>
-            <li>User management</li>
-            <li>Deployment support</li>
-          </ul>
-
-          <Link
-            href="/contact"
-            className="mt-8 block rounded-full bg-black px-6 py-3 text-center text-sm font-semibold text-white
-            transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-          >
-            Get started
-          </Link>
+          <div className="pt-8 border-t border-slate-200">
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Typically starts at</p>
+            <p className="text-4xl font-bold tracking-tight">$3,500+</p>
+            <Link 
+              href="/contact" 
+              className="mt-8 block w-full text-center rounded-full bg-black py-4 text-sm font-bold text-white hover:bg-zinc-800 transition-all"
+            >
+              Get a Custom Quote
+            </Link>
+          </div>
         </motion.div>
 
-        {/* GROWTH (FEATURED) */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="relative rounded-2xl border-2 border-black bg-white p-8 shadow-xl"
+        {/* MODEL 2: FRACTIONAL CTO / PARTNER */}
+        <motion.div 
+          whileHover={{ y: -5 }}
+          className="p-10 rounded-[2.5rem] bg-zinc-900 text-white space-y-8 shadow-2xl relative overflow-hidden"
         >
-          <span className="absolute top-4 right-4 text-xs bg-black text-white px-3 py-1 rounded-full">
-            Most popular
-          </span>
+          <div className="relative z-10">
+            <h3 className="text-2xl font-bold uppercase tracking-tighter">Retainer Partner</h3>
+            <p className="text-zinc-400 mt-2 text-sm italic">Continuous optimization for growing operations.</p>
+          </div>
 
-          <h3 className="text-lg font-semibold">Growth</h3>
-          <p className="mt-2 text-sm text-wanky-muted">For growing businesses scaling operations</p>
+          <div className="relative z-10 space-y-4">
+            {[
+              "Fractional CTO advisory",
+              "Ongoing feature development",
+              "Priority bug fixes & security",
+              "Workflow automation audits",
+              "System performance scaling"
+            ].map((feature, i) => (
+              <div key={i} className="flex items-center gap-3">
+                <div className="h-1.5 w-1.5 rounded-full bg-white/40" />
+                <p className="text-sm font-medium text-zinc-300">{feature}</p>
+              </div>
+            ))}
+          </div>
 
-          <p className="mt-6 text-3xl font-semibold">₦400k – ₦800k</p>
-
-          <ul className="mt-6 space-y-2 text-sm text-wanky-muted">
-            <li>Advanced dashboards</li>
-            <li>Automation workflows</li>
-            <li>Analytics & reporting</li>
-            <li>Role-based access</li>
-            <li>API integrations</li>
-          </ul>
-
-          <Link
-            href="/contact"
-            className="mt-8 block rounded-full bg-black px-6 py-3 text-center text-sm font-semibold text-white
-            transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-          >
-            Start building
-          </Link>
+          <div className="relative z-10 pt-8 border-t border-white/10">
+            <p className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-2">Monthly investment</p>
+            <p className="text-4xl font-bold tracking-tight">$1,500<span className="text-lg text-zinc-500 font-normal"> /mo</span></p>
+            <Link 
+              href="/contact" 
+              className="mt-8 block w-full text-center rounded-full bg-white py-4 text-sm font-bold text-black hover:bg-slate-100 transition-all"
+            >
+              Check Availability
+            </Link>
+          </div>
+          
+          {/* Subtle decoration */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 blur-3xl rounded-full -mr-10 -mt-10" />
         </motion.div>
 
-        {/* SCALE */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="rounded-2xl border border-wanky-border bg-white p-8 shadow-sm"
-        >
-          <h3 className="text-lg font-semibold">Scale</h3>
-          <p className="mt-2 text-sm text-wanky-muted">For companies needing full systems</p>
+      </div>
 
-          <p className="mt-6 text-3xl font-semibold">₦1M+</p>
-
-          <ul className="mt-6 space-y-2 text-sm text-wanky-muted">
-            <li>Full system architecture</li>
-            <li>Custom workflows</li>
-            <li>Real-time features</li>
-            <li>Advanced integrations</li>
-            <li>Ongoing support</li>
-          </ul>
-
-          <Link
-            href="/contact"
-            className="mt-8 block rounded-full border border-black px-6 py-3 text-center text-sm font-semibold text-black
-            transition-all duration-300 hover:bg-black hover:text-white"
-          >
-            Contact us
-          </Link>
-        </motion.div>
-
-      </section>
-
-      {/* CTA */}
-      <section className="rounded-2xl bg-black p-10 text-center text-white">
-        <h2 className="text-2xl font-semibold">
-          Not sure which plan fits?
-        </h2>
-
-        <p className="mt-3 text-sm text-white/70">
-          We’ll help you define the right system based on your business needs.
-        </p>
-
-        <div className="mt-6">
-          <Link
-            href="/contact"
-            className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-black
-            transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-          >
-            Talk to us
-          </Link>
+      {/* WHY US SECTION */}
+      <section className="mt-32 grid md:grid-cols-3 gap-12 border-t border-slate-100 pt-16">
+        <div>
+          <h4 className="font-bold uppercase text-xs tracking-[0.2em] mb-4">No Hidden Fees</h4>
+          <p className="text-sm text-slate-500 leading-relaxed">The price we agree on is the price you pay. No billing for "extra hours" on agreed scopes.</p>
+        </div>
+        <div>
+          <h4 className="font-bold uppercase text-xs tracking-[0.2em] mb-4">You Own the Code</h4>
+          <p className="text-sm text-slate-500 leading-relaxed">Unlike SaaS, you own the IP. If we part ways, you take your system with you. No lock-in.</p>
+        </div>
+        <div>
+          <h4 className="font-bold uppercase text-xs tracking-[0.2em] mb-4">Build for ROI</h4>
+          <p className="text-sm text-slate-500 leading-relaxed">If we don't believe a tool will save you more money than it costs to build, we won't build it.</p>
         </div>
       </section>
-
     </div>
   );
 }
