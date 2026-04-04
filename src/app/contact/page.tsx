@@ -90,12 +90,6 @@ export default function ContactPage() {
         </div>
 
       </div>
-
-      {/* 3. FOOTER STYLE DECOR */}
-      <div className="mt-32 pt-12 border-t border-slate-100 flex justify-between items-center text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em]">
-        <span>Wanky Software 2024</span>
-        <span>Lagos / Global</span>
-      </div>
     </div>
   );
 }
