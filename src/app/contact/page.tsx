@@ -1,94 +1,94 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function ContactPage() {
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText("hello@wankysoftware.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
-    <div className="relative mx-auto max-w-5xl px-6 py-24 lg:py-32 bg-white text-black font-sans">
+    <div className="relative mx-auto max-w-5xl px-6 py-24 lg:py-32 bg-white text-black font-sans selection:bg-[#FF4D94] selection:text-white">
       
-      {/* 1. SECTION HEADER */}
+      {/* 1. HEADER SECTION */}
       <motion.section 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-2xl"
+        className="max-w-2xl mb-24"
       >
-        <span className="px-3 py-1 rounded-full border border-black/10 bg-slate-50 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
-          Inquiry
+        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#FF4D94]">
+          Onboarding
         </span>
         <h1 className="mt-6 text-5xl font-bold tracking-tight lg:text-7xl">
-          Let’s fix your <span className="text-slate-400 font-medium italic">chaos.</span>
+          Apply for the <br />
+          <span className="text-slate-400 font-medium italic underline decoration-[#FF4D94]/20">Wanky</span> <br />
+          Beta.
         </h1>
-        <p className="mt-8 text-lg text-slate-500 leading-relaxed">
-          We only take on 2 projects at a time to ensure architectural excellence. 
-          Tell us about the systems that are currently slowing you down.
+        <p className="mt-8 text-xl text-slate-500 leading-relaxed">
+          We are accepting a limited number of high-stakes businesses for our 
+          next implementation cycle. We do not build "apps"—we install operating systems.
         </p>
       </motion.section>
 
-      {/* 2. CONTACT GRID */}
-      <div className="mt-20 grid lg:grid-cols-12 gap-12">
+      {/* 2. THE BRIEFING GRID */}
+      <div className="grid lg:grid-cols-12 gap-12 items-start">
         
         {/* Left: The Briefing Instructions */}
-        <div className="lg:col-span-7 space-y-10">
-          <div className="group rounded-[2rem] border border-slate-100 bg-slate-50/50 p-10 transition-all hover:border-black/5 hover:bg-white hover:shadow-xl">
-            <h3 className="text-xl font-bold mb-4">Direct Briefing</h3>
-            <p className="text-slate-500 mb-8 leading-relaxed">
-              Skip the back-and-forth. Send a detailed brief to the address below. 
-              To help us move fast, please include:
+        <div className="lg:col-span-7 space-y-10 rounded-[3rem] border border-slate-100 bg-slate-50/50 p-10 lg:p-14">
+            <h3 className="text-2xl font-bold tracking-tight uppercase">Briefing Protocol</h3>
+            <p className="text-slate-500 leading-relaxed mb-8">
+              To save time, we do not require a formal RFP. Instead, please send a short brief 
+              answering the following operational questions:
             </p>
             
-            <ul className="space-y-6">
+            <ul className="space-y-8">
               {[
-                { label: "The Friction", desc: "What part of your workflow is manual, slow, or broken?" },
-                { label: "The Data", desc: "Where does your information live now? (Sheets, WhatsApp, etc.)" },
-                { label: "The Outcome", desc: "What does a perfect day look like once this system is live?" },
-                { label: "The Budget", desc: "Approximate range so we can propose the right architecture." }
+                { label: "The Chaos", desc: "What part of your current workflow is manual, unstable, or scattered across sheets/chats?" },
+                { label: "The Data", desc: "Where does your business critical information live today?" },
+                { label: "The Outcome", desc: "What is the single operational metric you need to change?" },
+                { label: "The Timeline", desc: "When do you need the first core module deployed?" }
               ].map((item, i) => (
                 <li key={i} className="flex gap-4">
-                  <span className="font-mono text-xs text-slate-300 mt-1">0{i+1}</span>
+                  <span className="font-mono text-xs text-[#FF4D94] mt-1">MOD_0{i+1}</span>
                   <div>
-                    <p className="font-bold text-sm uppercase tracking-wider">{item.label}</p>
-                    <p className="text-sm text-slate-500 mt-1">{item.desc}</p>
+                    <p className="font-bold text-base uppercase tracking-wider">{item.label}</p>
+                    <p className="text-sm text-slate-500 mt-1 leading-relaxed">{item.desc}</p>
                   </div>
                 </li>
               ))}
             </ul>
-
-            <div className="mt-12 pt-8 border-t border-slate-100">
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Priority Inbox</p>
-              <a 
-                href="mailto:hello@wankysoftware.com" 
-                className="text-2xl font-bold hover:text-slate-600 transition-colors break-all"
-              >
-                hello@wankysoftware.com
-              </a>
-            </div>
-          </div>
         </div>
 
-        {/* Right: The "Fast Path" Callouts */}
-        <div className="lg:col-span-5 space-y-6">
-          <div className="rounded-[2rem] bg-black p-10 text-white shadow-2xl">
-            <div className="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center mb-6">
-                <div className="h-2 w-2 rounded-full bg-white animate-pulse" />
-            </div>
-            <h3 className="text-xl font-bold mb-4 italic">The Fast Path</h3>
-            <p className="text-zinc-400 text-sm leading-relaxed mb-6">
-              "A 2-minute Loom video of your messy spreadsheet is worth 20 emails."
+        {/* Right: The CTAs and availability */}
+        <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-24">
+          <div className="rounded-[2.5rem] bg-zinc-900 p-10 text-white shadow-2xl relative overflow-hidden group">
+            <h3 className="text-xl font-bold mb-4 uppercase text-[#FF4D94]">The Priority Line</h3>
+            <p className="text-zinc-400 text-sm leading-relaxed mb-10">
+              Send your completed brief directly to our engineering core.
             </p>
-            <p className="text-sm text-zinc-300">
-              Record a quick walkthrough of your current process and link it in your email. We’ll review it and get back to you within 24 hours.
-            </p>
+            
+            <button 
+                onClick={copyEmail}
+                className="group w-full flex items-center justify-center gap-3 rounded-full bg-black py-4 text-xs font-bold uppercase tracking-widest text-white transition-all hover:bg-zinc-800 active:scale-95 border border-white/5"
+            >
+                {copied ? "Copied" : "hello@wankysoftware.com"}
+                {copied && <span className="text-[#FF4D94] animate-pulse">✓</span>}
+            </button>
+            
+            {/* Subtle Gradient Glow */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#FF4D94]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
           </div>
 
-          <div className="rounded-[2rem] border border-slate-100 p-10">
-            <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-4">Availability</h3>
-            <div className="flex items-center gap-3">
-              <div className="h-2 w-2 rounded-full bg-green-500" />
-              <p className="text-sm font-medium">Currently accepting Q2 projects</p>
-            </div>
+          <div className="rounded-[2.5rem] border border-slate-100 bg-slate-50 p-8 flex items-center gap-3">
+              <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+              <p className="text-sm font-bold uppercase tracking-widest text-slate-400">Status: accepting Q2 applications</p>
           </div>
         </div>
-
       </div>
     </div>
   );
