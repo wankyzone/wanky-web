@@ -5,66 +5,68 @@ import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white text-black font-sans selection:bg-black selection:text-white">
-      {/* 1. HERO SECTION: THE ARCHITECTURAL HOOK */}
+    <div className="min-h-screen bg-white text-black font-sans selection:bg-[#FF4D94] selection:text-white">
+      
+      {/* 1. HERO SECTION: THE LOGISTICS OS */}
       <div className="mx-auto max-w-6xl px-6 py-20 lg:py-32">
         <motion.section 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative overflow-hidden rounded-[3rem] border border-slate-100 bg-slate-50/50 px-8 py-16 lg:px-20 lg:py-24"
+          className="relative overflow-hidden rounded-[3rem] border border-slate-100 bg-slate-50/30 px-8 py-16 lg:px-20 lg:py-24"
         >
           <div className="relative z-10 max-w-4xl">
-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400">
-              Lagos // Global Systems Agency
+            <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-[#FF4D94]">
+              <span className="h-2 w-2 rounded-full bg-[#FF4D94] animate-pulse" />
+              Now in Private Beta
             </span>
 
             <h1 className="mt-8 text-6xl font-bold leading-[0.9] tracking-tighter text-black sm:text-7xl lg:text-8xl">
-              Software for <br />
-              <span className="text-slate-400 italic">High-Stakes</span> <br />
-              Operations.
+              The OS for <br />
+              <span className="text-slate-400 italic underline decoration-[#FF4D94]/30">Unstructured</span> <br />
+              Logistics.
             </h1>
 
             <p className="mt-10 max-w-xl text-lg leading-relaxed text-slate-500">
-              We engineer the internal tools, admin engines, and automated 
-              workflows that turn operational chaos into a competitive advantage.
+              Wanky is the infrastructure for businesses that move in the physical world. 
+              Automate dispatch, scale telemetry, and centralize operations on a single proprietary engine.
             </p>
 
             <div className="mt-12 flex flex-wrap gap-4">
               <Link
-                href="/systems"
+                href="/contact"
                 className="rounded-full bg-black px-10 py-4 text-sm font-bold text-white transition-all hover:bg-zinc-800 hover:scale-[1.02] active:scale-95 shadow-xl shadow-black/10"
               >
-                View Systems
+                Get Started
               </Link>
               <Link
-                href="/contact"
+                href="/platform"
                 className="rounded-full border border-slate-200 bg-white px-10 py-4 text-sm font-bold text-black transition-all hover:bg-slate-50"
               >
-                Start a Brief
+                Explore Platform
               </Link>
             </div>
           </div>
 
-          {/* Subtle Grid Pattern Background */}
+          {/* Background Grid Pattern */}
           <div className="absolute inset-0 -z-10 opacity-[0.03] [mask-image:linear-gradient(to_bottom_left,white,transparent)]">
             <svg width="100%" height="100%"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="black" strokeWidth="1"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)" /></svg>
           </div>
         </motion.section>
 
-        {/* 2. THE THREE PILLARS (CAPABILITIES) */}
+        {/* 2. CORE PLATFORM PILLARS */}
         <section className="mt-24 grid gap-8 md:grid-cols-3">
           {[
             { 
-              title: "Admin Hubs", 
-              desc: "Role-based control panels for managing complex permissions, users, and audit trails." 
+              title: "Unified Dispatch", 
+              desc: "A centralized engine for task allocation, priority routing, and real-time fleet management." 
             },
             { 
-              title: "Internal Tools", 
-              desc: "Custom-built engines for inventory, logistics, finance, and niche business logic." 
+              title: "Operational BI", 
+              desc: "High-fidelity data telemetry that turns field activity into actionable business intelligence." 
             },
             { 
-              title: "Automation", 
-              desc: "Eliminating manual entry through event-driven workflows and immutable data logs." 
+              title: "Automated Payouts", 
+              desc: "Immutable financial layers for high-velocity billing, payouts, and reconciliation." 
             },
           ].map((item, i) => (
             <motion.div 
@@ -72,77 +74,66 @@ export default function Home() {
               whileHover={{ y: -8 }}
               className="group rounded-[2rem] border border-slate-100 bg-white p-10 transition-all hover:shadow-2xl hover:shadow-black/5"
             >
-              <div className="mb-6 h-1 w-12 bg-slate-100 group-hover:bg-black transition-colors" />
+              <div className="mb-6 h-1 w-12 bg-[#FF4D94]/20 group-hover:bg-[#FF4D94] transition-colors" />
               <h3 className="text-xl font-bold tracking-tight">{item.title}</h3>
               <p className="mt-4 text-sm leading-relaxed text-slate-500">{item.desc}</p>
             </motion.div>
           ))}
         </section>
 
-        {/* 3. FEATURED BUILD: ERS (Social Proof) */}
-        <section className="mt-32 overflow-hidden rounded-[3rem] bg-zinc-900 p-10 lg:p-20 text-white">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        {/* 3. THE FLAGSHIP: ERS (Errand Runner System) */}
+        <section className="mt-32 overflow-hidden rounded-[3rem] bg-zinc-900 p-10 lg:p-20 text-white relative">
+          <div className="grid lg:grid-cols-2 gap-16 items-center relative z-10">
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">Current Spotlight</span>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[#FF4D94]">Case Study: ERS</span>
               <h2 className="mt-6 text-4xl font-bold tracking-tighter sm:text-5xl">
-                ERS: The Errand <br /> Runner System.
+                Redefining Same-Day <br /> Physical Logistics.
               </h2>
               <p className="mt-8 text-lg text-zinc-400 leading-relaxed">
-                Transforming WhatsApp-based logistics into a centralized dispatch 
-                platform with real-time runner telemetry and automated billing.
+                ERS is more than an app; it's a complete ecosystem. We built the 
+                infrastructure to handle thousands of local tasks with zero friction.
               </p>
               <Link 
-                href="/projects" 
-                className="mt-10 inline-block border-b border-white/20 pb-1 text-sm font-bold uppercase tracking-widest hover:border-white transition-all"
+                href="/platform" 
+                className="mt-10 inline-block border-b border-[#FF4D94]/30 pb-1 text-sm font-bold uppercase tracking-widest hover:border-[#FF4D94] transition-all"
               >
-                Read Case Study →
+                View Platform Details →
               </Link>
             </div>
-            <div className="aspect-video rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center italic text-zinc-600">
-              [Visual System Preview]
+            <div className="aspect-video rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center relative group overflow-hidden">
+                {/* Visual Placeholder for Platform Screenshot */}
+                <div className="absolute inset-0 bg-[#FF4D94]/5 blur-3xl group-hover:bg-[#FF4D94]/10 transition-colors" />
+                <span className="italic text-zinc-600 font-mono text-sm">[ ERS_INTERFACE_V1.0 ]</span>
             </div>
           </div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF4D94]/10 blur-[120px] rounded-full -mr-20 -mt-20" />
         </section>
 
-        {/* 4. THE MANIFESTO SNIPPET */}
-        <section className="mt-32 flex flex-col lg:flex-row gap-16 lg:items-center">
-          <div className="flex-1">
-            <h2 className="text-4xl font-bold tracking-tight uppercase">Why Wanky.</h2>
-          </div>
-          <div className="flex-[2] grid sm:grid-cols-2 gap-12">
-            <div>
-              <h4 className="font-bold text-sm uppercase tracking-widest mb-4">Outcome-Driven</h4>
-              <p className="text-sm text-slate-500 leading-relaxed">
-                We don't sell hours; we sell operational freedom. If a system doesn't 
-                increase your efficiency, we don't build it.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-bold text-sm uppercase tracking-widest mb-4">Durable Code</h4>
-              <p className="text-sm text-slate-500 leading-relaxed">
-                Built with a "Zero-Bugs" mindset and architectural documentation that 
-                ensures your system lives for a decade, not a week.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* 5. FINAL CALL TO ACTION */}
+        {/* 4. THE STARTUP CTAs */}
         <section className="mt-40 text-center">
-          <h2 className="text-5xl font-bold tracking-tight mb-8 uppercase italic">Let's build.</h2>
+          <h2 className="text-5xl font-bold tracking-tight mb-8 uppercase italic leading-[1.1]">
+            Build on <span className="text-[#FF4D94]">Cloud</span> <br /> Built for <span className="text-slate-300">Scale.</span>
+          </h2>
           <p className="text-slate-500 mb-12 max-w-xl mx-auto leading-relaxed">
-            Ready to replace your manual processes with a high-performance 
-            internal engine? Let's start with an audit.
+            Stop stitching together manual workflows. Deploy a professional-grade 
+            operating system for your business today.
           </p>
-          <div className="flex justify-center gap-6">
-            <a 
-              href="mailto:hello@wankysoftware.com"
+          <div className="flex flex-col sm:flex-row justify-center gap-6">
+            <Link 
+              href="/contact"
               className="rounded-full bg-black px-12 py-5 text-sm font-bold text-white transition-all hover:bg-zinc-800"
             >
-              hello@wankysoftware.com
-            </a>
+              Book a Demo
+            </Link>
+            <Link 
+              href="/pricing"
+              className="rounded-full border border-slate-200 px-12 py-5 text-sm font-bold text-black transition-all hover:bg-slate-50"
+            >
+              Pricing Plans
+            </Link>
           </div>
         </section>
+
       </div>
     </div>
   );
