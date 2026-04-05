@@ -1,125 +1,146 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function PricingPage() {
+  const tiers = [
+    {
+      name: "Pilot",
+      price: "Custom",
+      desc: "For startups validating a core operational hook.",
+      features: [
+        "Single Core Module Deployment",
+        "Standard Admin Dashboard",
+        "Essential Data Telemetry",
+        "4-Week Rapid Build Cycle",
+      ],
+      button: "Start Pilot",
+      featured: false,
+    },
+    {
+      name: "Scale",
+      price: "Enterprise",
+      desc: "Full infrastructure for high-velocity operations.",
+      features: [
+        "Full Platform Ecosystem (ERS Style)",
+        "Advanced Dispatch Logic",
+        "Automated Payout & Ledger Layer",
+        "Priority Architecture Support",
+      ],
+      button: "Get Started",
+      featured: true,
+    },
+    {
+      name: "Infrastructure",
+      price: "Strategic",
+      desc: "For established firms requiring deep integration.",
+      features: [
+        "Custom Protocol Development",
+        "Multi-Tenant API Architecture",
+        "Legacy System Migration",
+        "Long-term Execution Partner",
+      ],
+      button: "Inquire",
+      featured: false,
+    },
+  ];
+
   return (
-    <div className="relative mx-auto max-w-6xl px-6 py-24 lg:py-32 bg-white text-black font-sans">
+    <div className="relative mx-auto max-w-6xl px-6 py-24 lg:py-32 bg-white text-black font-sans selection:bg-[#FF4D94] selection:text-white">
       
-      {/* HERO */}
+      {/* 1. PRICING HERO */}
       <motion.section 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-20"
+        className="text-center mb-24"
       >
-        <span className="px-3 py-1 rounded-full border border-black/10 bg-slate-50 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
+        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#FF4D94]">
           Engagement Models
         </span>
-        <h1 className="mt-6 text-5xl font-bold tracking-tight lg:text-7xl">
-          Investment in <span className="text-slate-400 font-medium">Clarity.</span>
+        <h1 className="mt-6 text-5xl font-bold tracking-tighter lg:text-7xl">
+          Investment in <br />
+          <span className="text-slate-400 italic">Infrastructure.</span>
         </h1>
-        <p className="mt-8 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          We don't bill by the hour. We price based on the value and efficiency 
-          our systems bring to your bottom line.
+        <p className="mt-8 text-lg text-slate-500 max-w-xl mx-auto leading-relaxed">
+          We don't bill by the hour. We price based on the operational leverage 
+          and long-term value our systems bring to your business.
         </p>
       </motion.section>
 
-      {/* PRICING CARDS */}
-      <div className="grid md:grid-cols-2 gap-8 items-start">
-        
-        {/* MODEL 1: FIXED SCOPE */}
-        <motion.div 
-          whileHover={{ y: -5 }}
-          className="p-10 rounded-[2.5rem] border border-slate-100 bg-slate-50/30 space-y-8"
-        >
-          <div>
-            <h3 className="text-2xl font-bold uppercase tracking-tighter">Fixed-Scope Build</h3>
-            <p className="text-slate-500 mt-2 text-sm italic">Perfect for defined projects like ERS or Custom Dashboards.</p>
-          </div>
-          
-          <div className="space-y-4">
-            {[
-              "End-to-end system architecture",
-              "UI/UX Design focused on utility",
-              "Database & API integration",
-              "30 days of post-launch support",
-              "Full code ownership"
-            ].map((feature, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <div className="h-1.5 w-1.5 rounded-full bg-black" />
-                <p className="text-sm font-medium text-slate-700">{feature}</p>
-              </div>
-            ))}
-          </div>
+      {/* 2. THE TIERS */}
+      <section className="grid gap-8 lg:grid-cols-3 items-start">
+        {tiers.map((tier, i) => (
+          <motion.div 
+            key={tier.name}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1 }}
+            className={`relative rounded-[2.5rem] p-10 border transition-all duration-500 ${
+              tier.featured 
+                ? "bg-zinc-900 text-white border-zinc-800 shadow-2xl scale-[1.05] z-10" 
+                : "bg-slate-50/50 border-slate-100 text-black hover:border-[#FF4D94]/20"
+            }`}
+          >
+            {tier.featured && (
+              <span className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-[#FF4D94] px-4 py-1 text-[10px] font-bold uppercase tracking-widest text-white">
+                Most Scalable
+              </span>
+            )}
+            
+            <h3 className={`text-sm font-bold uppercase tracking-widest mb-2 ${tier.featured ? "text-[#FF4D94]" : "text-slate-400"}`}>
+              {tier.name}
+            </h3>
+            <p className="text-3xl font-bold tracking-tighter mb-4">{tier.price}</p>
+            <p className={`text-xs leading-relaxed mb-8 ${tier.featured ? "text-zinc-400" : "text-slate-500"}`}>
+              {tier.desc}
+            </p>
 
-          <div className="pt-8 border-t border-slate-200">
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Typically starts at</p>
-            <p className="text-4xl font-bold tracking-tight">$3,500+</p>
-            <Link 
-              href="/contact" 
-              className="mt-8 block w-full text-center rounded-full bg-black py-4 text-sm font-bold text-white hover:bg-zinc-800 transition-all"
+            <ul className="space-y-4 mb-10">
+              {tier.features.map((feature) => (
+                <li key={feature} className="flex items-start gap-3 text-[11px] font-medium tracking-tight">
+                  <div className={`mt-1 h-1.5 w-1.5 rounded-full shrink-0 ${tier.featured ? "bg-[#FF4D94]" : "bg-black"}`} />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+
+            <Link
+              href="/contact"
+              className={`block w-full rounded-full py-4 text-center text-xs font-bold uppercase tracking-widest transition-all ${
+                tier.featured 
+                  ? "bg-[#FF4D94] text-white hover:bg-[#FF4D94]/90" 
+                  : "bg-black text-white hover:bg-zinc-800"
+              }`}
             >
-              Get a Custom Quote
+              {tier.button}
             </Link>
-          </div>
-        </motion.div>
+          </motion.div>
+        ))}
+      </section>
 
-        {/* MODEL 2: FRACTIONAL CTO / PARTNER */}
-        <motion.div 
-          whileHover={{ y: -5 }}
-          className="p-10 rounded-[2.5rem] bg-zinc-900 text-white space-y-8 shadow-2xl relative overflow-hidden"
-        >
-          <div className="relative z-10">
-            <h3 className="text-2xl font-bold uppercase tracking-tighter">Retainer Partner</h3>
-            <p className="text-zinc-400 mt-2 text-sm italic">Continuous optimization for growing operations.</p>
-          </div>
-
-          <div className="relative z-10 space-y-4">
-            {[
-              "Fractional CTO advisory",
-              "Ongoing feature development",
-              "Priority bug fixes & security",
-              "Workflow automation audits",
-              "System performance scaling"
-            ].map((feature, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <div className="h-1.5 w-1.5 rounded-full bg-white/40" />
-                <p className="text-sm font-medium text-zinc-300">{feature}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="relative z-10 pt-8 border-t border-white/10">
-            <p className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-2">Monthly investment</p>
-            <p className="text-4xl font-bold tracking-tight">$1,500<span className="text-lg text-zinc-500 font-normal"> /mo</span></p>
-            <Link 
-              href="/contact" 
-              className="mt-8 block w-full text-center rounded-full bg-white py-4 text-sm font-bold text-black hover:bg-slate-100 transition-all"
-            >
-              Check Availability
-            </Link>
-          </div>
-          
-          {/* Subtle decoration */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 blur-3xl rounded-full -mr-10 -mt-10" />
-        </motion.div>
-
-      </div>
-
-      {/* WHY US SECTION */}
-      <section className="mt-32 grid md:grid-cols-3 gap-12 border-t border-slate-100 pt-16">
+      {/* 3. THE "WHY" SECTION */}
+      <section className="mt-40 grid lg:grid-cols-2 gap-16 items-center border-t border-slate-100 pt-20">
         <div>
-          <h4 className="font-bold uppercase text-xs tracking-[0.2em] mb-4">No Hidden Fees</h4>
-          <p className="text-sm text-slate-500 leading-relaxed">The price we agree on is the price you pay. No billing for "extra hours" on agreed scopes.</p>
+            <h2 className="text-3xl font-bold tracking-tight uppercase italic mb-6">Build Once. <br/>Scale Forever.</h2>
+            <p className="text-slate-500 text-sm leading-relaxed">
+                We believe in the Bezos philosophy of "Relentless Execution". 
+                When you invest in a Wanky system, you aren't buying a temporary fix; 
+                you're installing a permanent asset that depreciates your manual overhead 
+                to near zero.
+            </p>
         </div>
-        <div>
-          <h4 className="font-bold uppercase text-xs tracking-[0.2em] mb-4">You Own the Code</h4>
-          <p className="text-sm text-slate-500 leading-relaxed">Unlike SaaS, you own the IP. If we part ways, you take your system with you. No lock-in.</p>
-        </div>
-        <div>
-          <h4 className="font-bold uppercase text-xs tracking-[0.2em] mb-4">Build for ROI</h4>
-          <p className="text-sm text-slate-500 leading-relaxed">If we don't believe a tool will save you more money than it costs to build, we won't build it.</p>
+        <div className="p-10 rounded-3xl bg-slate-50 border border-slate-100">
+            <h4 className="font-bold text-xs uppercase tracking-widest mb-4">Included in every tier</h4>
+            <div className="grid grid-cols-2 gap-y-4 gap-x-8">
+                {["Cloud Hosting", "Source Code Access", "24/7 Monitoring", "Technical Docs"].map((item) => (
+                    <div key={item} className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter flex items-center gap-2">
+                        <div className="h-1 w-1 bg-[#FF4D94] rounded-full" />
+                        {item}
+                    </div>
+                ))}
+            </div>
         </div>
       </section>
     </div>
