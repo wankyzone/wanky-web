@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white text-black font-sans selection:bg-[#FF4D94] selection:text-white">
       
-      {/* 1. HERO SECTION: THE LOGISTICS OS */}
+      {/* 1. HERO SECTION */}
       <div className="mx-auto max-w-6xl px-6 py-20 lg:py-32">
         <motion.section 
           initial={{ opacity: 0, y: 20 }}
@@ -36,7 +36,7 @@ export default function Home() {
                 href="/contact"
                 className="rounded-full bg-black px-10 py-4 text-sm font-bold text-white transition-all hover:bg-zinc-800 hover:scale-[1.02] active:scale-95 shadow-xl shadow-black/10"
               >
-                Get Started
+                Book a Demo
               </Link>
               <Link
                 href="/platform"
@@ -46,91 +46,80 @@ export default function Home() {
               </Link>
             </div>
           </div>
-
-          {/* Background Grid Pattern */}
-          <div className="absolute inset-0 -z-10 opacity-[0.03] [mask-image:linear-gradient(to_bottom_left,white,transparent)]">
-            <svg width="100%" height="100%"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="black" strokeWidth="1"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)" /></svg>
-          </div>
         </motion.section>
 
-        {/* 2. CORE PLATFORM PILLARS */}
-        <section className="mt-24 grid gap-8 md:grid-cols-3">
-          {[
-            { 
-              title: "Unified Dispatch", 
-              desc: "A centralized engine for task allocation, priority routing, and real-time fleet management." 
-            },
-            { 
-              title: "Operational BI", 
-              desc: "High-fidelity data telemetry that turns field activity into actionable business intelligence." 
-            },
-            { 
-              title: "Automated Payouts", 
-              desc: "Immutable financial layers for high-velocity billing, payouts, and reconciliation." 
-            },
-          ].map((item, i) => (
-            <motion.div 
-              key={i}
-              whileHover={{ y: -8 }}
-              className="group rounded-[2rem] border border-slate-100 bg-white p-10 transition-all hover:shadow-2xl hover:shadow-black/5"
-            >
-              <div className="mb-6 h-1 w-12 bg-[#FF4D94]/20 group-hover:bg-[#FF4D94] transition-colors" />
-              <h3 className="text-xl font-bold tracking-tight">{item.title}</h3>
-              <p className="mt-4 text-sm leading-relaxed text-slate-500">{item.desc}</p>
-            </motion.div>
-          ))}
-        </section>
-
-        {/* 3. THE FLAGSHIP: ERS (Errand Runner System) */}
-        <section className="mt-32 overflow-hidden rounded-[3rem] bg-zinc-900 p-10 lg:p-20 text-white relative">
-          <div className="grid lg:grid-cols-2 gap-16 items-center relative z-10">
-            <div>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[#FF4D94]">Case Study: ERS</span>
-              <h2 className="mt-6 text-4xl font-bold tracking-tighter sm:text-5xl">
-                Redefining Same-Day <br /> Physical Logistics.
-              </h2>
-              <p className="mt-8 text-lg text-zinc-400 leading-relaxed">
-                ERS is more than an app; it's a complete ecosystem. We built the 
-                infrastructure to handle thousands of local tasks with zero friction.
-              </p>
-              <Link 
-                href="/platform" 
-                className="mt-10 inline-block border-b border-[#FF4D94]/30 pb-1 text-sm font-bold uppercase tracking-widest hover:border-[#FF4D94] transition-all"
-              >
-                View Platform Details →
-              </Link>
-            </div>
-            <div className="aspect-video rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center relative group overflow-hidden">
-                {/* Visual Placeholder for Platform Screenshot */}
-                <div className="absolute inset-0 bg-[#FF4D94]/5 blur-3xl group-hover:bg-[#FF4D94]/10 transition-colors" />
-                <span className="italic text-zinc-600 font-mono text-sm">[ ERS_INTERFACE_V1.0 ]</span>
+        {/* 2. DASHBOARD PREVIEW SECTION (Ref: Image 7) */}
+        <section className="mt-32 rounded-[3rem] bg-zinc-900 p-12 lg:p-20 text-white relative">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-4xl font-bold tracking-tight">Real-time control, <br/>without leaving the dashboard.</h2>
+            <p className="mt-6 text-base text-zinc-400 leading-relaxed">
+              The ERS Admin Interface gives you 100% visibility over every errand, runner, and financial node in your network.
+            </p>
+            <div className="mt-8 flex justify-center gap-2">
+                {["Task Manager", "Fleet Telemetry", "Reconciliation"].map((tab, i) => (
+                    <div key={tab} className={`px-5 py-2.5 rounded-full border text-[11px] font-bold uppercase tracking-widest ${i === 0 ? "border-[#FF4D94] text-white" : "border-white/10 text-zinc-500"}`}>
+                        {tab}
+                    </div>
+                ))}
             </div>
           </div>
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF4D94]/10 blur-[120px] rounded-full -mr-20 -mt-20" />
+
+          <motion.div 
+            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            viewport={{ once: true }}
+            className="aspect-[16/10] rounded-2xl bg-white/5 border border-white/10 p-4 shadow-2xl relative overflow-hidden group"
+          >
+            {/* Visual Placeholder for actual Dashboard Screenshot */}
+            <div className="absolute inset-0 bg-[#FF4D94]/5 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+            
+            {/* Mock Dashboard UI */}
+            <div className="flex flex-col gap-4 h-full relative z-10">
+                <div className="flex justify-between items-center pb-4 border-b border-white/10">
+                    <div className="h-5 w-1/4 bg-white/10 rounded-md" />
+                    <div className="flex gap-2">
+                        <div className="h-3 w-3 rounded-full bg-red-500/30" />
+                        <div className="h-3 w-3 rounded-full bg-yellow-500/30" />
+                        <div className="h-3 w-3 rounded-full bg-green-500/30" />
+                    </div>
+                </div>
+                <div className="grid grid-cols-10 gap-4 flex-grow">
+                    <div className="col-span-3 h-full bg-white/5 rounded-xl border border-white/5 flex flex-col justify-end p-4">
+                        <div className="h-3 w-1/2 bg-zinc-600 rounded mb-2" />
+                        <div className="h-2 w-full bg-zinc-700 rounded" />
+                    </div>
+                    <div className="col-span-7 h-full bg-white/[0.02] rounded-xl border border-white/5 p-4 flex flex-col gap-3">
+                        <div className="h-3 w-1/3 bg-zinc-700 rounded" />
+                        {[1, 2, 3, 4].map(i => <div key={i} className="h-2 w-full bg-zinc-800 rounded"/>)}
+                    </div>
+                </div>
+            </div>
+          </motion.div>
+          <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#FF4D94]/10 blur-[100px] rounded-full" />
         </section>
 
-        {/* 4. THE STARTUP CTAs */}
-        <section className="mt-40 text-center">
-          <h2 className="text-5xl font-bold tracking-tight mb-8 uppercase italic leading-[1.1]">
-            Build on <span className="text-[#FF4D94]">Cloud</span> <br /> Built for <span className="text-slate-300">Scale.</span>
-          </h2>
-          <p className="text-slate-500 mb-12 max-w-xl mx-auto leading-relaxed">
-            Stop stitching together manual workflows. Deploy a professional-grade 
-            operating system for your business today.
+        {/* 3. GITHUB/BUILD IN SECONDS SECTION (Ref: Image 6) */}
+        <section className="mt-40 rounded-[3rem] bg-black p-12 lg:p-20 text-white text-center">
+          <h2 className="text-4xl font-bold tracking-tight mb-6">Start building in seconds.</h2>
+          <p className="text-zinc-400 max-w-xl mx-auto mb-12 text-sm leading-relaxed">
+            The Wanky architecture is modular by default. Integrate our core logic into your 
+            stack or kickstart your next logistics project with our pre-built templates.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-6">
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link 
-              href="/contact"
-              className="rounded-full bg-black px-12 py-5 text-sm font-bold text-white transition-all hover:bg-zinc-800"
+              href="/platform"
+              className="rounded-full bg-white px-10 py-4 text-sm font-bold text-black transition-all hover:bg-slate-100"
             >
-              Book a Demo
+              Explore the Platform
             </Link>
-            <Link 
-              href="/pricing"
-              className="rounded-full border border-slate-200 px-12 py-5 text-sm font-bold text-black transition-all hover:bg-slate-50"
+            <a 
+              href="https://github.com/wankyzone" // REPLACE WITH YOUR ACTUAL GITHUB URL
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="rounded-full border border-white/20 bg-black px-10 py-4 text-sm font-bold text-white transition-all hover:bg-white/5"
             >
-              Pricing Plans
-            </Link>
+              Official GitHub Library
+            </a>
           </div>
         </section>
 
