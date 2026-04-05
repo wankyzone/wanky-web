@@ -8,34 +8,10 @@ const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   title: "Wanky — Software for High-Stakes Operations",
-  description: "We engineer internal tools, admin engines, and automated workflows for modern businesses.",
-  metadataBase: new URL('https://wankysoftware.com'),
-  alternates: {
-    canonical: '/',
-  },
+  description:
+    "We engineer internal tools, admin engines, and automated workflows for modern businesses.",
   icons: {
-    icon: [
-      { url: '/favicon.ico' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-    ],
-    apple: [
-      { url: '/apple-touch-icon.png' },
-    ],
-  },
-  openGraph: {
-    title: 'Wanky Software',
-    description: 'Internal systems and cloud software for modern businesses.',
-    url: 'https://wankysoftware.com',
-    siteName: 'Wanky',
-    images: [
-      {
-        url: '/og-image.png', // You should create a 1200x630 version of your logo for social sharing
-        width: 1200,
-        height: 630,
-      },
-    ],
-    locale: 'en_US',
-    type: 'website',
+    icon: "/favicon.ico",
   },
 };
 
@@ -52,9 +28,8 @@ function Nav() {
 
         <nav className="hidden md:flex items-center gap-8">
           {[
-            { name: "Systems", href: "/systems" },
-            { name: "Projects", href: "/projects" },
-            { name: "Pricing", href: "/pricing" },
+            { name: "Platform", href: "/platform" },
+            { name: "Infrastructure", href: "/systems" },
             { name: "Principles", href: "/principles" },
           ].map((item) => (
             <Link 
@@ -78,7 +53,7 @@ function Nav() {
           className="md:hidden rounded-full bg-black px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white"
           href="/contact"
         >
-          Talk to us
+          Talk
         </Link>
       </div>
     </header>
@@ -86,25 +61,71 @@ function Nav() {
 }
 
 function Footer() {
-  return (
-    <footer className="mt-20 border-t border-slate-100 bg-white">
-      <div className="mx-auto max-w-6xl px-6 py-12">
-        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-2 opacity-50 grayscale">
-            <WankyMark size={20} />
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Wanky Software</span>
-          </div>
-          
-          <div className="flex gap-8 text-[10px] font-bold uppercase tracking-widest text-slate-400">
-            <Link href="/systems" className="hover:text-black transition-colors">Systems</Link>
-            <Link href="/projects" className="hover:text-black transition-colors">Portfolio</Link>
-            <a href="mailto:hello@wankysoftware.com" className="hover:text-black transition-colors">Contact</a>
-          </div>
+  const footerSections = [
+    {
+      title: "Product",
+      links: [
+        { name: "OS Platform", href: "/platform" },
+        { name: "ERS Engine", href: "/platform" },
+        { name: "Infrastructure", href: "/systems" },
+        { name: "Plans", href: "/pricing" },
+      ],
+    },
+    {
+      title: "Company",
+      links: [
+        { name: "Principles", href: "/principles" },
+        { name: "Roadmap", href: "/platform" },
+        { name: "Brand Assets", href: "#" },
+      ],
+    },
+    {
+      title: "Resources",
+      links: [
+        { name: "Documentation", href: "#" },
+        { name: "GitHub Library", href: "https://github.com/your-username" }, // REPLACE
+        { name: "Audit Guide", href: "#" },
+      ],
+    },
+  ];
 
-          <p className="text-[10px] font-bold uppercase tracking-widest text-slate-300">
-            © {new Date().getFullYear()} — Built for Operations
-          </p>
+  return (
+    <footer className="mt-40 border-t border-slate-100 bg-slate-50/50">
+      <div className="mx-auto max-w-6xl px-6 py-20 grid grid-cols-2 md:grid-cols-5 gap-12">
+        
+        {/* Logo & Callout */}
+        <div className="col-span-2 md:col-span-2 pr-10">
+            <Link href="/" className="flex items-center gap-2 group mb-6">
+                <WankyMark size={24} />
+                <span className="text-sm font-bold tracking-tighter uppercase">Wanky</span>
+            </Link>
+            <p className="text-xs leading-relaxed text-slate-500 mb-8 max-w-xs">
+                Engineering the infrastructure for businesses that operate in the high-stakes physical world. Lagos // Global.
+            </p>
         </div>
+
+        {/* Directory Links */}
+        {footerSections.map(section => (
+            <div key={section.title}>
+                <h5 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-6">{section.title}</h5>
+                <ul className="space-y-4">
+                    {section.links.map(link => (
+                        <li key={link.name}>
+                            <Link href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} className="text-sm text-slate-600 hover:text-black transition-colors">
+                                {link.name}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        ))}
+      </div>
+
+      {/* Legal Bar */}
+      <div className="border-t border-slate-100 bg-white">
+          <div className="mx-auto max-w-6xl px-6 py-6 text-center text-[10px] font-medium tracking-wide text-slate-400">
+             © {new Date().getFullYear()} Wanky Software. all rights reserved.
+          </div>
       </div>
     </footer>
   );
@@ -113,7 +134,7 @@ function Footer() {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} antialiased selection:bg-black selection:text-white`}>
+      <body className={`${inter.className} antialiased selection:bg-[#FF4D94] selection:text-white`}>
         <Nav />
         <main>{children}</main>
         <Footer />
