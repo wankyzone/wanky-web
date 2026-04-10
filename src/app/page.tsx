@@ -3,50 +3,75 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-// Helper for the infinite loop
+/* ================= LOGOS ================= */
 const LOGOS = [
-  "Google", "Paystack", "Amazon", "Bukku Mart", 
-  "Purple Mall", "Market Square", "Jumia", "DHL", "Kobo360"
+  { src: "/logos/paystack.svg", alt: "Paystack" },
+  { src: "/logos/flutterwave.svg", alt: "Flutterwave" },
+  { src: "/logos/jumia.svg", alt: "Jumia" },
+  { src: "/logos/dhl.svg", alt: "DHL" },
+  { src: "/logos/uber.svg", alt: "Uber" },
+  { src: "/logos/bolt.svg", alt: "Bolt" },
+  { src: "/logos/kobo360.svg", alt: "Kobo360" },
+];
+
+/* ================= FEATURES ================= */
+const FEATURES = [
+  {
+    title: "Dispatch Engine",
+    desc: "Automate assignment, routing, and execution of errands in real time.",
+  },
+  {
+    title: "Telemetry Layer",
+    desc: "Track runners, jobs, and movement with live system visibility.",
+  },
+  {
+    title: "Financial Core",
+    desc: "Control payouts, escrow, and transaction flow with precision.",
+  },
+  {
+    title: "Admin Control",
+    desc: "Operate your entire logistics network from a single dashboard.",
+  },
 ];
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white text-black font-sans selection:bg-[#FF4D94] selection:text-white">
       
-      {/* 1. HERO SECTION */}
-      <div className="mx-auto max-w-6xl px-6 py-20 lg:pt-32 lg:pb-10">
-        <motion.section 
-          initial={{ opacity: 0, y: 20 }}
+      {/* ================= HERO ================= */}
+      <div className="mx-auto max-w-6xl px-6 py-20 lg:pt-32">
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative overflow-hidden rounded-[3rem] border border-slate-100 bg-slate-50/30 px-8 py-16 lg:px-20 lg:py-24"
+          className="rounded-[3rem] border border-slate-100 bg-slate-50/40 px-8 py-20 lg:px-20"
         >
-          <div className="relative z-10 max-w-4xl">
+          <div className="max-w-4xl">
             <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-[#FF4D94]">
               <span className="h-2 w-2 rounded-full bg-[#FF4D94] animate-pulse" />
-              Now in Private Beta
+              Private Beta
             </span>
 
-            <h1 className="mt-8 text-6xl font-bold leading-[0.9] tracking-tighter text-black sm:text-7xl lg:text-8xl">
-              The OS for <br />
-              <span className="text-slate-400 italic underline decoration-[#FF4D94]/30">Unstructured</span> <br />
-              Logistics.
+            <h1 className="mt-8 text-6xl font-bold leading-[0.9] tracking-tighter sm:text-7xl lg:text-8xl">
+              The Operating System <br />
+              for <span className="text-slate-400 italic underline decoration-[#FF4D94]/30">Logistics</span>
             </h1>
 
-            <p className="mt-10 max-w-xl text-lg leading-relaxed text-slate-500">
-              Wanky is the infrastructure for businesses that move in the physical world. 
-              Automate dispatch, scale telemetry, and centralize operations on a single proprietary engine.
+            <p className="mt-10 max-w-xl text-lg text-slate-500 leading-relaxed">
+              Wanky powers businesses that move in the physical world. 
+              Automate operations, unify data, and scale execution from a single system.
             </p>
 
             <div className="mt-12 flex flex-wrap gap-4">
               <Link
                 href="/contact"
-                className="rounded-full bg-black px-10 py-4 text-sm font-bold text-white transition-all hover:bg-zinc-800 hover:scale-[1.02] active:scale-95 shadow-xl shadow-black/10"
+                className="rounded-full bg-black px-10 py-4 text-sm font-bold text-white hover:bg-zinc-800 transition"
               >
                 Book a Demo
               </Link>
+
               <Link
                 href="/platform"
-                className="rounded-full border border-slate-200 bg-white px-10 py-4 text-sm font-bold text-black transition-all hover:bg-slate-50"
+                className="rounded-full border border-slate-200 px-10 py-4 text-sm font-bold hover:bg-slate-50"
               >
                 Explore Platform
               </Link>
@@ -55,129 +80,105 @@ export default function Home() {
         </motion.section>
       </div>
 
-      {/* 2. LOGO MARQUEE (The "Google-style" Slider) */}
-      <section className="py-20 border-y border-slate-50 overflow-hidden">
+      {/* ================= LOGO STRIP ================= */}
+      <section className="py-24 border-y border-slate-50 overflow-hidden">
         <div className="mx-auto max-w-6xl px-6">
-          <p className="text-center text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-12">
-            Trusted by the next generation of commerce
+
+          <p className="text-center text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400 mb-14">
+            Built for teams operating across modern commerce
           </p>
-          
-          <div className="relative flex">
-            <motion.div 
-              className="flex gap-16 whitespace-nowrap items-center"
+
+          <div className="relative flex items-center">
+            <motion.div
+              className="flex gap-20 whitespace-nowrap"
               animate={{ x: ["0%", "-50%"] }}
-              transition={{ ease: "linear", duration: 25, repeat: Infinity }}
+              transition={{ ease: "linear", duration: 30, repeat: Infinity }}
             >
               {[...LOGOS, ...LOGOS].map((logo, i) => (
-                <span 
-                  key={i} 
-                  className="text-2xl lg:text-3xl font-black text-slate-200 hover:text-[#FF4D94] transition-colors cursor-default"
+                <div
+                  key={i}
+                  className="opacity-40 hover:opacity-100 transition"
                 >
-                  {logo}
-                </span>
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className="h-8 lg:h-10 grayscale hover:grayscale-0 transition"
+                  />
+                </div>
               ))}
             </motion.div>
-            {/* Gradient Fades for depth */}
-            <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white to-transparent z-10" />
-            <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white to-transparent z-10" />
+
+            <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white to-transparent" />
+            <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white to-transparent" />
           </div>
         </div>
       </section>
 
       <div className="mx-auto max-w-6xl px-6">
-        {/* 3. DASHBOARD PREVIEW SECTION */}
-        <section className="mt-20 rounded-[3rem] bg-zinc-900 p-12 lg:p-20 text-white relative overflow-hidden">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-4xl font-bold tracking-tight">Real-time control, <br/>without leaving the dashboard.</h2>
-            <p className="mt-6 text-base text-zinc-400 leading-relaxed">
-              The ERS Admin Interface gives you 100% visibility over every errand, runner, and financial node in your network.
+
+        {/* ================= FEATURES ================= */}
+        <section className="py-32">
+          <div className="max-w-2xl mb-16">
+            <h2 className="text-4xl font-bold tracking-tight">
+              Everything you need to run logistics at scale.
+            </h2>
+            <p className="mt-6 text-slate-500">
+              Modular systems designed to replace fragmented workflows and manual operations.
             </p>
           </div>
 
-          <motion.div 
-            whileInView={{ opacity: 1, y: 0 }}
-            initial={{ opacity: 0, y: 30 }}
-            viewport={{ once: true }}
-            className="aspect-[16/10] rounded-2xl bg-white/5 border border-white/10 p-4 shadow-2xl relative z-10"
-          >
-            <div className="flex flex-col gap-4 h-full">
-                <div className="flex justify-between items-center pb-4 border-b border-white/10">
-                    <div className="h-5 w-1/4 bg-white/10 rounded-md" />
-                    <div className="flex gap-2">
-                        <div className="h-3 w-3 rounded-full bg-red-500/30" />
-                        <div className="h-3 w-3 rounded-full bg-yellow-500/30" />
-                        <div className="h-3 w-3 rounded-full bg-green-500/30" />
-                    </div>
-                </div>
-                <div className="grid grid-cols-10 gap-4 flex-grow">
-                    <div className="col-span-3 h-full bg-white/5 rounded-xl border border-white/5 p-4" />
-                    <div className="col-span-7 h-full bg-white/[0.02] rounded-xl border border-white/5 p-4 flex flex-col gap-3" />
-                </div>
-            </div>
-          </motion.div>
-          
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#FF4D94]/20 blur-[120px] rounded-full" />
-          <div className="absolute top-0 left-0 w-64 h-64 bg-blue-500/10 blur-[100px] rounded-full" />
+          <div className="grid md:grid-cols-2 gap-10">
+            {FEATURES.map((f, i) => (
+              <div
+                key={i}
+                className="p-8 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-slate-100 transition"
+              >
+                <h3 className="font-bold text-lg mb-2">{f.title}</h3>
+                <p className="text-sm text-slate-500">{f.desc}</p>
+              </div>
+            ))}
+          </div>
         </section>
 
-        {/* 4. DEVELOPER / GITHUB SECTION */}
-        <section className="mt-40 mb-32 rounded-[3rem] bg-black p-12 lg:p-20 text-white">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-4xl font-bold tracking-tight mb-6">Start building in seconds.</h2>
-              <p className="text-zinc-400 max-w-xl mb-12 text-sm leading-relaxed">
-                The Wanky architecture is modular by default. Integrate our core logic into your 
-                stack or kickstart your next logistics project with our pre-built SDK.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Link 
-                  href="/platform"
-                  className="rounded-full bg-white px-8 py-3 text-sm font-bold text-black transition-all hover:bg-slate-100"
-                >
-                  Explore Platform
-                </Link>
-                <a 
-                  href="https://github.com/wankyzone"
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="rounded-full border border-white/20 bg-black px-8 py-3 text-sm font-bold text-white transition-all hover:bg-white/5"
-                >
-                  View Documentation
-                </a>
-              </div>
-            </div>
+        {/* ================= DASHBOARD ================= */}
+        <section className="rounded-[3rem] bg-zinc-900 p-16 text-white">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-4xl font-bold">
+              Full operational visibility.
+            </h2>
+            <p className="mt-6 text-zinc-400">
+              Monitor errands, runners, and transactions in real time.
+            </p>
+          </div>
 
-            {/* Mock Code Block */}
-            <div className="bg-[#111] rounded-2xl border border-white/10 p-6 font-mono text-xs sm:text-sm shadow-2xl">
-              <div className="flex gap-1.5 mb-6">
-                <div className="w-3 h-3 rounded-full bg-red-500/20" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500/20" />
-                <div className="w-3 h-3 rounded-full bg-green-500/20" />
-              </div>
-              <p className="text-zinc-500 mb-2">// Initialize Wanky Engine</p>
-              <p className="text-white"><span className="text-[#FF4D94]">const</span> wanky = <span className="text-blue-400">new</span> WankyOS(<span className="text-green-400">&apos;pk_prod_x92...&apos;</span>);</p>
-              <p className="text-white mt-4"><span className="text-[#FF4D94]">await</span> wanky.<span className="text-blue-400">dispatch</span>({`{`}</p>
-              <p className="text-white pl-4">origin: <span className="text-green-400">&quot;Lagos_Mainland&quot;</span>,</p>
-              <p className="text-white pl-4">destination: <span className="text-green-400">&quot;Victoria_Island&quot;</span>,</p>
-              <p className="text-white pl-4">optimization: <span className="text-green-400">&quot;fastest&quot;</span></p>
-              <p className="text-white">{`}`});</p>
-              <p className="text-zinc-500 mt-4">// Status: 200 OK - Runner assigned.</p>
-            </div>
+          <div className="h-[400px] rounded-2xl bg-white/5 border border-white/10" />
+        </section>
+
+        {/* ================= CTA ================= */}
+        <section className="py-32 text-center">
+          <h2 className="text-4xl font-bold">
+            Start building your logistics system.
+          </h2>
+          <p className="mt-6 text-slate-500">
+            Join the private beta and deploy your first module.
+          </p>
+
+          <div className="mt-10">
+            <Link
+              href="/contact"
+              className="rounded-full bg-black px-12 py-5 text-white font-bold hover:bg-zinc-800"
+            >
+              Apply for Beta
+            </Link>
           </div>
         </section>
       </div>
 
-      {/* 5. SIMPLE STARTUP FOOTER */}
-      <footer className="border-t border-slate-100 py-12">
-        <div className="mx-auto max-w-6xl px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-4">
-            <span className="font-black text-xl tracking-tighter">Wanky.</span>
-            <span className="text-[10px] text-green-500 font-bold uppercase tracking-widest flex items-center gap-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
-              Systems Operational
-            </span>
-          </div>
-          <p className="text-slate-400 text-xs">© 2026 Wanky Infrastructure. Built for the physical world.</p>
+      {/* ================= FOOTER ================= */}
+      <footer className="border-t border-slate-100 py-10">
+        <div className="mx-auto max-w-6xl px-6 flex justify-between text-sm text-slate-400">
+          <span>© 2026 Wanky Infrastructure</span>
+          <span>Systems Operational</span>
         </div>
       </footer>
     </div>
