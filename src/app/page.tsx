@@ -6,13 +6,12 @@ import DemoPanel from "@/components/DemoPanel";
 
 /* ================= LOGOS ================= */
 const LOGOS = [
-  { src: "/logos/paystack.svg", alt: "Paystack" },
   { src: "/logos/flutterwave.svg", alt: "Flutterwave" },
-  { src: "/logos/jumia.svg", alt: "Jumia" },
   { src: "/logos/dhl.svg", alt: "DHL" },
   { src: "/logos/uber.svg", alt: "Uber" },
-  { src: "/logos/bolt.svg", alt: "Bolt" },
-  { src: "/logos/kobo360.svg", alt: "Kobo360" },
+  { src: "/logos/doordash.svg", alt: "DoorDash" },
+  { src: "/logos/stripe.svg", alt: "Stripe" },
+  { src: "/logos/shopify.svg", alt: "Shopify" },
 ];
 
 /* ================= FEATURES ================= */
@@ -96,7 +95,7 @@ export default function Home() {
               transition={{ ease: "linear", duration: 30, repeat: Infinity }}
             >
               {[...LOGOS, ...LOGOS].map((logo, i) => (
-                <div key={i} className="opacity-40 hover:opacity-100 transition">
+                <div key={i} className="h-8 lg:h-10 opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition duration-300">
                   <img
                     src={logo.src}
                     alt={logo.alt}
