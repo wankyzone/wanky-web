@@ -96,10 +96,7 @@ export default function Home() {
               transition={{ ease: "linear", duration: 30, repeat: Infinity }}
             >
               {[...LOGOS, ...LOGOS].map((logo, i) => (
-                <div
-                  key={i}
-                  className="opacity-40 hover:opacity-100 transition"
-                >
+                <div key={i} className="opacity-40 hover:opacity-100 transition">
                   <img
                     src={logo.src}
                     alt={logo.alt}
@@ -152,7 +149,10 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="h-[400px] rounded-2xl bg-white/5 border border-white/10" />
+          {/* ✅ THIS IS THE FIX */}
+          <div className="h-[400px] rounded-2xl bg-white/5 border border-white/10 p-4">
+            <DemoPanel />
+          </div>
         </section>
 
         {/* ================= CTA ================= */}
