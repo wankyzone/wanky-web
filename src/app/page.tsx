@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import DemoPanel from "@/components/DemoPanel";
 
 /* ================= LOGOS ================= */
 const LOGOS = [
