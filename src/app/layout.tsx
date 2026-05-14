@@ -3,7 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
-import { GitHub, MessageCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import { FaFacebook, FaTwitter, FaInstagram, FaGithub } from "react-icons/fa";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
