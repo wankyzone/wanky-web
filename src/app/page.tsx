@@ -95,11 +95,11 @@ export default function Home() {
               transition={{ ease: "linear", duration: 30, repeat: Infinity }}
             >
               {[...LOGOS, ...LOGOS].map((logo, i) => (
-                <div key={i} className="h-8 lg:h-10 opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition duration-300">
+                <div key={i} className="h-12 lg:h-14 object-contain scale-125">
                   <img
                     src={logo.src}
                     alt={logo.alt}
-                    className="h-8 lg:h-10 grayscale hover:grayscale-0 transition"
+                    className="h-12 lg:h-14 object-contain opacity-70 hover:opacity-100 transition duration-300"
                   />
                 </div>
               ))}
