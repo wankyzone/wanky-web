@@ -24,6 +24,16 @@ const FEATURES = [
   },
 ];
 
+/* ================= LOGOS ================= */
+const LOGOS = [
+  "https://logo.clearbit.com/flutterwave.com",
+  "https://logo.clearbit.com/dhl.com",
+  "https://logo.clearbit.com/uber.com",
+  "https://logo.clearbit.com/doordash.com",
+  "https://logo.clearbit.com/stripe.com",
+  "https://logo.clearbit.com/shopify.com",
+];
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-white text-black font-sans">
@@ -89,25 +99,15 @@ export default function Home() {
               animate={{ x: ["0%", "-50%"] }}
               transition={{ ease: "linear", duration: 40, repeat: Infinity }}
             >
-              {[
-                "https://cdn.simpleicons.org/flutterwave",
-                "https://cdn.simpleicons.org/dhl",
-                "https://cdn.simpleicons.org/uber",
-                "https://cdn.simpleicons.org/doordash",
-                "https://cdn.simpleicons.org/stripe",
-                "https://cdn.simpleicons.org/shopify",
-                "https://cdn.simpleicons.org/flutterwave",
-                "https://cdn.simpleicons.org/dhl",
-                "https://cdn.simpleicons.org/uber",
-                "https://cdn.simpleicons.org/doordash",
-                "https://cdn.simpleicons.org/stripe",
-                "https://cdn.simpleicons.org/shopify",
-              ].map((src, i) => (
-                <div key={i} className="flex items-center justify-center min-w-[160px]">
+              {[...LOGOS, ...LOGOS].map((src, i) => (
+                <div
+                  key={i}
+                  className="flex items-center justify-center min-w-[160px]"
+                >
                   <img
                     src={src}
                     alt="logo"
-                    className="h-10 lg:h-12 object-contain opacity-70 hover:opacity-100 transition duration-300"
+                    className="h-12 object-contain opacity-80 hover:opacity-100 transition duration-300"
                   />
                 </div>
               ))}
