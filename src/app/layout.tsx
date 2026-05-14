@@ -3,13 +3,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
-import { 
-  Github, 
-  Twitter, 
-  Facebook, 
-  Instagram, 
-  MessageCircle 
-} from "lucide-react";
+import { GitHub, MessageCircle } from "lucide-react";
+import { FaFacebook, FaTwitter, FaInstagram, FaGithub } from "react-icons/fa";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
@@ -71,12 +66,12 @@ function Nav() {
 // --- FOOTER COMPONENT ---
 function Footer() {
   const socials = [
-    { icon: <Twitter size={18} />, href: "https://x.com/Wanky328178", label: "X" },
-    { icon: <MessageCircle size={18} />, href: "https://threads.com/@founder.wanky", label: "Threads" },
-    { icon: <Facebook size={18} />, href: "https://facebook.com/isaacessoh.dev", label: "Facebook" },
-    { icon: <Instagram size={18} />, href: "https://instagram.com/founder.wanky?igsh=d200OHFnam52c291", label: "Instagram" },
-    { icon: <Github size={18} />, href: "https://github.com/wankyzone", label: "GitHub" },
-  ];
+  { icon: <FaTwitter size={18} />, href: "https://x.com/Wanky328178", label: "X" },
+  { icon: <MessageCircle size={18} />, href: "https://threads.com/@founder.wanky", label: "Threads" },
+  { icon: <FaFacebook size={18} />, href: "https://facebook.com/isaacessoh.dev", label: "Facebook" },
+  { icon: <FaInstagram size={18} />, href: "https://instagram.com/founder.wanky", label: "Instagram" },
+  { icon: <FaGithub size={18} />, href: "https://github.com/wankyzone", label: "GitHub" },
+];
 
   const sections = [
     {
