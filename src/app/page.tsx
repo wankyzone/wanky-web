@@ -4,16 +4,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import DemoPanel from "@/components/DemoPanel";
 
-/* ================= LOGOS ================= */
-const LOGOS = [
-  { src: "/logos/flutterwave.svg", alt: "Flutterwave" },
-  { src: "/logos/dhl.svg", alt: "DHL" },
-  { src: "/logos/uber.svg", alt: "Uber" },
-  { src: "/logos/doordash.svg", alt: "DoorDash" },
-  { src: "/logos/stripe.svg", alt: "Stripe" },
-  { src: "/logos/shopify.svg", alt: "Shopify" },
-];
-
 /* ================= FEATURES ================= */
 const FEATURES = [
   {
@@ -36,8 +26,8 @@ const FEATURES = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white text-black font-sans selection:bg-[#FF4D94] selection:text-white">
-      
+    <div className="min-h-screen bg-white text-black font-sans">
+
       {/* ================= HERO ================= */}
       <div className="mx-auto max-w-6xl px-6 py-20 lg:pt-32">
         <motion.section
@@ -46,22 +36,22 @@ export default function Home() {
           className="rounded-[3rem] border border-slate-100 bg-slate-50/40 px-8 py-20 lg:px-20"
         >
           <div className="max-w-4xl">
-            <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-[#FF4D94]">
-              <span className="h-2 w-2 rounded-full bg-[#FF4D94] animate-pulse" />
+            <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-pink-500">
+              <span className="h-2 w-2 rounded-full bg-pink-500 animate-pulse" />
               Private Beta
             </span>
 
             <h1 className="mt-8 text-6xl font-bold leading-[0.9] tracking-tighter sm:text-7xl lg:text-8xl">
               The Operating System <br />
-              for <span className="text-slate-400 italic underline decoration-[#FF4D94]/30">Logistics</span>
+              for <span className="text-slate-400 italic underline decoration-pink-500/30">Logistics</span>
             </h1>
 
-            <p className="mt-10 max-w-xl text-lg text-slate-500 leading-relaxed">
-              Wanky powers businesses that move in the physical world. 
+            <p className="mt-10 max-w-xl text-lg text-slate-500">
+              Wanky powers businesses that move in the physical world.
               Automate operations, unify data, and scale execution from a single system.
             </p>
 
-            <div className="mt-12 flex flex-wrap gap-4">
+            <div className="mt-12 flex gap-4">
               <Link
                 href="/contact"
                 className="rounded-full bg-black px-10 py-4 text-sm font-bold text-white hover:bg-zinc-800 transition"
@@ -81,32 +71,47 @@ export default function Home() {
       </div>
 
       {/* ================= LOGO STRIP ================= */}
-      <section className="py-24 border-y border-slate-50 overflow-hidden">
+      <section className="py-28 border-y border-slate-100 overflow-hidden bg-white">
         <div className="mx-auto max-w-6xl px-6">
 
-          <p className="text-center text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400 mb-14">
+          <p className="text-center text-[11px] font-semibold uppercase tracking-[0.25em] text-slate-400 mb-16">
             Built for teams operating across modern commerce
           </p>
 
-          <div className="relative flex items-center">
+          <div className="relative">
+
+            {/* Fade edges */}
+            <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10" />
+            <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10" />
+
             <motion.div
-              className="flex gap-20 whitespace-nowrap"
+              className="flex w-max gap-24"
               animate={{ x: ["0%", "-50%"] }}
-              transition={{ ease: "linear", duration: 30, repeat: Infinity }}
+              transition={{ ease: "linear", duration: 40, repeat: Infinity }}
             >
-              {[...LOGOS, ...LOGOS].map((logo, i) => (
-                <div key={i} className="h-12 lg:h-14 object-contain scale-125">
+              {[
+                "https://cdn.simpleicons.org/flutterwave",
+                "https://cdn.simpleicons.org/dhl",
+                "https://cdn.simpleicons.org/uber",
+                "https://cdn.simpleicons.org/doordash",
+                "https://cdn.simpleicons.org/stripe",
+                "https://cdn.simpleicons.org/shopify",
+                "https://cdn.simpleicons.org/flutterwave",
+                "https://cdn.simpleicons.org/dhl",
+                "https://cdn.simpleicons.org/uber",
+                "https://cdn.simpleicons.org/doordash",
+                "https://cdn.simpleicons.org/stripe",
+                "https://cdn.simpleicons.org/shopify",
+              ].map((src, i) => (
+                <div key={i} className="flex items-center justify-center min-w-[160px]">
                   <img
-                    src={logo.src}
-                    alt={logo.alt}
-                    className="h-12 lg:h-14 object-contain opacity-70 hover:opacity-100 transition duration-300"
+                    src={src}
+                    alt="logo"
+                    className="h-10 lg:h-12 object-contain opacity-70 hover:opacity-100 transition duration-300"
                   />
                 </div>
               ))}
             </motion.div>
-
-            <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white to-transparent" />
-            <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white to-transparent" />
           </div>
         </div>
       </section>
@@ -116,11 +121,11 @@ export default function Home() {
         {/* ================= FEATURES ================= */}
         <section className="py-32">
           <div className="max-w-2xl mb-16">
-            <h2 className="text-4xl font-bold tracking-tight">
+            <h2 className="text-4xl font-bold">
               Everything you need to run logistics at scale.
             </h2>
             <p className="mt-6 text-slate-500">
-              Modular systems designed to replace fragmented workflows and manual operations.
+              Modular systems designed to replace fragmented workflows.
             </p>
           </div>
 
@@ -128,7 +133,7 @@ export default function Home() {
             {FEATURES.map((f, i) => (
               <div
                 key={i}
-                className="p-8 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-slate-100 transition"
+                className="p-8 rounded-2xl border border-slate-100 bg-slate-50 hover:bg-slate-100 transition"
               >
                 <h3 className="font-bold text-lg mb-2">{f.title}</h3>
                 <p className="text-sm text-slate-500">{f.desc}</p>
@@ -148,8 +153,7 @@ export default function Home() {
             </p>
           </div>
 
-          {/* ✅ THIS IS THE FIX */}
-          <div className="h-[400px] rounded-2xl bg-white/5 border border-white/10 p-4">
+          <div className="h-[420px] rounded-2xl bg-white/5 border border-white/10 overflow-hidden p-4">
             <DemoPanel />
           </div>
         </section>
