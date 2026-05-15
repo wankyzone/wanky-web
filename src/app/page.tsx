@@ -9,8 +9,6 @@ import {
   MapPin, 
   CreditCard, 
   LayoutDashboard, 
-  Package, 
-  Cloud,
   X
 } from "lucide-react";
 
@@ -47,6 +45,22 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white text-black font-sans selection:bg-pink-100">
       
+      {/* ================= NAVBAR ================= */}
+      <div className="mx-auto max-w-6xl px-6 py-6 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <img 
+            src="/logo.svg" 
+            alt="Wanky Logo" 
+            className="w-8 h-8 object-contain"
+          />
+          <span className="font-bold text-lg">Wanky</span>
+        </div>
+
+        <div className="text-sm text-slate-500">
+          Infrastructure Layer
+        </div>
+      </div>
+
       {/* ================= PREVIEW MODAL ================= */}
       <AnimatePresence>
         {isDemoOpen && (
@@ -77,7 +91,7 @@ export default function Home() {
       </AnimatePresence>
 
       {/* ================= HERO ================= */}
-      <div className="mx-auto max-w-6xl px-6 py-20 lg:pt-32">
+      <div className="mx-auto max-w-6xl px-6 py-10 lg:pt-16">
         <motion.section
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -120,7 +134,7 @@ export default function Home() {
 
       <div className="mx-auto max-w-6xl px-6">
         
-        {/* ================= FEATURES WITH ANIMATION ================= */}
+        {/* ================= FEATURES ================= */}
         <section className="py-32">
           <div className="max-w-2xl mb-16">
             <h2 className="text-4xl font-bold">Everything you need to run logistics at scale.</h2>
@@ -147,7 +161,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ================= PRODUCTS WITH GLOW ================= */}
+        {/* ================= PRODUCTS ================= */}
         <section className="py-32">
           <div className="max-w-2xl mb-16">
             <h2 className="text-4xl font-bold">A unified system for operations and infrastructure.</h2>
@@ -166,7 +180,11 @@ export default function Home() {
               <div className="relative z-10">
                 <div className="mb-6 flex items-center justify-between">
                   <div className="text-xs font-bold uppercase tracking-widest text-pink-500">Core System</div>
-                  <Package className="w-6 h-6 text-pink-500" />
+                  <img 
+                    src="/ers-logo.svg" 
+                    alt="ERS Logo" 
+                    className="w-8 h-8 object-contain"
+                  />
                 </div>
                 <h3 className="text-3xl font-bold mb-4">ERS (Errand Runner System)</h3>
                 <p className="text-slate-500 mb-8 text-lg">Manage logistics, assign errands, and track operations in real time.</p>
@@ -187,7 +205,11 @@ export default function Home() {
               <div className="relative z-10">
                 <div className="mb-6 flex items-center justify-between">
                   <div className="text-xs font-bold uppercase tracking-widest text-indigo-500">Infrastructure</div>
-                  <Cloud className="w-6 h-6 text-indigo-500" />
+                  <img 
+                    src="/cloud-logo.png" 
+                    alt="Wanky Cloud Logo" 
+                    className="w-8 h-8 object-contain"
+                  />
                 </div>
                 <h3 className="text-3xl font-bold mb-4">Wanky Cloud</h3>
                 <p className="text-slate-500 mb-8 text-lg">Storage, compute, and backend systems powering modern logistics.</p>
@@ -243,7 +265,14 @@ export default function Home() {
       <footer className="border-t border-slate-100 py-12 bg-slate-50/30">
         <div className="mx-auto max-w-6xl px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-400">
           <div className="flex items-center gap-6">
-            <span className="font-bold text-black">Wanky.</span>
+            <div className="flex items-center gap-2">
+              <img 
+                src="/logo.svg" 
+                alt="Wanky Logo" 
+                className="w-6 h-6 object-contain"
+              />
+              <span className="font-bold text-black">Wanky</span>
+            </div>
             <span>© 2026 Wanky Infrastructure</span>
           </div>
           <div className="flex items-center gap-2">
