@@ -24,16 +24,6 @@ const FEATURES = [
   },
 ];
 
-/* ================= LOGOS ================= */
-const LOGOS = [
-  "https://logo.clearbit.com/flutterwave.com",
-  "https://logo.clearbit.com/dhl.com",
-  "https://logo.clearbit.com/uber.com",
-  "https://logo.clearbit.com/doordash.com",
-  "https://logo.clearbit.com/stripe.com",
-  "https://logo.clearbit.com/shopify.com",
-];
-
 export default function Home() {
   return (
     <div className="min-h-screen bg-white text-black font-sans">
@@ -95,18 +85,30 @@ export default function Home() {
             <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10" />
 
             <motion.div
-              className="flex w-max gap-24"
+              className="flex w-max gap-24 items-center"
               animate={{ x: ["0%", "-50%"] }}
               transition={{ ease: "linear", duration: 40, repeat: Infinity }}
             >
-              {[...LOGOS, ...LOGOS].map((src, i) => (
-                <div
-                  key={i}
-                  className="flex items-center justify-center min-w-[160px]"
-                >
+              {[
+                "https://cdn.simpleicons.org/flutterwave/6B5AED",
+                "https://cdn.simpleicons.org/dhl/FFCC00",
+                "https://cdn.simpleicons.org/uber/000000",
+                "https://cdn.simpleicons.org/doordash/FF3008",
+                "https://cdn.simpleicons.org/stripe/635BFF",
+                "https://cdn.simpleicons.org/shopify/7AB55C",
+
+                // duplicate for infinite scroll
+                "https://cdn.simpleicons.org/flutterwave/6B5AED",
+                "https://cdn.simpleicons.org/dhl/FFCC00",
+                "https://cdn.simpleicons.org/uber/000000",
+                "https://cdn.simpleicons.org/doordash/FF3008",
+                "https://cdn.simpleicons.org/stripe/635BFF",
+                "https://cdn.simpleicons.org/shopify/7AB55C",
+              ].map((src, i) => (
+                <div key={i} className="flex items-center justify-center min-w-[160px]">
                   <img
                     src={src}
-                    alt="logo"
+                    alt="company logo"
                     className="h-12 object-contain opacity-80 hover:opacity-100 transition duration-300"
                   />
                 </div>
