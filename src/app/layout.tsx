@@ -1,4 +1,5 @@
 import { WankyMark } from "@/components/WankyMark";
+import NewsletterSignup from "@/components/NewsletterSignup";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -9,8 +10,8 @@ import { FaFacebook, FaTwitter, FaInstagram, FaGithub } from "react-icons/fa";
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Wanky — The OS for Unstructured Logistics",
-  description: "High-performance infrastructure for businesses operating in the physical world.",
+  title: "Wanky Technologies — Software, Products & Infrastructure",
+  description: "Wanky Technologies builds software products, operational systems, and infrastructure.",
   icons: {
     icon: "/favicon.ico", // Ensure you've uploaded the favicon.io assets
   },
@@ -31,6 +32,7 @@ function Nav() {
         <nav className="hidden md:flex items-center gap-8">
           {[
             { name: "Platform", href: "/platform" },
+            { name: "Classroom", href: "/classroom" },
             { name: "Infrastructure", href: "/systems" },
             { name: "Principles", href: "/principles" },
             { name: "Pricing", href: "/pricing" },
@@ -78,6 +80,7 @@ function Footer() {
       title: "Product",
       links: [
         { name: "OS Platform", href: "/platform" },
+        { name: "Wanky Classroom", href: "/classroom" },
         { name: "ERS Engine", href: "/platform" },
         { name: "Infrastructure", href: "/systems" },
         { name: "Pricing Plans", href: "/pricing" },
@@ -103,6 +106,7 @@ function Footer() {
 
   return (
     <footer className="mt-40 border-t border-slate-100 bg-slate-50/50">
+      <NewsletterSignup />
       <div className="mx-auto max-w-6xl px-6 py-20">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-12 lg:gap-20">
           
@@ -113,7 +117,7 @@ function Footer() {
               <span className="text-sm font-bold tracking-tighter uppercase">Wanky</span>
             </Link>
             <p className="text-xs leading-relaxed text-slate-500 mb-8 max-w-xs">
-              Engineering the infrastructure for businesses that operate in the high-stakes physical world. Lagos // Global.
+              Building software products, operational systems, and infrastructure. Lagos, Nigeria.
             </p>
             
             <div className="flex gap-5 text-slate-400">
@@ -157,7 +161,7 @@ function Footer() {
       {/* Bottom Legal Bar */}
       <div className="border-t border-slate-100 bg-white">
         <div className="mx-auto max-w-6xl px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-medium tracking-wide text-slate-400 uppercase">
-          <span>© {new Date().getFullYear()} Wanky Software. all rights reserved.</span>
+          <span>© {new Date().getFullYear()} Wanky Technologies. All rights reserved.</span>
           <div className="flex gap-8">
             <Link href="#" className="hover:text-black transition-colors">Privacy</Link>
             <Link href="#" className="hover:text-black transition-colors">Terms</Link>

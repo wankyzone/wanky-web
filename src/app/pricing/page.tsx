@@ -1,148 +1,188 @@
-"use client";
-
+import type { Metadata } from "next";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  Blocks,
+  BriefcaseBusiness,
+  MessageSquareText,
+} from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Engagements — Wanky Technologies",
+  description:
+    "Explore how to discuss product development, operational systems, and infrastructure projects with Wanky Technologies.",
+};
+
+const engagements = [
+  {
+    number: "01",
+    title: "Product discovery",
+    description:
+      "For teams that need to clarify a problem, identify users, and define the smallest useful solution before committing to development.",
+    icon: MessageSquareText,
+    points: [
+      "Problem and workflow review",
+      "Initial scope and priorities",
+      "Proposed next steps",
+    ],
+  },
+  {
+    number: "02",
+    title: "Product development",
+    description:
+      "For projects with a defined goal that need an implementation plan, technical decisions, and a realistic delivery scope.",
+    icon: Blocks,
+    points: [
+      "Requirements and technical review",
+      "Scope and milestone discussion",
+      "Project-specific proposal",
+    ],
+  },
+  {
+    number: "03",
+    title: "Infrastructure planning",
+    description:
+      "For teams evaluating deployment, managed services, integrations, and the operational requirements of their applications.",
+    icon: BriefcaseBusiness,
+    points: [
+      "Current architecture review",
+      "Infrastructure requirements",
+      "Cost and trade-off discussion",
+    ],
+  },
+];
 
 export default function PricingPage() {
-  const tiers = [
-    {
-      name: "Pilot",
-      price: "Custom",
-      desc: "For startups validating a core operational hook.",
-      features: [
-        "Single Core Module Deployment",
-        "Standard Admin Dashboard",
-        "Essential Data Telemetry",
-        "4-Week Rapid Build Cycle",
-      ],
-      button: "Start Pilot",
-      featured: false,
-    },
-    {
-      name: "Scale",
-      price: "Enterprise",
-      desc: "Full infrastructure for high-velocity operations.",
-      features: [
-        "Full Platform Ecosystem (ERS Style)",
-        "Advanced Dispatch Logic",
-        "Automated Payout & Ledger Layer",
-        "Priority Architecture Support",
-      ],
-      button: "Get Started",
-      featured: true,
-    },
-    {
-      name: "Infrastructure",
-      price: "Strategic",
-      desc: "For established firms requiring deep integration.",
-      features: [
-        "Custom Protocol Development",
-        "Multi-Tenant API Architecture",
-        "Legacy System Migration",
-        "Long-term Execution Partner",
-      ],
-      button: "Inquire",
-      featured: false,
-    },
-  ];
-
   return (
-    <div className="relative mx-auto max-w-6xl px-6 py-24 lg:py-32 bg-white text-black font-sans selection:bg-[#FF4D94] selection:text-white">
-      
-      {/* 1. PRICING HERO */}
-      <motion.section 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-24"
-      >
-        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#FF4D94]">
-          Engagement Models
-        </span>
-        <h1 className="mt-6 text-5xl font-bold tracking-tighter lg:text-7xl">
-          Investment in <br />
-          <span className="text-slate-400 italic">Infrastructure.</span>
-        </h1>
-        <p className="mt-8 text-lg text-slate-500 max-w-xl mx-auto leading-relaxed">
-          We don't bill by the hour. We price based on the operational leverage 
-          and long-term value our systems bring to your business.
-        </p>
-      </motion.section>
-
-      {/* 2. THE TIERS */}
-      <section className="grid gap-8 lg:grid-cols-3 items-start">
-        {tiers.map((tier, i) => (
-          <motion.div 
-            key={tier.name}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className={`relative rounded-[2.5rem] p-10 border transition-all duration-500 ${
-              tier.featured 
-                ? "bg-zinc-900 text-white border-zinc-800 shadow-2xl scale-[1.05] z-10" 
-                : "bg-slate-50/50 border-slate-100 text-black hover:border-[#FF4D94]/20"
-            }`}
+    <main className="min-h-screen bg-white text-black">
+      <section className="border-b border-slate-100">
+        <div className="mx-auto max-w-6xl px-6 py-24 text-center sm:py-32">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#D92D78]">
+            Engagements
+          </p>
+          <h1 className="mx-auto mt-6 max-w-4xl text-5xl font-bold leading-tight tracking-tight sm:text-7xl">
+            Clear scope.{" "}
+            <span className="text-slate-400">Thoughtful execution.</span>
+          </h1>
+          <p className="mx-auto mt-8 max-w-2xl text-lg leading-8 text-slate-600">
+            Every project has different requirements. We start by understanding
+            the problem, the people affected, and the outcome you need before
+            discussing scope, delivery, and cost.
+          </p>
+          <a
+            href="mailto:wankyzone@gmail.com?subject=Project%20Inquiry"
+            className="mt-10 inline-flex items-center gap-3 rounded-full bg-black px-7 py-4 text-sm font-semibold text-white transition hover:bg-[#FF4D94]"
           >
-            {tier.featured && (
-              <span className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-[#FF4D94] px-4 py-1 text-[10px] font-bold uppercase tracking-widest text-white">
-                Most Scalable
-              </span>
-            )}
-            
-            <h3 className={`text-sm font-bold uppercase tracking-widest mb-2 ${tier.featured ? "text-[#FF4D94]" : "text-slate-400"}`}>
-              {tier.name}
-            </h3>
-            <p className="text-3xl font-bold tracking-tighter mb-4">{tier.price}</p>
-            <p className={`text-xs leading-relaxed mb-8 ${tier.featured ? "text-zinc-400" : "text-slate-500"}`}>
-              {tier.desc}
-            </p>
-
-            <ul className="space-y-4 mb-10">
-              {tier.features.map((feature) => (
-                <li key={feature} className="flex items-start gap-3 text-[11px] font-medium tracking-tight">
-                  <div className={`mt-1 h-1.5 w-1.5 rounded-full shrink-0 ${tier.featured ? "bg-[#FF4D94]" : "bg-black"}`} />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-
-            <Link
-              href="/contact"
-              className={`block w-full rounded-full py-4 text-center text-xs font-bold uppercase tracking-widest transition-all ${
-                tier.featured 
-                  ? "bg-[#FF4D94] text-white hover:bg-[#FF4D94]/90" 
-                  : "bg-black text-white hover:bg-zinc-800"
-              }`}
-            >
-              {tier.button}
-            </Link>
-          </motion.div>
-        ))}
-      </section>
-
-      {/* 3. THE "WHY" SECTION */}
-      <section className="mt-40 grid lg:grid-cols-2 gap-16 items-center border-t border-slate-100 pt-20">
-        <div>
-            <h2 className="text-3xl font-bold tracking-tight uppercase italic mb-6">Build Once. <br/>Scale Forever.</h2>
-            <p className="text-slate-500 text-sm leading-relaxed">
-                We believe in the Bezos philosophy of "Relentless Execution". 
-                When you invest in a Wanky system, you aren't buying a temporary fix; 
-                you're installing a permanent asset that depreciates your manual overhead 
-                to near zero.
-            </p>
-        </div>
-        <div className="p-10 rounded-3xl bg-slate-50 border border-slate-100">
-            <h4 className="font-bold text-xs uppercase tracking-widest mb-4">Included in every tier</h4>
-            <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-                {["Cloud Hosting", "Source Code Access", "24/7 Monitoring", "Technical Docs"].map((item) => (
-                    <div key={item} className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter flex items-center gap-2">
-                        <div className="h-1 w-1 bg-[#FF4D94] rounded-full" />
-                        {item}
-                    </div>
-                ))}
-            </div>
+            Discuss a project <ArrowRight size={17} />
+          </a>
+          <p className="mt-5 text-xs text-slate-400">
+            Pricing is project-specific. No fixed rates or service availability
+            are implied on this page.
+          </p>
         </div>
       </section>
-    </div>
+
+      <section className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
+        <div className="max-w-2xl">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#D92D78]">
+            Ways to work together
+          </p>
+          <h2 className="mt-5 text-3xl font-bold tracking-tight sm:text-5xl">
+            Start with the problem, not a package.
+          </h2>
+          <p className="mt-6 leading-7 text-slate-600">
+            These are starting points for a conversation, not preconfigured
+            plans. We will confirm fit, deliverables, timeline, dependencies,
+            and commercial terms before any work begins.
+          </p>
+        </div>
+
+        <div className="mt-14 grid gap-5 lg:grid-cols-3">
+          {engagements.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <article
+                key={item.number}
+                className="flex flex-col rounded-3xl border border-slate-200 p-7 transition hover:-translate-y-1 hover:border-[#FF4D94]/50 hover:shadow-lg hover:shadow-pink-500/5 sm:p-8"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="rounded-2xl bg-slate-50 p-3 text-[#D92D78]">
+                    <Icon size={23} />
+                  </div>
+                  <span className="font-mono text-xs text-slate-400">
+                    {item.number}
+                  </span>
+                </div>
+                <h3 className="mt-7 text-xl font-bold">{item.title}</h3>
+                <p className="mt-3 leading-7 text-slate-600">
+                  {item.description}
+                </p>
+                <ul className="mt-7 space-y-3 border-t border-slate-100 pt-6">
+                  {item.points.map((point) => (
+                    <li
+                      key={point}
+                      className="flex items-start gap-3 text-sm text-slate-600"
+                    >
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#FF4D94]" />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href={`mailto:wankyzone@gmail.com?subject=${encodeURIComponent(item.title + " Inquiry")}`}
+                  className="mt-8 inline-flex items-center gap-2 text-sm font-semibold transition hover:text-[#D92D78]"
+                >
+                  Discuss this option <ArrowRight size={16} />
+                </a>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 pb-24">
+        <div className="rounded-[2rem] bg-zinc-950 p-8 text-white sm:p-12">
+          <h2 className="text-3xl font-bold tracking-tight">
+            What happens after you inquire?
+          </h2>
+          <ol className="mt-8 grid gap-8 sm:grid-cols-3">
+            <li>
+              <p className="text-xs font-bold uppercase tracking-widest text-[#FF4D94]">
+                Step 01
+              </p>
+              <h3 className="mt-3 font-semibold">Share the problem</h3>
+              <p className="mt-2 text-sm leading-6 text-zinc-400">
+                Explain what you are trying to build or improve.
+              </p>
+            </li>
+            <li>
+              <p className="text-xs font-bold uppercase tracking-widest text-[#FF4D94]">
+                Step 02
+              </p>
+              <h3 className="mt-3 font-semibold">Review the fit</h3>
+              <p className="mt-2 text-sm leading-6 text-zinc-400">
+                Discuss requirements, constraints, and feasibility.
+              </p>
+            </li>
+            <li>
+              <p className="text-xs font-bold uppercase tracking-widest text-[#FF4D94]">
+                Step 03
+              </p>
+              <h3 className="mt-3 font-semibold">Agree on scope</h3>
+              <p className="mt-2 text-sm leading-6 text-zinc-400">
+                Confirm deliverables, timeline, and cost before proceeding.
+              </p>
+            </li>
+          </ol>
+          <Link
+            href="/contact"
+            className="mt-10 inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-black transition hover:bg-[#FF4D94]"
+          >
+            Contact Wanky <ArrowRight size={16} />
+          </Link>
+        </div>
+      </section>
+    </main>
   );
 }

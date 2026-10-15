@@ -1,123 +1,173 @@
-"use client";
-
+import type { Metadata } from "next";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  Cloud,
+  Database,
+  GitBranch,
+  LockKeyhole,
+  Server,
+  Workflow,
+} from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Wanky Cloud — Managed Infrastructure",
+  description:
+    "Wanky Cloud is being developed around managed infrastructure, deployment workflows, storage, and reliable backend services, beginning with the needs of Wanky products.",
+};
+
+const capabilities = [
+  {
+    title: "Compute and deployment",
+    description:
+      "A foundation for deploying and operating application services with clear environments and repeatable workflows.",
+    icon: Server,
+    status: "Planned capability",
+  },
+  {
+    title: "Storage and databases",
+    description:
+      "A practical approach to application data, file storage, backups, and the services that depend on them.",
+    icon: Database,
+    status: "Planned capability",
+  },
+  {
+    title: "Automation and workflows",
+    description:
+      "Reduce repetitive operational work through documented deployment and maintenance processes.",
+    icon: Workflow,
+    status: "Planned capability",
+  },
+  {
+    title: "Security and access",
+    description:
+      "Build around least-privilege access, protected credentials, and appropriate operational controls.",
+    icon: LockKeyhole,
+    status: "Design principle",
+  },
+];
 
 export default function SystemsPage() {
-  const modules = [
-    { 
-      title: "Core Admin Engine", 
-      desc: "The nerve center. Manage global configurations, multi-tenant roles, and high-level system health from a single dashboard." 
-    },
-    { 
-      title: "Dynamic Dispatcher", 
-      desc: "Our proprietary logic for automated task routing. It handles the complexity of real-world logistics in milliseconds." 
-    },
-    { 
-      title: "Ledger & Payouts", 
-      desc: "A hardened financial layer. Automated reconciliation and instant payouts designed for high-volume transactions." 
-    },
-    { 
-      title: "Real-time Telemetry", 
-      desc: "Live field data tracking. Every movement is logged and visualized to provide total operational transparency." 
-    },
-    { 
-      title: "Automation Engine", 
-      desc: "Trigger-based workflows that eliminate manual intervention. If it happens in the field, the system reacts instantly." 
-    },
-    { 
-      title: "Audit Protocols", 
-      desc: "Enterprise-grade security. Every action within the Wanky ecosystem is timestamped and immutable." 
-    },
-  ];
-
   return (
-    <div className="relative mx-auto max-w-6xl px-6 py-24 lg:py-32 bg-white text-black font-sans">
-      
-      {/* 1. HEADER: THE ARCHITECTURE */}
-      <motion.section 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="max-w-3xl mb-24"
-      >
-        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#FF4D94]">
-          System Architecture
-        </span>
-        <h1 className="mt-6 text-5xl font-bold tracking-tight lg:text-7xl leading-[1.1]">
-          Engineered for <br />
-          <span className="text-slate-400 italic">Resilience.</span>
-        </h1>
-        <p className="mt-8 text-xl text-slate-500 leading-relaxed">
-          Wanky isn't just an app—it's a modular infrastructure built to handle 
-          the unpredictable nature of physical operations at scale.
-        </p>
-      </motion.section>
-
-      {/* 2. MODULAR GRID */}
-      <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {modules.map((m, i) => (
-          <motion.div 
-            key={m.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.05 }}
-            className="group relative p-8 rounded-[2rem] border border-slate-100 bg-slate-50/30 hover:bg-white hover:shadow-2xl hover:shadow-black/5 transition-all"
-          >
-            <div className="mb-6 flex items-center justify-between">
-                <div className="h-2 w-2 rounded-full bg-[#FF4D94]" />
-                <span className="font-mono text-[10px] text-slate-300">MOD_0{i + 1}</span>
+    <main className="min-h-screen bg-white text-black">
+      <section className="relative overflow-hidden border-b border-slate-100">
+        <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-[#FF4D94]/10 blur-3xl" />
+        <div className="relative mx-auto max-w-6xl px-6 py-24 sm:py-32">
+          <div className="max-w-4xl">
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+              <Cloud size={15} className="text-[#D92D78]" />
+              Wanky Cloud
             </div>
-            <h3 className="text-lg font-bold tracking-tight uppercase mb-3">{m.title}</h3>
-            <p className="text-sm text-slate-500 leading-relaxed">
-              {m.desc}
+
+            <h1 className="mt-8 text-5xl font-bold leading-[0.98] tracking-tight sm:text-7xl">
+              Infrastructure built around{" "}
+              <span className="text-slate-400">real workloads.</span>
+            </h1>
+
+            <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
+              Wanky Cloud is our planned managed-infrastructure offering. We
+              are approaching it from the practical needs of building,
+              deploying, and operating Wanky products—not from the idea of
+              recreating every layer of cloud infrastructure ourselves.
             </p>
-          </motion.div>
-        ))}
-      </section>
 
-      {/* 3. TECH STACK (The "Startup" Credibility) */}
-      <section className="mt-32 rounded-[3rem] bg-zinc-900 p-12 lg:p-20 text-white overflow-hidden relative">
-        <div className="relative z-10 grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-                <h2 className="text-3xl font-bold tracking-tighter uppercase italic mb-6 text-[#FF4D94]">The Stack</h2>
-                <p className="text-zinc-400 leading-relaxed mb-8">
-                    We build on a modern, cloud-native foundation to ensure 99.9% uptime 
-                    and sub-second latency across all operational nodes.
-                </p>
-                <div className="flex flex-wrap gap-3">
-                    {["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Redis", "AWS"].map((tech) => (
-                        <span key={tech} className="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold uppercase tracking-widest">
-                            {tech}
-                        </span>
-                    ))}
-                </div>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <a
+                href="mailto:wankyzone@gmail.com?subject=Wanky%20Cloud%20Inquiry"
+                className="inline-flex items-center gap-3 rounded-full bg-black px-7 py-4 text-sm font-semibold text-white transition hover:bg-[#FF4D94]"
+              >
+                Discuss infrastructure needs
+                <ArrowRight size={17} />
+              </a>
+              <Link
+                href="/principles"
+                className="inline-flex items-center rounded-full border border-slate-200 px-7 py-4 text-sm font-semibold transition hover:border-black"
+              >
+                Our engineering principles
+              </Link>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-                <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-                    <p className="text-[#FF4D94] font-bold text-2xl mb-1">0ms</p>
-                    <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest">Cold Start</p>
-                </div>
-                <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-                    <p className="text-[#FF4D94] font-bold text-2xl mb-1">E2E</p>
-                    <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest">Encryption</p>
-                </div>
-            </div>
+
+            <p className="mt-5 text-xs leading-5 text-slate-400">
+              Wanky Cloud is under development. The capabilities below describe
+              the direction of the product, not a list of currently available
+              or guaranteed services.
+            </p>
+          </div>
         </div>
-        <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-[#FF4D94]/10 blur-[100px] rounded-full" />
       </section>
 
-      {/* 4. FINAL CALL TO ACTION */}
-      <section className="mt-40 border-t border-slate-100 pt-20 text-center">
-        <h2 className="text-4xl font-bold tracking-tight mb-8">Ready to deploy?</h2>
-        <Link 
-            href="/contact"
-            className="inline-block rounded-full bg-black px-12 py-5 text-sm font-bold text-white transition-all hover:bg-zinc-800"
-        >
-            Request Implementation Audit
-        </Link>
+      <section className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
+        <div className="max-w-2xl">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#D92D78]">
+            The infrastructure approach
+          </p>
+          <h2 className="mt-5 text-3xl font-bold tracking-tight sm:text-5xl">
+            Use proven foundations. Solve the right problems.
+          </h2>
+          <p className="mt-6 leading-7 text-slate-600">
+            Our initial direction is to combine established cloud services
+            and deployment tools into an operational foundation that can
+            support real applications. We intend to learn from the needs of
+            ERS before expanding the scope.
+          </p>
+        </div>
+
+        <div className="mt-14 grid gap-5 sm:grid-cols-2">
+          {capabilities.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <article
+                key={item.title}
+                className="rounded-3xl border border-slate-200 p-7 transition hover:-translate-y-1 hover:border-[#FF4D94]/50 hover:shadow-lg hover:shadow-pink-500/5 sm:p-9"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="rounded-2xl bg-slate-50 p-3 text-[#D92D78]">
+                    <Icon size={23} />
+                  </div>
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                    {item.status}
+                  </span>
+                </div>
+                <h3 className="mt-7 text-xl font-bold">{item.title}</h3>
+                <p className="mt-3 leading-7 text-slate-600">
+                  {item.description}
+                </p>
+              </article>
+            );
+          })}
+        </div>
       </section>
 
-    </div>
+      <section className="mx-auto max-w-6xl px-6 pb-24 sm:pb-32">
+        <div className="grid gap-10 rounded-[2rem] bg-zinc-950 p-8 text-white sm:p-14 lg:grid-cols-2 lg:items-center">
+          <div>
+            <div className="flex items-center gap-3 text-[#FF4D94]">
+              <GitBranch size={20} />
+              <span className="text-xs font-bold uppercase tracking-[0.2em]">
+                ERS-first development
+              </span>
+            </div>
+            <h2 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl">
+              Start with a workload we understand.
+            </h2>
+          </div>
+          <div>
+            <p className="leading-7 text-zinc-400">
+              ERS gives us a concrete context for evaluating deployment,
+              application services, data management, observability, and
+              operational cost. We can validate what is useful before
+              offering infrastructure capabilities to other customers.
+            </p>
+            <a
+              href="mailto:wankyzone@gmail.com?subject=Wanky%20Cloud%20Feedback"
+              className="mt-7 inline-flex items-center gap-3 text-sm font-semibold text-white transition hover:text-[#FF4D94]"
+            >
+              Contact the team <ArrowRight size={16} />
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

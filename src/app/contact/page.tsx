@@ -1,140 +1,156 @@
-"use client";
+import type { Metadata } from "next";
+import Link from "next/link";
+import {
+  ArrowRight,
+  BriefcaseBusiness,
+  GraduationCap,
+  Mail,
+  MessageCircle,
+  ShieldCheck,
+  Cloud,
+} from "lucide-react";
 
-import { motion } from "framer-motion";
-import { useState } from "react";
+export const metadata: Metadata = {
+  title: "Contact Wanky Technologies",
+  description:
+    "Contact Wanky Technologies about ERS, Wanky Cloud, Wanky Protect, Wanky Classroom, partnerships, and product inquiries.",
+};
+
+const inquiryTypes = [
+  {
+    title: "ERS",
+    description: "Errand Runner System and logistics marketplace inquiries.",
+    icon: BriefcaseBusiness,
+    subject: "ERS Inquiry",
+  },
+  {
+    title: "Wanky Cloud",
+    description: "Managed infrastructure direction and technical discussions.",
+    icon: Cloud,
+    subject: "Wanky Cloud Inquiry",
+  },
+  {
+    title: "Wanky Protect",
+    description: "Security, protection, and ecosystem security discussions.",
+    icon: ShieldCheck,
+    subject: "Wanky Protect Inquiry",
+  },
+  {
+    title: "Wanky Classroom",
+    description: "Digital learning product feedback and early interest.",
+    icon: GraduationCap,
+    subject: "Wanky Classroom Inquiry",
+  },
+];
+
+const email = "wankyzone@gmail.com";
 
 export default function ContactPage() {
-  const [copied, setCopied] = useState(false);
-
-  const handleEmailClick = () => {
-    const email = "hello@wankysoftware.com";
-
-    // Copy to clipboard
-    navigator.clipboard.writeText(email);
-
-    // Trigger email client
-    window.location.href = `mailto:${email}`;
-
-    // UI feedback
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   return (
-    <div className="relative mx-auto max-w-5xl px-6 py-24 lg:py-32 bg-white text-black font-sans selection:bg-[#FF4D94] selection:text-white">
-      
-      {/* HEADER */}
-      <motion.section 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="max-w-2xl mb-24"
-      >
-        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#FF4D94]">
-          Onboarding
-        </span>
+    <main className="overflow-hidden bg-white text-zinc-950">
+      <section className="relative border-b border-zinc-100">
+        <div className="pointer-events-none absolute -right-40 -top-20 h-[440px] w-[440px] rounded-full bg-[#FF4D94]/[0.08] blur-3xl" />
+        <div className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-zinc-500">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#FF4D94]" />
+              Contact Wanky
+            </div>
+            <h1 className="mt-8 text-5xl font-bold leading-[0.98] tracking-tight sm:text-7xl">
+              Good work starts
+              <span className="mt-3 block text-zinc-400">with a conversation.</span>
+            </h1>
+            <p className="mt-8 max-w-2xl text-lg leading-8 text-zinc-600">
+              Tell us what you are building, what needs to work better, or
+              which part of the Wanky ecosystem you want to discuss. A clear
+              starting point helps us understand the problem and the next step.
+            </p>
+          </div>
+        </div>
+      </section>
 
-        <h1 className="mt-6 text-5xl font-bold tracking-tight lg:text-7xl">
-          Apply for the <br />
-          <span className="text-slate-400 font-medium italic underline decoration-[#FF4D94]/20">
-            Wanky
-          </span>{" "}
-          <br />
-          Beta.
-        </h1>
-
-        <p className="mt-8 text-xl text-slate-500 leading-relaxed">
-          We are accepting a limited number of high-stakes businesses for our 
-          next implementation cycle. We do not build "apps"—we install operating systems.
-        </p>
-      </motion.section>
-
-      {/* GRID */}
-      <div className="grid lg:grid-cols-12 gap-12 items-start">
-        
-        {/* LEFT */}
-        <div className="lg:col-span-7 space-y-10 rounded-[3rem] border border-slate-100 bg-slate-50/50 p-10 lg:p-14">
-          <h3 className="text-2xl font-bold tracking-tight uppercase">
-            Briefing Protocol
-          </h3>
-
-          <p className="text-slate-500 leading-relaxed mb-8">
-            To save time, we do not require a formal RFP. Instead, please send a short brief 
-            answering the following operational questions:
+      <section className="mx-auto grid max-w-7xl gap-12 px-6 py-20 sm:py-24 lg:grid-cols-[1fr_0.75fr] lg:gap-20">
+        <div>
+          <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#D92D78]">
+            Choose a topic
           </p>
-
-          <ul className="space-y-8">
-            {[
-              {
-                label: "The Chaos",
-                desc: "What part of your current workflow is manual, unstable, or scattered across sheets/chats?",
-              },
-              {
-                label: "The Data",
-                desc: "Where does your business critical information live today?",
-              },
-              {
-                label: "The Outcome",
-                desc: "What is the single operational metric you need to change?",
-              },
-              {
-                label: "The Timeline",
-                desc: "When do you need the first core module deployed?",
-              },
-            ].map((item, i) => (
-              <li key={i} className="flex gap-4">
-                <span className="font-mono text-xs text-[#FF4D94] mt-1">
-                  MOD_0{i + 1}
-                </span>
-
-                <div>
-                  <p className="font-bold text-base uppercase tracking-wider">
-                    {item.label}
+          <h2 className="mt-4 text-3xl font-bold tracking-tight">
+            What would you like to discuss?
+          </h2>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            {inquiryTypes.map((item) => {
+              const Icon = item.icon;
+              return (
+                <a
+                  key={item.title}
+                  href={`mailto:${email}?subject=${encodeURIComponent(item.subject)}`}
+                  className="group rounded-3xl border border-zinc-200 p-6 transition hover:-translate-y-1 hover:border-[#FF4D94]/60 hover:shadow-lg hover:shadow-pink-500/5"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="rounded-xl bg-pink-50 p-3 text-[#D92D78]">
+                      <Icon size={21} />
+                    </div>
+                    <ArrowRight size={17} className="text-zinc-400 transition group-hover:translate-x-1 group-hover:text-[#D92D78]" />
+                  </div>
+                  <h3 className="mt-6 text-lg font-bold">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-zinc-600">
+                    {item.description}
                   </p>
-                  <p className="text-sm text-slate-500 mt-1 leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* RIGHT */}
-        <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-24">
-          
-          {/* EMAIL CARD */}
-          <div className="rounded-[2.5rem] bg-zinc-900 p-10 text-white shadow-2xl relative overflow-hidden group">
-            <h3 className="text-xl font-bold mb-4 uppercase text-[#FF4D94]">
-              The Priority Line
-            </h3>
-
-            <p className="text-zinc-400 text-sm leading-relaxed mb-10">
-              Send your completed brief directly to our engineering core.
-            </p>
-
-            <button 
-              onClick={handleEmailClick}
-              className="group w-full flex items-center justify-center gap-3 rounded-full bg-black py-4 text-xs font-bold tracking-widest text-white transition-all hover:bg-zinc-800 active:scale-95 border border-white/5 normal-case"
-            >
-              {copied ? "Copied" : "hello@wankysoftware.com"}
-              {copied && (
-                <span className="text-[#FF4D94] animate-pulse">✓</span>
-              )}
-            </button>
-
-            {/* Glow */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#FF4D94]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-          </div>
-
-          {/* STATUS */}
-          <div className="rounded-[2.5rem] border border-slate-100 bg-slate-50 p-8 flex items-center gap-3">
-            <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-            <p className="text-sm font-bold uppercase tracking-widest text-slate-400">
-              Status: accepting Q2 applications
-            </p>
+                </a>
+              );
+            })}
           </div>
         </div>
-      </div>
-    </div>
+
+        <aside className="h-fit rounded-[2rem] bg-zinc-950 p-7 text-white sm:p-9">
+          <div className="rounded-xl bg-[#FF4D94]/10 p-3 text-[#FF4D94] w-fit">
+            <Mail size={23} />
+          </div>
+          <p className="mt-7 text-[10px] font-bold uppercase tracking-[0.22em] text-[#FF4D94]">
+            Direct contact
+          </p>
+          <h2 className="mt-3 text-2xl font-bold">Send us a brief.</h2>
+          <p className="mt-4 text-sm leading-7 text-zinc-400">
+            Include the problem you are trying to solve, who it affects, any
+            important constraints, and what a successful outcome would look
+            like.
+          </p>
+          <a
+            href={`mailto:${email}?subject=${encodeURIComponent("Wanky Technologies Inquiry")}`}
+            className="mt-8 flex items-center justify-between gap-3 rounded-full border border-white/15 bg-white/[0.04] px-5 py-4 text-sm font-semibold transition hover:border-[#FF4D94]/60 hover:bg-white/[0.08]"
+          >
+            <span className="break-all">{email}</span>
+            <ArrowRight size={17} className="shrink-0 text-[#FF4D94]" />
+          </a>
+          <p className="mt-4 text-xs leading-5 text-zinc-500">
+            This opens your email application. Response times and project
+            availability are not guaranteed.
+          </p>
+        </aside>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 pb-24 sm:pb-32">
+        <div className="flex flex-col gap-6 rounded-[2rem] border border-zinc-200 p-8 sm:p-10 md:flex-row md:items-center md:justify-between">
+          <div className="flex items-start gap-4">
+            <div className="rounded-xl bg-pink-50 p-3 text-[#D92D78]">
+              <MessageCircle size={22} />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold">Still exploring?</h2>
+              <p className="mt-2 max-w-xl text-sm leading-6 text-zinc-600">
+                Learn more about the products and the principles behind how
+                we build them.
+              </p>
+            </div>
+          </div>
+          <Link
+            href="/principles"
+            className="inline-flex shrink-0 items-center gap-3 rounded-full bg-black px-6 py-4 text-sm font-semibold text-white transition hover:bg-[#D92D78]"
+          >
+            Our principles <ArrowRight size={16} />
+          </Link>
+        </div>
+      </section>
+    </main>
   );
 }

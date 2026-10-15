@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import DemoPanel from "@/components/DemoPanel";
+import ArchitectureVisual from "@/components/ArchitectureVisual";
 import { 
   Terminal, 
   MapPin, 
@@ -11,6 +12,7 @@ import {
   LayoutDashboard, 
   Package, 
   Cloud,
+  ShieldCheck,
   X
 } from "lucide-react";
 
@@ -76,55 +78,157 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* ================= HERO ================= */}
-      <div className="mx-auto max-w-6xl px-6 py-20 lg:pt-32">
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="rounded-[3rem] border border-slate-100 bg-slate-50/40 px-8 py-20 lg:px-20 relative overflow-hidden"
+      {/* ================= CINEMATIC WANKY HERO ================= */}
+      <section className="relative isolate min-h-[680px] overflow-hidden bg-[#08080A] text-white sm:min-h-[740px]">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/images/wanky-hero.png')" }}
+        />
+
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-r from-[#08080A] via-[#08080A]/90 to-[#08080A]/15"
+        />
+
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-t from-[#08080A]/90 via-transparent to-[#08080A]/20"
+        />
+
+        {/* WANKY NETWORK VISUAL */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 right-0 hidden w-[58%] overflow-hidden lg:block"
         >
-          <div className="max-w-4xl relative z-10">
-            <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-pink-500">
-              <span className="h-2 w-2 rounded-full bg-pink-500 animate-pulse" />
-              {isSubdomain ? "Logged into ERS Node" : "Private Beta"}
+          <svg
+            viewBox="0 0 760 760"
+            preserveAspectRatio="xMidYMid meet"
+            className="h-full w-full"
+            fill="none"
+          >
+            <defs>
+              <radialGradient id="networkGlow">
+                <stop offset="0%" stopColor="#FF4D94" stopOpacity="0.22" />
+                <stop offset="100%" stopColor="#FF4D94" stopOpacity="0" />
+              </radialGradient>
+              <linearGradient id="networkLine" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#FF4D94" stopOpacity="0.05" />
+                <stop offset="50%" stopColor="#FF4D94" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#E4E4E7" stopOpacity="0.12" />
+              </linearGradient>
+            </defs>
+
+            <circle cx="420" cy="380" r="300" fill="url(#networkGlow)" />
+
+            <g stroke="url(#networkLine)" strokeWidth="1">
+              <path d="M380 60 L520 145 L650 105 L700 245 L610 350 L680 480 L560 625 L420 680 L300 590 L155 625 L90 470 L145 330 L70 195 L210 115 Z" />
+              <path d="M380 60 L420 270 L520 145 L480 390 L650 105" />
+              <path d="M70 195 L300 280 L145 330 L350 430 L90 470" />
+              <path d="M210 115 L300 280 L420 270 L610 350 L480 390 L680 480" />
+              <path d="M155 625 L350 430 L420 680 L480 390 L560 625" />
+              <path d="M300 590 L350 430 L610 350" />
+              <path d="M420 270 L350 430 L420 520 L560 625" />
+              <path d="M300 280 L480 390 L420 520 L300 590" />
+              <path d="M210 115 L420 270 L700 245" />
+              <path d="M145 330 L300 590" />
+            </g>
+
+            <g stroke="#FF4D94" strokeOpacity="0.38" strokeWidth="1.5">
+              <path d="M300 280 L420 270 L480 390 L350 430 Z" />
+              <path d="M420 270 L610 350 L480 390" />
+              <path d="M350 430 L420 520 L480 390" />
+            </g>
+
+            <g fill="#FF4D94">
+              {[
+                [380, 60], [520, 145], [650, 105], [700, 245],
+                [610, 350], [680, 480], [560, 625], [420, 680],
+                [300, 590], [155, 625], [90, 470], [145, 330],
+                [70, 195], [210, 115], [420, 270], [300, 280],
+                [480, 390], [350, 430], [420, 520],
+              ].map(([cx, cy], i) => (
+                <circle key={i} cx={cx} cy={cy} r={i > 13 ? 4 : 2.5}>
+                  {i % 3 === 0 && (
+                    <animate
+                      attributeName="opacity"
+                      values="0.45;1;0.45"
+                      dur={`${2 + (i % 4)}s`}
+                      repeatCount="indefinite"
+                    />
+                  )}
+                </circle>
+              ))}
+            </g>
+
+            <g fill="#F9A8D4" opacity="0.7">
+              <circle cx="420" cy="270" r="7" />
+              <circle cx="480" cy="390" r="5" />
+              <circle cx="350" cy="430" r="5" />
+            </g>
+          </svg>
+        </div>
+
+
+        <div className="relative mx-auto flex min-h-[680px] max-w-7xl items-center px-6 py-20 sm:min-h-[740px] lg:py-28">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="max-w-2xl"
+          >
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/30 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-zinc-300 backdrop-blur-sm">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#FF4D94]" />
+              Wanky Technologies
             </span>
 
-            <h1 className="mt-8 text-6xl font-bold leading-[0.9] tracking-tighter sm:text-7xl lg:text-8xl">
-              The Operating System <br />
-              for <span className="text-slate-400 italic underline decoration-pink-500/30">Logistics</span>
+            <h1 className="mt-8 text-5xl font-bold leading-[0.98] tracking-tight sm:text-6xl lg:text-7xl">
+              We build the systems
+              <span className="mt-3 block text-zinc-400">
+                behind what&apos;s next.
+              </span>
             </h1>
 
-            <p className="mt-10 max-w-xl text-lg text-slate-500">
-              Wanky powers businesses that move in the physical world.
-              Automate operations, unify data, and scale execution from a single system.
+            <p className="mt-7 max-w-xl text-base leading-8 text-zinc-300 sm:text-lg">
+              Software products, operational systems, and infrastructure
+              designed to solve real problems and support what comes next.
             </p>
 
-            <div className="mt-12 flex flex-wrap gap-4">
+            <div className="mt-9 flex flex-wrap gap-3">
               <Link
-                href="/contact"
-                className="rounded-full bg-black px-10 py-4 text-sm font-bold text-white hover:bg-zinc-800 transition shadow-lg shadow-black/10"
+                href="/platform"
+                className="inline-flex items-center gap-3 rounded-full bg-[#FF4D94] px-7 py-4 text-sm font-semibold text-black transition hover:bg-white"
               >
-                Book a Demo
+                Explore our products <span aria-hidden="true">→</span>
               </Link>
 
-              <button
-                onClick={() => setIsDemoOpen(true)}
-                className="rounded-full border border-slate-200 bg-white px-10 py-4 text-sm font-bold hover:bg-slate-50 transition flex items-center gap-2"
+              <Link
+                href="/contact"
+                className="inline-flex items-center rounded-full border border-white/25 bg-white/[0.04] px-7 py-4 text-sm font-semibold text-white backdrop-blur-sm transition hover:border-white hover:bg-white/10"
               >
-                View Demo Preview
-              </button>
+                Discuss a project
+              </Link>
             </div>
-          </div>
-        </motion.section>
-      </div>
 
-      <div className="mx-auto max-w-6xl px-6">
-        
+            <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-xs text-zinc-400">
+              <span>Product engineering</span>
+              <span className="text-[#FF4D94]">/</span>
+              <span>Connected systems</span>
+              <span className="text-[#FF4D94]">/</span>
+              <span>Infrastructure</span>
+            </div>
+          </motion.div>
+        </div>
+
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#FF4D94]/50 to-transparent" />
+      </section>
+
+      <div className="mx-auto max-w-6xl px-6 pt-16">
         {/* ================= FEATURES WITH ANIMATION ================= */}
         <section className="py-32">
           <div className="max-w-2xl mb-16">
-            <h2 className="text-4xl font-bold">Everything you need to run logistics at scale.</h2>
-            <p className="mt-6 text-slate-500">Modular systems designed to replace fragmented workflows.</p>
+            <h2 className="text-4xl font-bold">Engineering for real-world problems.</h2>
+            <p className="mt-6 text-slate-500">Purpose-built products and connected software systems, developed around specific needs.</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
@@ -150,8 +254,8 @@ export default function Home() {
         {/* ================= PRODUCTS WITH GLOW ================= */}
         <section className="py-32">
           <div className="max-w-2xl mb-16">
-            <h2 className="text-4xl font-bold">A unified system for operations and infrastructure.</h2>
-            <p className="mt-6 text-slate-500">Execution and infrastructure into a single operating layer.</p>
+            <h2 className="text-4xl font-bold">Different products. One engineering mindset.</h2>
+            <p className="mt-6 text-slate-500">Each product has its own purpose, roadmap, and level of readiness.</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
@@ -171,7 +275,7 @@ export default function Home() {
                 <h3 className="text-3xl font-bold mb-4">ERS (Errand Runner System)</h3>
                 <p className="text-slate-500 mb-8 text-lg">Manage logistics, assign errands, and track operations in real time.</p>
                 <span className="inline-flex items-center gap-2 font-bold group-hover:gap-4 transition-all">
-                  Open ERS <span className="text-pink-500">→</span>
+                  Visit ERS <span className="text-pink-500">→</span>
                 </span>
               </div>
             </motion.a>
@@ -190,12 +294,38 @@ export default function Home() {
                   <Cloud className="w-6 h-6 text-indigo-500" />
                 </div>
                 <h3 className="text-3xl font-bold mb-4">Wanky Cloud</h3>
-                <p className="text-slate-500 mb-8 text-lg">Storage, compute, and backend systems powering modern logistics.</p>
+                <p className="text-slate-500 mb-8 text-lg">A planned managed-infrastructure offering, beginning with practical application workloads.</p>
                 <span className="inline-flex items-center gap-2 font-bold group-hover:gap-4 transition-all">
-                  Explore Cloud <span className="text-indigo-500">→</span>
+                  Explore the direction <span className="text-indigo-500">→</span>
                 </span>
               </div>
             </motion.a>
+            {/* WANKY PROTECT */}
+            <motion.div
+              whileHover={{ y: -6 }}
+              className="group relative overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white p-10 shadow-sm transition-all hover:border-[#FF4D94]/30 hover:shadow-xl hover:shadow-pink-500/5"
+            >
+              <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-pink-500/5 blur-3xl transition-colors group-hover:bg-pink-500/10" />
+              <div className="relative z-10">
+                <div className="mb-6 flex items-center justify-between">
+                  <div className="text-xs font-bold uppercase tracking-widest text-[#D92D78]">
+                    Security layer · Planned
+                  </div>
+                  <ShieldCheck className="h-6 w-6 text-[#D92D78]" />
+                </div>
+                <h3 className="mb-4 text-3xl font-bold">Wanky Protect</h3>
+                <p className="mb-8 text-lg text-slate-500">
+                  Our planned security and protection layer for identity,
+                  access control, threat detection, and the wider Wanky ecosystem.
+                </p>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 font-bold transition-all group-hover:gap-4"
+                >
+                  Discuss security <span className="text-[#D92D78]">→</span>
+                </Link>
+              </div>
+            </motion.div>
           </div>
         </section>
 
@@ -203,8 +333,8 @@ export default function Home() {
         <section className="rounded-[3rem] bg-zinc-900 p-8 md:p-16 text-white overflow-hidden relative">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-4xl font-bold">Full operational visibility.</h2>
-            <p className="mt-6 text-zinc-400">Monitor errands, runners, and transactions in real time.</p>
+            <h2 className="text-4xl font-bold">See how a system fits together.</h2>
+            <p className="mt-6 text-zinc-400">A product interface concept for exploring operational workflows—not a live production monitor.</p>
           </div>
 
           <motion.div 
@@ -223,8 +353,8 @@ export default function Home() {
              whileInView={{ scale: [0.95, 1], opacity: [0, 1] }}
              viewport={{ once: true }}
           >
-            <h2 className="text-5xl font-bold tracking-tight">Start building your <br/>logistics system.</h2>
-            <p className="mt-6 text-slate-500 text-lg">Join the private beta and deploy your first module today.</p>
+            <h2 className="text-5xl font-bold tracking-tight">Have a problem worth solving?</h2>
+            <p className="mt-6 text-slate-500 text-lg">Tell us what you want to build, improve, or understand.</p>
 
             <div className="mt-12">
               <Link
@@ -244,11 +374,11 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-400">
           <div className="flex items-center gap-6">
             <span className="font-bold text-black">Wanky.</span>
-            <span>© 2026 Wanky Infrastructure</span>
+            <span>Software, products &amp; infrastructure</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="h-1.5 w-1.5 rounded-full bg-green-500" />
-            <span>All Nodes Operational</span>
+            <span>Building with intention</span>
           </div>
         </div>
       </footer>
