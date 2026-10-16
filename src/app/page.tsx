@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import DemoPanel from "@/components/DemoPanel";
-import ArchitectureVisual from "@/components/ArchitectureVisual";
 import { 
   Terminal, 
   MapPin, 
@@ -42,9 +41,6 @@ const FEATURES = [
 
 export default function Home() {
   const [isDemoOpen, setIsDemoOpen] = useState(false);
-
-  // Subdomain awareness logic (simulated for UI)
-  const isSubdomain = typeof window !== "undefined" && window.location.host.includes("ers.");
 
   return (
     <div className="min-h-screen bg-white text-black font-sans selection:bg-pink-100">

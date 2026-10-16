@@ -36,6 +36,7 @@ function Nav() {
             { name: "Infrastructure", href: "/systems" },
             { name: "Principles", href: "/principles" },
             { name: "Pricing", href: "/pricing" },
+            { name: "Blog", href: "/blog" },
           ].map((item) => (
             <Link 
               key={item.name}
@@ -54,12 +55,20 @@ function Nav() {
         </nav>
 
         {/* Mobile Contact Only */}
-        <Link
-          className="md:hidden rounded-full bg-black px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white"
-          href="/contact"
-        >
-          Talk
-        </Link>
+        <div className="md:hidden flex items-center gap-4">
+          <Link
+            href="/blog"
+            className="text-[10px] font-bold uppercase tracking-widest text-slate-500"
+          >
+            Blog
+          </Link>
+          <Link
+            className="rounded-full bg-black px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white"
+            href="/contact"
+          >
+            Talk
+          </Link>
+        </div>
       </div>
     </header>
   );
@@ -97,6 +106,7 @@ function Footer() {
     {
       title: "Resources",
       links: [
+        { name: "Blog", href: "/blog" },
         { name: "Documentation", href: "#" },
         { name: "GitHub Library", href: "https://github.com/wankyzone" },
         { name: "System Status", href: "#" },
