@@ -139,6 +139,73 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "introducing-wanky-protect",
+    title: "Introducing Wanky Protect: Building Security Into the Wanky Ecosystem",
+    category: "Security and engineering",
+    dateLabel: "17 October 2026",
+    author: "Wanky Technologies",
+    excerpt:
+      "Wanky Protect is our security-focused product direction: a commitment to make privacy, access control, and responsible engineering part of how Wanky products are designed. Here is what that means—and what is still ahead.",
+    status: "Published",
+    sections: [
+      {
+        heading: "Security is a foundation, not a feature added later",
+        paragraphs: [
+          "As software becomes part of everyday work, communication, and business operations, protecting accounts, data, and access becomes a core engineering responsibility. Security cannot be reduced to a badge or a promise on a product page. It has to be reflected in design decisions, implementation, testing, and ongoing maintenance.",
+          "Wanky Protect is the name for our security-focused direction within the wider Wanky ecosystem. It represents an intention to approach protection deliberately, rather than treating it as a final checklist after the main product has been built.",
+        ],
+      },
+      {
+        heading: "What Wanky Protect is intended to focus on",
+        paragraphs: [
+          "Our intended areas of focus include account and access security, privacy-conscious handling of data, protection of application secrets, secure development practices, and clear communication about product limitations. The exact scope and delivery sequence will be defined through product and engineering work.",
+          "These are areas of focus, not a claim that a single Wanky Protect product currently provides every capability. Specific features will be described as available only after they have been implemented, tested, and documented.",
+        ],
+        bullets: [
+          "Identity and access: give users and services only the permissions they need.",
+          "Data privacy: collect and use information responsibly, with clear purposes and appropriate safeguards.",
+          "Secure engineering: protect credentials, review changes, test important boundaries, and address vulnerabilities.",
+          "Transparency: explain what is protected, what remains limited, and what users should not assume.",
+        ],
+      },
+      {
+        heading: "Security across a growing product ecosystem",
+        paragraphs: [
+          "Wanky Technologies is building products with different purposes, including ERS, Wanky Cloud, Wanky AI, Wanky Classroom, and the longer-term Wanky OS vision. Their security needs will differ, and each product must be secured according to its own architecture, data, users, and risks.",
+          "Wanky Protect may eventually provide shared principles, tools, or services where doing so makes sense. That does not mean these products currently share a security layer or that a single integration protects them all. Any common capability must be designed, implemented, and independently validated for its intended use.",
+        ],
+      },
+      {
+        heading: "How we intend to approach the work",
+        paragraphs: [
+          "We intend to build security into the development lifecycle: identify risks early, minimize privileges, keep sensitive credentials out of source code, validate authentication and authorization, review dependencies, and test how systems behave when requests fail or users lack permission.",
+          "Security is also an operational responsibility. As products mature, the work may include monitoring, incident response procedures, vulnerability handling, and clear guidance for users. The measures appropriate to each product will depend on its actual design and deployment.",
+        ],
+      },
+      {
+        heading: "What Wanky Protect does not claim today",
+        paragraphs: [
+          "Wanky Protect is currently a concept and planning direction, not an announcement of a generally available security product. We are not claiming that it provides antivirus protection, endpoint monitoring, a password manager, threat detection, compliance certification, or a guarantee against attacks.",
+          "Those capabilities should never be inferred from the name. If and when a specific capability is built, we will explain its purpose, its limitations, its availability, and the evidence behind any security claims.",
+        ],
+      },
+      {
+        heading: "Trust is earned through evidence",
+        paragraphs: [
+          "A credible security effort depends on consistent engineering and honest communication. A policy is not a substitute for implementation, a successful test is not proof of perfect security, and no product can promise to eliminate every risk.",
+          "Our aim is to make security a visible, practical part of how Wanky products are built. We will share concrete progress when there is a working control, a documented process, or a verified capability to discuss.",
+        ],
+      },
+      {
+        heading: "A direction we intend to build responsibly",
+        paragraphs: [
+          "Wanky Protect is in the concept and planning stage. This article describes our intended approach and does not represent a launch announcement or a guarantee of future features.",
+          "As the Wanky ecosystem develops, we want security to grow with it: grounded in the needs of each product, clear about its limits, and supported by work that can be examined rather than promises that cannot yet be demonstrated.",
+        ],
+      },
+    ],
+  },
 ];
 
 export function getBlogPost(slug: string) {
