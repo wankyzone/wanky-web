@@ -110,10 +110,73 @@ export class NewsletterService {
     return { accepted: true as const };
   }
 
-  async confirm(token: unknown): Promise<TokenResult> {
-    if (!isNewsletterToken(token)) return "invalid";
-    return this.repository.confirmSubscription(hashNewsletterToken(token));
+  async confirm(
+  confirmationToken: unknown,
+  unsubscribeToken: unknown,
+): Promise<TokenResult> {
+  if (
+    !isNewsletterToken(confirmationToken) ||
+    !isNewsletterToken(unsubscribeToken)
+  ) {
+    return "invalid";
   }
+
+  const confirmationTokenHash = hashNewsletterToken(confirmationToken);
+  const unsubscribeTokenHash = hashNewsletterToken(unsubscribeToken);
+
+  const result =
+    await this.repository.confirmSubscription(confirmationTokenHash);
+
+  if (result !== "confirmed") return result;
+
+  const claim = await this.repository.claimWelcomeDelivery(
+    confirmationTokenHash,
+    unsubscribeTokenHash,
+  );
+
+  if (!claim) return "confirmed";
+
+  try {
+    await this.mailer.sendWelcome({
+      email: claim.email,
+      unsubscribeToken,
+      idempotencyKey: claim.deliveryKey,
+    });
+  } catch {
+    try {
+      await this.repository.finishWelcomeDelivery(
+        confirmationTokenHash,
+        unsubscribeTokenHash,
+        false,
+      );
+    } catch {
+      // Preserve the original delivery failure.
+    }
+
+    throw new NewsletterDeliveryError("Welcome delivery failed.");
+  }
+
+  let recorded: boolean;
+  try {
+    recorded = await this.repository.finishWelcomeDelivery(
+      confirmationTokenHash,
+      unsubscribeTokenHash,
+      true,
+    );
+  } catch {
+    throw new NewsletterDeliveryError(
+      "Welcome delivery status could not be recorded.",
+    );
+  }
+
+  if (!recorded) {
+    throw new NewsletterDeliveryError(
+      "Welcome delivery status could not be recorded.",
+    );
+  }
+
+  return "confirmed";
+}
 
   async unsubscribe(token: unknown): Promise<TokenResult> {
     if (!isNewsletterToken(token)) return "invalid";

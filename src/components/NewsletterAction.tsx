@@ -31,8 +31,15 @@ export default function NewsletterAction({ kind }: { kind: NewsletterActionKind 
   const [state, setState] = useState<ActionState>("ready");
 
   async function handleAction() {
-    const token = window.location.hash.slice(1);
-    if (!token) {
+    const fragment = new URLSearchParams(window.location.hash.slice(1));
+    const token =
+      kind === "confirm"
+        ? fragment.get("token")
+        : window.location.hash.slice(1);
+    const unsubscribeToken =
+      kind === "confirm" ? fragment.get("unsubscribeToken") : null;
+
+    if (!token || (kind === "confirm" && !unsubscribeToken)) {
       setState("invalid");
       return;
     }
@@ -44,7 +51,9 @@ export default function NewsletterAction({ kind }: { kind: NewsletterActionKind 
       const response = await fetch(`/api/newsletter/${kind}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token }),
+        body: JSON.stringify(
+          kind === "confirm" ? { token, unsubscribeToken } : { token },
+        ),
       });
       const result = (await response.json()) as { status?: string };
 

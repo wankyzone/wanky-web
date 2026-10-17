@@ -17,6 +17,12 @@ class FakeRepository implements NewsletterRepository {
   state: SubscriptionRequestState = "confirmation_required";
   tokenResult: TokenResult = "confirmed";
   rateAllowed = true;
+  welcomeClaim: { email: string; deliveryKey: string } | null = {
+    email: "member@example.com",
+    deliveryKey: "wanky-newsletter-welcome-test",
+  };
+  finishWelcomeResult = true;
+  finishedWelcomeCalls: boolean[] = [];
   requested: Parameters<NewsletterRepository["requestSubscription"]>[0][] = [];
   clearedTokens: string[] = [];
   rateKeys: string[] = [];
@@ -41,6 +47,19 @@ class FakeRepository implements NewsletterRepository {
     return this.tokenResult;
   }
 
+  async claimWelcomeDelivery() {
+    return this.welcomeClaim;
+  }
+
+  async finishWelcomeDelivery(
+    _confirmationTokenHash: string,
+    _unsubscribeTokenHash: string,
+    success: boolean,
+  ) {
+    this.finishedWelcomeCalls.push(success);
+    return this.finishWelcomeResult;
+  }
+
   async unsubscribe() {
     return this.tokenResult;
   }
@@ -54,14 +73,19 @@ describe("NewsletterService", () => {
   let repository: FakeRepository;
   let mailer: NewsletterMailer;
   let sendConfirmation: Mock<(input: Parameters<NewsletterMailer["sendConfirmation"]>[0]) => Promise<void>>;
+  let sendWelcome: Mock<(input: Parameters<NewsletterMailer["sendWelcome"]>[0]) => Promise<void>>;
   let service: NewsletterService;
 
   beforeEach(() => {
     repository = new FakeRepository();
     sendConfirmation = vi.fn().mockResolvedValue(undefined);
+    sendWelcome = vi.fn().mockResolvedValue(undefined);
     mailer = {
       sendConfirmation: async (input) => {
         await sendConfirmation(input);
+      },
+      sendWelcome: async (input) => {
+        await sendWelcome(input);
       },
     };
     let tokenNumber = 0;
@@ -125,9 +149,60 @@ describe("NewsletterService", () => {
   });
 
   it("confirms only correctly formed one-time tokens through the repository", async () => {
-    await expect(service.confirm("invalid")).resolves.toBe("invalid");
-    await expect(service.confirm("A".repeat(43))).resolves.toBe("confirmed");
+    await expect(service.confirm("invalid", "invalid")).resolves.toBe("invalid");
+    await expect(
+      service.confirm("A".repeat(43), "B".repeat(43)),
+    ).resolves.toBe("confirmed");
     expect(repository.tokenResult).toBe("confirmed");
+  });
+
+  it("sends the welcome email and records successful delivery", async () => {
+    await expect(
+      service.confirm("A".repeat(43), "B".repeat(43)),
+    ).resolves.toBe("confirmed");
+
+    expect(sendWelcome).toHaveBeenCalledOnce();
+    expect(sendWelcome).toHaveBeenCalledWith(
+      expect.objectContaining({
+        email: "member@example.com",
+        unsubscribeToken: "B".repeat(43),
+        idempotencyKey: "wanky-newsletter-welcome-test",
+      }),
+    );
+    expect(repository.finishedWelcomeCalls).toEqual([true]);
+  });
+
+  it("records failed delivery and reports a welcome-email error", async () => {
+    sendWelcome.mockRejectedValueOnce(new Error("provider failure"));
+
+    await expect(
+      service.confirm("A".repeat(43), "B".repeat(43)),
+    ).rejects.toBeInstanceOf(NewsletterDeliveryError);
+
+    expect(sendWelcome).toHaveBeenCalledOnce();
+    expect(repository.finishedWelcomeCalls).toEqual([false]);
+  });
+
+  it("does not send a welcome email when no delivery claim is available", async () => {
+    repository.welcomeClaim = null;
+
+    await expect(
+      service.confirm("A".repeat(43), "B".repeat(43)),
+    ).resolves.toBe("confirmed");
+
+    expect(sendWelcome).not.toHaveBeenCalled();
+    expect(repository.finishedWelcomeCalls).toEqual([]);
+  });
+
+  it("reports an error when successful delivery cannot be recorded", async () => {
+    repository.finishWelcomeResult = false;
+
+    await expect(
+      service.confirm("A".repeat(43), "B".repeat(43)),
+    ).rejects.toBeInstanceOf(NewsletterDeliveryError);
+
+    expect(sendWelcome).toHaveBeenCalledOnce();
+    expect(repository.finishedWelcomeCalls).toEqual([true]);
   });
 
   it("makes repeated unsubscribe outcomes safe and idempotent", async () => {

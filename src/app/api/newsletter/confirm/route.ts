@@ -24,8 +24,11 @@ export async function POST(request: Request) {
   }
 
   try {
-    const token = (payload as Record<string, unknown>).token;
-    const result = await newsletter.service.confirm(token);
+    const body = payload as Record<string, unknown>;
+const token = body.token;
+const unsubscribeToken = body.unsubscribeToken;
+
+const result = await newsletter.service.confirm(token, unsubscribeToken);
     if (result === "confirmed") return jsonResponse({ status: "confirmed" }, 200);
     return jsonResponse({ status: "invalid_or_expired" }, 400);
   } catch {

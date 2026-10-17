@@ -57,6 +57,47 @@ export class SupabaseNewsletterRepository implements NewsletterRepository {
     return parseTokenResult(data, "confirmed");
   }
 
+    async claimWelcomeDelivery(
+    confirmationTokenHash: string,
+    unsubscribeTokenHash: string,
+  ): Promise<{ email: string; deliveryKey: string } | null> {
+    const { data, error } = await this.client.rpc("claim_welcome_delivery", {
+      p_confirmation_token_hash: confirmationTokenHash,
+      p_unsubscribe_token_hash: unsubscribeTokenHash,
+    });
+
+    if (error) throw new Error("Welcome delivery claim unavailable.");
+
+    const result = Array.isArray(data) ? data[0] : undefined;
+    if (
+      !result ||
+      typeof result.email !== "string" ||
+      typeof result.delivery_key !== "string"
+    ) {
+      return null;
+    }
+
+    return {
+      email: result.email,
+      deliveryKey: result.delivery_key,
+    };
+  }
+
+  async finishWelcomeDelivery(
+    confirmationTokenHash: string,
+    unsubscribeTokenHash: string,
+    success: boolean,
+  ): Promise<boolean> {
+    const { data, error } = await this.client.rpc("finish_welcome_delivery", {
+      p_confirmation_token_hash: confirmationTokenHash,
+      p_unsubscribe_token_hash: unsubscribeTokenHash,
+      p_success: success,
+    });
+
+    if (error) throw new Error("Welcome delivery result unavailable.");
+    return data === true;
+  }
+
   async clearFailedConfirmation(tokenHash: string): Promise<void> {
     const { error } = await this.client.rpc("clear_failed_confirmation", {
       p_confirmation_token_hash: tokenHash,
