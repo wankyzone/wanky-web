@@ -296,6 +296,25 @@ export default function Home() {
                 </span>
               </div>
             </motion.a>
+            <Link
+              href="/ai"
+              className="group relative overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white p-10 shadow-sm transition-all hover:-translate-y-1 hover:border-[#FF4D94]/40 hover:shadow-xl hover:shadow-pink-500/5"
+            >
+              <div className="mb-6 flex items-center justify-between">
+                <span className="text-xs font-bold uppercase tracking-widest text-[#D92D78]">
+                  AI engineering · Planned division
+                </span>
+                <Terminal className="h-6 w-6 text-[#D92D78]" />
+              </div>
+              <h3 className="mb-4 text-3xl font-bold">Wanky AI</h3>
+              <p className="mb-8 text-lg text-slate-500">
+                A developing focus on intelligent software, AI engineering,
+                automation, and a long-term direction in physical AI.
+              </p>
+              <span className="inline-flex items-center gap-2 font-bold transition-all group-hover:gap-4">
+                Explore Wanky AI <span className="text-[#D92D78]">→</span>
+              </span>
+            </Link>
             {/* WANKY PROTECT */}
             <motion.div
               whileHover={{ y: -6 }}

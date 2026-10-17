@@ -10,6 +10,7 @@ import { FaFacebook, FaTwitter, FaInstagram, FaGithub } from "react-icons/fa";
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://wanky-web.vercel.app"),
   title: "Wanky Technologies — Software, Products & Infrastructure",
   description: "Wanky Technologies builds software products, operational systems, and infrastructure.",
   icons: {
@@ -32,6 +33,7 @@ function Nav() {
         <nav className="hidden md:flex items-center gap-8">
           {[
             { name: "Platform", href: "/platform" },
+            { name: "Wanky AI", href: "/ai" },
             { name: "Classroom", href: "/classroom" },
             { name: "Infrastructure", href: "/systems" },
             { name: "Principles", href: "/principles" },
@@ -56,6 +58,12 @@ function Nav() {
 
         {/* Mobile Contact Only */}
         <div className="md:hidden flex items-center gap-4">
+          <Link
+            href="/ai"
+            className="text-[10px] font-bold uppercase tracking-widest text-slate-500"
+          >
+            Wanky AI
+          </Link>
           <Link
             href="/blog"
             className="text-[10px] font-bold uppercase tracking-widest text-slate-500"
@@ -98,6 +106,7 @@ function Footer() {
     {
       title: "Company",
       links: [
+        { name: "Wanky AI", href: "/ai" },
         { name: "Principles", href: "/principles" },
         { name: "Roadmap", href: "/platform" },
         { name: "Brand Assets", href: "#" },
