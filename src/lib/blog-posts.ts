@@ -21,11 +21,11 @@ export const blogPosts: BlogPost[] = [
     slug: "building-ers-for-what-comes-next-our-move-toward-aws",
     title: "Building ERS for What Comes Next: Our Move Toward AWS",
     category: "Engineering",
-    dateLabel: "Publication date to be confirmed",
+    dateLabel: "17 October 2026",
     author: "Wanky Technologies",
     excerpt:
       "ERS has started migrating toward AWS for deployment and hosting. Here is why the work matters, what it means for launch timing, and what remains to be validated.",
-    status: "Draft for review",
+    status: "Published",
     sections: [
       {
         heading: "What AWS and cloud hosting mean",
@@ -66,21 +66,21 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "ers-weekly-update-aws-migration",
-    title: "ERS Weekly Update: AWS Migration",
+    title: "ERS Weekly Update: Week 39 — AWS Migration",
     category: "Weekly update",
-    dateLabel: "Publication date to be confirmed",
+    dateLabel: "18 October 2026",
     author: "Wanky Technologies",
     excerpt:
       "The ERS migration toward AWS has started. The deployment and hosting work is ongoing, and production readiness and launch timing remain under validation.",
-    status: "Draft for review",
-    updateNumber: "To be confirmed",
+    status: "Published",
+    updateNumber: "Week 39",
     sections: [
       {
         heading: "ERS migration status",
         paragraphs: [
           "The move toward AWS for ERS deployment and hosting has started. Work is ongoing, and the migration is not being described as complete.",
           "Infrastructure, configuration, security, monitoring, connectivity, and release validation still need attention before production readiness can be confirmed. This additional engineering affects launch timing; no launch date is confirmed.",
-          "Publication date: To be confirmed. Weekly update number: To be confirmed.",
+          "Publication date: 18 October 2026. Weekly update: Week 39.",
         ],
       },
     ],
