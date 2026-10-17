@@ -33,6 +33,7 @@ function Nav() {
         <nav className="hidden md:flex items-center gap-8">
           {[
             { name: "Platform", href: "/platform" },
+            { name: "Wanky OS", href: "/wanky-os" },
             { name: "Wanky AI", href: "/ai" },
             { name: "Classroom", href: "/classroom" },
             { name: "Infrastructure", href: "/systems" },
@@ -59,10 +60,10 @@ function Nav() {
         {/* Mobile Contact Only */}
         <div className="md:hidden flex items-center gap-4">
           <Link
-            href="/ai"
+            href="/wanky-os"
             className="text-[10px] font-bold uppercase tracking-widest text-slate-500"
           >
-            Wanky AI
+            Wanky OS
           </Link>
           <Link
             href="/blog"
@@ -96,7 +97,7 @@ function Footer() {
     {
       title: "Product",
       links: [
-        { name: "OS Platform", href: "/platform" },
+        { name: "Wanky OS", href: "/wanky-os" },
         { name: "Wanky Classroom", href: "/classroom" },
         { name: "ERS Engine", href: "/platform" },
         { name: "Infrastructure", href: "/systems" },
@@ -108,7 +109,7 @@ function Footer() {
       links: [
         { name: "Wanky AI", href: "/ai" },
         { name: "Principles", href: "/principles" },
-        { name: "Roadmap", href: "/platform" },
+        { name: "Roadmap", href: "/wanky-os" },
         { name: "Brand Assets", href: "#" },
       ],
     },
