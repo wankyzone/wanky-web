@@ -7,11 +7,20 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-/* ===== FAKE DATA ===== */
-const chartData = Array.from({ length: 12 }).map((_, i) => ({
-  name: i,
-  value: 200 + Math.random() * 300,
-}));
+const chartData = [
+  { name: 0, value: 240 },
+  { name: 1, value: 285 },
+  { name: 2, value: 260 },
+  { name: 3, value: 330 },
+  { name: 4, value: 305 },
+  { name: 5, value: 365 },
+  { name: 6, value: 340 },
+  { name: 7, value: 410 },
+  { name: 8, value: 380 },
+  { name: 9, value: 450 },
+  { name: 10, value: 420 },
+  { name: 11, value: 480 },
+];
 
 export default function DemoPanel() {
   const [jobs, setJobs] = useState(128);
@@ -48,7 +57,7 @@ export default function DemoPanel() {
       </div>
 
       {/* CHART */}
-      <div className="mt-6 h-24">
+      <div className="mt-6 h-24 w-full min-w-0">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData}>
             <Line
@@ -64,9 +73,9 @@ export default function DemoPanel() {
 
       {/* ACTIVITY */}
       <div className="mt-6 text-xs text-zinc-400 space-y-2">
-        <Activity text="New delivery assigned" />
-        <Activity text="Runner reached pickup" />
-        <Activity text="Payment confirmed" />
+        <Activity text="New delivery assigned" age={12} />
+        <Activity text="Runner reached pickup" age={8} />
+        <Activity text="Payment confirmed" age={3} />
       </div>
 
       {/* FOOT */}
@@ -81,7 +90,7 @@ export default function DemoPanel() {
 
 /* ===== COMPONENTS ===== */
 
-function Stat({ label, value }: any) {
+function Stat({ label, value }: { label: string; value: string | number }) {
   return (
     <div className="bg-white/5 p-4 rounded-lg hover:bg-white/10 transition">
       <p className="text-xs text-zinc-400">{label}</p>
@@ -90,11 +99,11 @@ function Stat({ label, value }: any) {
   );
 }
 
-function Activity({ text }: any) {
+function Activity({ text, age }: { text: string; age: number }) {
   return (
     <div className="flex justify-between">
       <span>{text}</span>
-      <span>{Math.floor(Math.random() * 20)}s ago</span>
+      <span>{age}s ago</span>
     </div>
   );
 }

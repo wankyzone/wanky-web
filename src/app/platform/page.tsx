@@ -8,7 +8,6 @@ import {
   CreditCard,
   Database,
   GitBranch,
-  MapPin,
   MessageSquare,
   Package,
   ShieldCheck,

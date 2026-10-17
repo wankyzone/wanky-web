@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import DemoPanel from "@/components/DemoPanel";
-import ArchitectureVisual from "@/components/ArchitectureVisual";
 import { 
   Terminal, 
   MapPin, 
@@ -42,9 +41,6 @@ const FEATURES = [
 
 export default function Home() {
   const [isDemoOpen, setIsDemoOpen] = useState(false);
-
-  // Subdomain awareness logic (simulated for UI)
-  const isSubdomain = typeof window !== "undefined" && window.location.host.includes("ers.");
 
   return (
     <div className="min-h-screen bg-white text-black font-sans selection:bg-pink-100">
@@ -300,6 +296,25 @@ export default function Home() {
                 </span>
               </div>
             </motion.a>
+            <Link
+              href="/ai"
+              className="group relative overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white p-10 shadow-sm transition-all hover:-translate-y-1 hover:border-[#FF4D94]/40 hover:shadow-xl hover:shadow-pink-500/5"
+            >
+              <div className="mb-6 flex items-center justify-between">
+                <span className="text-xs font-bold uppercase tracking-widest text-[#D92D78]">
+                  AI engineering · Planned division
+                </span>
+                <Terminal className="h-6 w-6 text-[#D92D78]" />
+              </div>
+              <h3 className="mb-4 text-3xl font-bold">Wanky AI</h3>
+              <p className="mb-8 text-lg text-slate-500">
+                A developing focus on intelligent software, AI engineering,
+                automation, and a long-term direction in physical AI.
+              </p>
+              <span className="inline-flex items-center gap-2 font-bold transition-all group-hover:gap-4">
+                Explore Wanky AI <span className="text-[#D92D78]">→</span>
+              </span>
+            </Link>
             {/* WANKY PROTECT */}
             <motion.div
               whileHover={{ y: -6 }}
