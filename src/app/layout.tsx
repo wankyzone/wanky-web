@@ -30,7 +30,7 @@ function Nav() {
           </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-5 xl:gap-8">
           {[
             { name: "Platform", href: "/platform" },
             { name: "Wanky OS", href: "/wanky-os" },
@@ -58,7 +58,7 @@ function Nav() {
         </nav>
 
         {/* Mobile Contact Only */}
-        <div className="md:hidden flex items-center gap-4">
+        <div className="flex lg:hidden items-center gap-4">
           <Link
             href="/wanky-os"
             className="text-[10px] font-bold uppercase tracking-widest text-slate-500"
