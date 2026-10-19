@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { connection } from "next/server";
 import Link from "next/link";
 import {
   ArrowDownRight,
@@ -14,6 +15,8 @@ import {
   Users,
   Workflow,
 } from "lucide-react";
+import ErsInterestForm from "@/components/ErsInterestForm";
+import { getErsInterestRuntime } from "@/lib/product-interest/ers-runtime";
 
 export const metadata: Metadata = {
   title: "ERS — Errand Runner System | Wanky Technologies",
@@ -75,7 +78,10 @@ const architecture = [
   },
 ];
 
-export default function PlatformPage() {
+export default async function PlatformPage() {
+  await connection();
+  const ersInterestEnabled = getErsInterestRuntime() !== null;
+
   return (
     <main className="overflow-hidden bg-white text-zinc-950">
       {/* HERO */}
@@ -114,10 +120,10 @@ export default function PlatformPage() {
               </a>
 
               <Link
-                href="/contact"
+                href="#interest"
                 className="inline-flex items-center gap-3 rounded-full border border-zinc-200 px-7 py-4 text-sm font-semibold transition hover:border-black"
               >
-                Contact Wanky
+                Share your interest
               </Link>
             </div>
 
@@ -318,6 +324,34 @@ export default function PlatformPage() {
               confirmation that production payments are active.
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* PRODUCT INTEREST */}
+      <section
+        id="interest"
+        className="mx-auto max-w-7xl scroll-mt-8 px-6 py-24 sm:py-32"
+      >
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <div className="max-w-xl">
+            <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#D92D78]">
+              ERS product interest
+            </p>
+            <h2 className="mt-5 text-3xl font-bold tracking-tight sm:text-5xl">
+              Tell us what you’d like to explore.
+            </h2>
+            <p className="mt-5 leading-7 text-zinc-600">
+              Share whether you are interested in using ERS, becoming a Runner,
+              exploring a business partnership, or another conversation. This
+              form is for product interest, not a Runner application.
+            </p>
+            <p className="mt-4 text-sm leading-6 text-zinc-500">
+              Availability and follow-up timing are not guaranteed. Your contact
+              details are used to respond to this ERS request and are not a
+              newsletter signup.
+            </p>
+          </div>
+          <ErsInterestForm enabled={ersInterestEnabled} />
         </div>
       </section>
 

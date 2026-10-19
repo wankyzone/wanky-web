@@ -97,7 +97,9 @@ npm run start
 
 ## Environment configuration
 
-No environment-variable references were found in the application source or current Next.js configuration. No local environment file or variable template is provided. Production hosting requirements, if any, must be confirmed with the release owner and hosting configuration; do not put credentials in this repository or this README.
+The ERS product-interest API is disabled unless `WANKY_ERS_INTEREST_ENABLED=true` in production. It requires the server-side variables `WANKY_NEWSLETTER_SUPABASE_URL`, `WANKY_NEWSLETTER_SUPABASE_SERVICE_ROLE_KEY`, `WANKY_NEWSLETTER_TOKEN_SECRET`, and `WANKY_NEWSLETTER_SITE_URL`. Keep the service-role key and token secret server-only; do not prefix them with `NEXT_PUBLIC_` or pass them to client components.
+
+The ERS persistence migration must be applied, and Supabase/PostgREST must expose both `wanky_product_interest` and `wanky_newsletter` schemas for the server-side RPC calls. The newsletter schema supplies the persistent rate limiter used by the ERS endpoint. No local environment template is provided; confirm production hosting settings with the release owner and never put credential values in this README.
 
 ## Documentation
 

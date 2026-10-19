@@ -3,7 +3,7 @@ import { hashRateLimitKey } from "./service";
 const MAX_REQUEST_BYTES = 2048;
 
 export function jsonResponse(
-  payload: Record<string, string>,
+  payload: Record<string, unknown>,
   status: number,
 ): Response {
   return Response.json(payload, {
