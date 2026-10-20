@@ -143,7 +143,7 @@ export default function WankyAIPage() {
             </p>
           </div>
           <Link
-            href="/contact"
+            href="/interest?product=wanky-ai"
             className="inline-flex shrink-0 items-center gap-3 rounded-md bg-[#FF4D94] px-6 py-4 text-sm font-semibold text-black transition hover:bg-white"
           >
             Contact Wanky <ArrowRight size={16} />

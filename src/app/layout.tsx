@@ -109,16 +109,16 @@ function Footer() {
         { name: "Wanky AI", href: "/ai" },
         { name: "Principles", href: "/principles" },
         { name: "Roadmap", href: "/platform" },
-        { name: "Brand Assets", href: "#" },
+        { name: "Get Started", href: "/interest" },
       ],
     },
     {
       title: "Resources",
       links: [
         { name: "Blog", href: "/blog" },
-        { name: "Documentation", href: "#" },
+        { name: "Contact / Interest", href: "/interest" },
         { name: "GitHub Library", href: "https://github.com/wankyzone" },
-        { name: "System Status", href: "#" },
+        { name: "Product Interest", href: "/interest" },
       ],
     },
   ];
