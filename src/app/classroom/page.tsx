@@ -72,7 +72,7 @@ export default function ClassroomPage() {
 
             <div className="mt-10 flex flex-wrap gap-4">
               <a
-                href="mailto:wankyzone@gmail.com?subject=Wanky%20Classroom%20Early%20Access"
+                href="/interest?product=partnership&goal=Join%20an%20early-access%20or%20feedback%20group&details=Wanky%20Classroom%20early%20access"
                 className="inline-flex items-center gap-3 rounded-full bg-black px-7 py-4 text-sm font-semibold text-white transition hover:bg-[#FF4D94]"
               >
                 Register your interest
@@ -153,7 +153,7 @@ export default function ClassroomPage() {
             committing to a wider feature set.
           </p>
           <a
-            href="mailto:wankyzone@gmail.com?subject=Wanky%20Classroom%20Feedback"
+            href="/interest?product=partnership&goal=Ask%20a%20question&details=Wanky%20Classroom%20feedback"
             className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-black transition hover:bg-[#FF4D94]"
           >
             Share your feedback
