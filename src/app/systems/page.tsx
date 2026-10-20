@@ -73,7 +73,7 @@ export default function SystemsPage() {
 
             <div className="mt-10 flex flex-wrap gap-4">
               <a
-                href="mailto:wankyzone@gmail.com?subject=Wanky%20Cloud%20Inquiry"
+                href="/interest?product=wanky-cloud"
                 className="inline-flex items-center gap-3 rounded-full bg-black px-7 py-4 text-sm font-semibold text-white transition hover:bg-[#FF4D94]"
               >
                 Discuss infrastructure needs
@@ -160,7 +160,7 @@ export default function SystemsPage() {
               offering infrastructure capabilities to other customers.
             </p>
             <a
-              href="mailto:wankyzone@gmail.com?subject=Wanky%20Cloud%20Feedback"
+              href="/interest?product=wanky-cloud&goal=Ask%20a%20question"
               className="mt-7 inline-flex items-center gap-3 text-sm font-semibold text-white transition hover:text-[#FF4D94]"
             >
               Contact the team <ArrowRight size={16} />
