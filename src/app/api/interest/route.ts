@@ -8,6 +8,21 @@ const clean = (value: unknown, max: number) => typeof value === "string" ? value
 
 export async function POST(request: NextRequest) {
   try {
+    const origin = request.headers.get("origin");
+    const configuredSiteUrl = process.env.WANKY_NEWSLETTER_SITE_URL;
+    if (origin && configuredSiteUrl) {
+      try {
+        if (new URL(origin).origin !== new URL(configuredSiteUrl).origin) {
+          return NextResponse.json({ error: "Invalid request origin." }, { status: 403 });
+        }
+      } catch {
+        return NextResponse.json({ error: "Invalid request origin." }, { status: 403 });
+      }
+    }
+    const contentLength = Number(request.headers.get("content-length") || "0");
+    if (contentLength > 12_000) {
+      return NextResponse.json({ error: "Your submission is too large." }, { status: 413 });
+    }
     const body = await request.json();
     // Quietly accept honeypot submissions without storing or emailing them.
     if (clean(body.website, 200)) return NextResponse.json({ ok: true });
@@ -58,7 +73,7 @@ export async function POST(request: NextRequest) {
 
     const resendKey = process.env.RESEND_API_KEY;
     const notifyEmail = process.env.WANKY_INTEREST_NOTIFY_EMAIL || "wankyzone@gmail.com";
-    const fromEmail = process.env.WANKY_TRANSACTIONAL_FROM_EMAIL;
+    // Use the same verified sender already used by Wanky newsletter delivery.\n    const fromEmail = process.env.WANKY_TRANSACTIONAL_FROM_EMAIL || "Wanky Technologies <newsletter@news.wankysoftware.com>";
     let notificationSent = false;
 
     if (resendKey && fromEmail) {
@@ -91,7 +106,7 @@ export async function POST(request: NextRequest) {
       console.warn("Interest saved, but notification email is not configured. Set RESEND_API_KEY and WANKY_TRANSACTIONAL_FROM_EMAIL.");
     }
 
-    return NextResponse.json({ ok: true, notificationSent });
+    return NextResponse.json({ ok: true, notificationSent, message: notificationSent ? "Your inquiry was saved and the team was notified." : "Your inquiry was saved. Email notification is temporarily unavailable; the team can still review it in the database." });
   } catch (error) {
     console.error("Interest endpoint error:", error);
     return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
