@@ -13,72 +13,85 @@ import {
 export const metadata: Metadata = {
   title: "Principles — Wanky Technologies",
   description:
-    "The engineering principles behind Wanky Technologies: thoughtful systems, reliability, security, clarity, and evidence-led progress.",
+    "The Wanky Technologies philosophy: understand people, focus on what matters, and make quality visible through dependable software and honest communication.",
 };
 
 const principles = [
   {
     number: "01",
-    title: "Systems over shortcuts",
+    title: "Empathy — understand people",
     description:
-      "We consider how products, services, data, and people fit together. Good engineering accounts for the whole system—not just the feature in front of us.",
+      "We build for real people and real problems, not for technology's sake. We seek to understand users' needs, constraints, and expectations before committing to a solution.",
     practice:
-      "Understand dependencies, define boundaries, and build foundations that can evolve.",
-    icon: Layers3,
-  },
-  {
-    number: "02",
-    title: "Reliability over hype",
-    description:
-      "A feature is not finished simply because it compiles or looks impressive. It needs appropriate testing, clear failure handling, and validation in the environment where it will be used.",
-    practice:
-      "Test critical workflows, investigate failures, and make claims that evidence supports.",
-    icon: CheckCircle2,
-  },
-  {
-    number: "03",
-    title: "Security by design",
-    description:
-      "Security belongs in product decisions and engineering workflows from the beginning. It should not be an afterthought added after a system has grown.",
-    practice:
-      "Apply appropriate access controls, protect credentials, handle data responsibly, and review risks.",
-    icon: LockKeyhole,
-  },
-  {
-    number: "04",
-    title: "Clarity over complexity",
-    description:
-      "Technology should make a real problem easier to solve. Unnecessary abstractions, premature expansion, and features without a clear purpose add cost without guaranteeing value.",
-    practice:
-      "Define the problem, establish priorities, and choose the simplest approach that meets the need.",
+      "Identify the user and problem, test assumptions with feedback, and define success before implementation.",
     icon: Eye,
   },
   {
+    number: "02",
+    title: "Focus — finish what matters",
+    description:
+      "Time, money, and attention are limited. A promising idea is not automatically a priority. We concentrate on meaningful outcomes and document future ideas until the right time.",
+    practice:
+      "Keep one clear primary execution priority, define deliverables, and avoid opening major initiatives that undermine current commitments.",
+    icon: Target,
+  },
+  {
+    number: "03",
+    title: "Excellence — make quality visible",
+    description:
+      "People experience a product before they can judge its architecture. Design, onboarding, reliability, communication, and support all shape whether we earn trust.",
+    practice:
+      "Make experiences clear and consistent, handle errors thoughtfully, and ensure product claims match what is actually available.",
+    icon: Wrench,
+  },
+  {
+    number: "04",
+    title: "Think in systems",
+    description:
+      "Products, services, data, integrations, and people interact. Good engineering considers the whole system—not just the feature in front of us.",
+    practice:
+      "Understand dependencies, define boundaries, and build foundations that can evolve without unnecessary complexity.",
+    icon: Layers3,
+  },
+  {
     number: "05",
+    title: "Reliability and security by design",
+    description:
+      "A feature is not finished simply because it compiles or looks impressive. It needs appropriate testing, clear failure handling, responsible data practices, and validation in realistic environments.",
+    practice:
+      "Test critical workflows, protect data and credentials, apply appropriate access controls, and investigate failures before claiming readiness.",
+    icon: LockKeyhole,
+  },
+  {
+    number: "06",
     title: "Progress through evidence",
     description:
       "We learn by building, testing, observing, and improving. Decisions should respond to actual user needs and technical evidence rather than assumptions or pressure to appear busy.",
     practice:
       "Set a clear goal, verify the result, learn from failures, and expand when the foundation is ready.",
-    icon: Target,
+    icon: CheckCircle2,
   },
 ];
-
 const commitments = [
   {
-    title: "Say what is ready",
+    title: "Understand before building",
     description:
-      "Distinguish working capabilities from prototypes, plans, and ideas.",
-  },
-  {
-    title: "Respect the problem",
-    description:
-      "Understand the people and workflows a product is meant to serve.",
+      "Investigate the problem and the people affected before choosing a solution.",
   },
   {
     title: "Finish the important work",
     description:
-      "Prioritise validation and dependable delivery before unnecessary expansion.",
+      "Prioritise dependable delivery over unnecessary expansion and distractions.",
+  },
+  {
+    title: "Be clear about readiness",
+    description:
+      "Distinguish working capabilities from prototypes, plans, and ideas.",
+  },
+  {
+    title: "Earn trust through evidence",
+    description:
+      "Let product quality, responsible practices, and honest communication support our claims.",
   },
 ];
 
@@ -104,10 +117,10 @@ export default function PrinciplesPage() {
             </h1>
 
             <p className="mt-8 max-w-2xl text-lg leading-8 text-zinc-600 sm:text-xl">
-              Wanky Technologies builds software products and the systems
-              behind them. Our principles guide how we make technical
-              decisions, define product scope, approach security, and turn
-              ideas into useful, dependable experiences.
+              Wanky Technologies builds software products and the systems behind them.
+              Our philosophy is simple: understand people, focus on what matters,
+              and make quality visible through dependable products and honest
+              communication.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-3">
@@ -128,9 +141,9 @@ export default function PrinciplesPage() {
 
           <div className="mt-16 grid gap-4 border-t border-zinc-200 pt-8 sm:grid-cols-3">
             {[
-              ["01", "Think in systems"],
-              ["02", "Build responsibly"],
-              ["03", "Prove the result"],
+              ["01", "Understand people"],
+              ["02", "Focus on what matters"],
+              ["03", "Make quality visible"],
             ].map(([number, label]) => (
               <div key={number} className="flex items-center gap-3">
                 <span className="font-mono text-xs text-[#D92D78]">
@@ -155,9 +168,10 @@ export default function PrinciplesPage() {
             Values expressed through engineering.
           </h2>
           <p className="mt-6 leading-7 text-zinc-600">
-            These principles are intended to shape everyday decisions—not
-            just describe the company. They apply across our products,
-            including ERS, Wanky Protect, Wanky Cloud, and Wanky Classroom.
+            These principles shape everyday decisions across product development,
+            engineering, design, marketing, customer support, and business
+            operations—including ERS, Wanky Cloud, Wanky AI, Wanky Protect,
+            and future initiatives such as Wanky OS.
           </p>
         </div>
 
@@ -211,9 +225,9 @@ export default function PrinciplesPage() {
                 Earn trust through the work.
               </h2>
               <p className="mt-6 max-w-lg leading-7 text-zinc-400">
-                Trust comes from clear expectations, responsible decisions,
-                and visible follow-through. We want our products and
-                partnerships to reflect those standards as the company grows.
+                Trust comes from understanding users, delivering the important work,
+                validating what we build, and communicating clearly. We aim to
+                make our product experience reflect those standards as Wanky grows.
               </p>
             </div>
 
@@ -254,10 +268,9 @@ export default function PrinciplesPage() {
               Build what matters. Make it dependable.
             </h2>
             <p className="mt-5 max-w-2xl leading-7 text-zinc-600">
-              We are building an ecosystem of products with distinct purposes
-              and evolving roadmaps. Our responsibility is to solve real
-              problems, validate the work, and grow on a foundation we
-              understand.
+              We are building an ecosystem of products with distinct purposes and
+              evolving roadmaps. We will solve real problems, concentrate on
+              meaningful outcomes, and grow on a foundation we understand.
             </p>
 
             <Link
