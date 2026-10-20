@@ -73,7 +73,8 @@ export async function POST(request: NextRequest) {
 
     const resendKey = process.env.RESEND_API_KEY;
     const notifyEmail = process.env.WANKY_INTEREST_NOTIFY_EMAIL || "wankyzone@gmail.com";
-    // Use the same verified sender already used by Wanky newsletter delivery.\n    const fromEmail = process.env.WANKY_TRANSACTIONAL_FROM_EMAIL || "Wanky Technologies <newsletter@news.wankysoftware.com>";
+    // Reuse the verified sender already used by Wanky newsletter delivery.
+    const fromEmail = process.env.WANKY_TRANSACTIONAL_FROM_EMAIL || "Wanky Technologies <newsletter@news.wankysoftware.com>";
     let notificationSent = false;
 
     if (resendKey && fromEmail) {
