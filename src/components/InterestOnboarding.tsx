@@ -22,10 +22,23 @@ type FormState = {
   updatesConsent: boolean; website: string;
 };
 const initial: FormState = { product: "", name: "", email: "", organization: "", role: "", goal: "", details: "", timeline: "", budget: "", updatesConsent: false, website: "" };
+function getInitialForm(): FormState {
+  if (typeof window === "undefined") return initial;
+  const query = new URLSearchParams(window.location.search);
+  const product = query.get("product") || "";
+  const goal = query.get("goal") || "";
+  return {
+    ...initial,
+    product: paths.some((path) => path.id === product) ? product : "",
+    goal: goals.includes(goal) ? goal : "",
+    details: (query.get("details") || "").slice(0, 3000),
+    sourcePath: window.location.pathname,
+  } as FormState;
+}
 
 export default function InterestOnboarding() {
   const [step, setStep] = useState(0);
-  const [form, setForm] = useState<FormState>(initial);
+  const [form, setForm] = useState<FormState>(getInitialForm);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [error, setError] = useState("");
   const selected = useMemo(() => paths.find((p) => p.id === form.product), [form.product]);
@@ -51,7 +64,7 @@ export default function InterestOnboarding() {
         <p className="mt-7 text-xs font-bold uppercase tracking-[0.24em] text-[#D92D78]">Submission received</p>
         <h1 className="mt-4 text-4xl font-bold tracking-tight">Thanks for your interest{form.name ? `, ${form.name.split(" ")[0]}` : ""}.</h1>
         <p className="mx-auto mt-5 max-w-lg leading-7 text-zinc-600">Your details have been submitted to Wanky. We’ll review your message and follow up if there’s a suitable next step. This is an inquiry—not an automatic signup, service commitment, or guarantee of early access.</p>
-        {form.product === "ers" && <a href="https://ers.wankysoftware.com/waitlist" className="mt-8 inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-semibold text-white hover:bg-[#D92D78]">Join the separate ERS waitlist <ArrowRight size={16} /></a>}
+        {form.product === "ers" && <p className="mt-5 text-sm text-zinc-500">This inquiry is separate from the official ERS waitlist. You can still visit the <a className="underline underline-offset-4" href="https://ers.wankysoftware.com" target="_blank" rel="noreferrer">ERS website</a> for its current signup options.</p>}
         <div className="mt-8"><Link href="/" className="text-sm font-semibold text-zinc-500 hover:text-black">Return to Wanky</Link></div>
       </section>
     </main>
@@ -112,7 +125,7 @@ export default function InterestOnboarding() {
             {step < 2 ? <button type="button" disabled={(step===0 && !form.product)||(step===1 && !form.goal)} onClick={()=>setStep((s)=>s+1)} className="inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#D92D78] disabled:opacity-40">Continue <ArrowRight size={16}/></button> : <button type="button" disabled={!form.name.trim() || !form.email.trim() || status==="submitting"} onClick={submit} className="inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#D92D78] disabled:opacity-40">{status==="submitting" ? "Submitting…" : "Submit inquiry"} <ArrowRight size={16}/></button>}
           </div>
         </div>
-        <aside className="h-fit rounded-3xl bg-zinc-50 p-6 sm:p-7"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#D92D78]">Your path</p><h3 className="mt-3 text-xl font-bold">{selected?.name ?? "Choose a Wanky path"}</h3><p className="mt-2 text-sm leading-6 text-zinc-600">{selected?.description ?? "Pick the product or kind of conversation that best matches your interest."}</p><div className="mt-6 border-t border-zinc-200 pt-5"><p className="text-sm font-semibold">What happens next?</p><ul className="mt-3 space-y-3 text-sm leading-6 text-zinc-600"><li>1. Your inquiry is saved securely.</li><li>2. The Wanky team is notified by email when delivery is configured.</li><li>3. We review it and follow up where appropriate.</li></ul></div><p className="mt-6 text-xs leading-5 text-zinc-400">Interested in ERS? This form is separate from the official ERS waitlist.</p></aside>
+        <aside className="h-fit rounded-3xl bg-zinc-50 p-6 sm:p-7"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#D92D78]">Your path</p><h3 className="mt-3 text-xl font-bold">{selected?.name ?? "Choose a Wanky path"}</h3><p className="mt-2 text-sm leading-6 text-zinc-600">{selected?.description ?? "Pick the product or kind of conversation that best matches your interest."}</p><div className="mt-6 border-t border-zinc-200 pt-5"><p className="text-sm font-semibold">What happens next?</p><ul className="mt-3 space-y-3 text-sm leading-6 text-zinc-600"><li>1. Your inquiry is sent through our secure submission endpoint.</li><li>2. The Wanky team is notified by email when delivery is configured.</li><li>3. We review it and follow up where appropriate.</li></ul></div><p className="mt-6 text-xs leading-5 text-zinc-400">Interested in ERS? This form is separate from the official ERS waitlist.</p></aside>
       </section>
     </main>
   );
