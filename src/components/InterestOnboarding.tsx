@@ -40,6 +40,7 @@ export default function InterestOnboarding() {
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<FormState>(getInitialForm);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [notificationSent, setNotificationSent] = useState<boolean | null>(null);
   const [error, setError] = useState("");
   const selected = useMemo(() => paths.find((p) => p.id === form.product), [form.product]);
   const update = <K extends keyof FormState>(key: K, value: FormState[K]) => setForm((prev) => ({ ...prev, [key]: value }));
@@ -50,6 +51,7 @@ export default function InterestOnboarding() {
       const response = await fetch("/api/interest", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(form) });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "We couldn't submit your interest. Please try again.");
+      setNotificationSent(data.notificationSent === true);
       setStatus("success");
     } catch (e) {
       setError(e instanceof Error ? e.message : "Something went wrong. Please try again.");
@@ -63,7 +65,7 @@ export default function InterestOnboarding() {
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600"><CheckCircle2 size={32} /></div>
         <p className="mt-7 text-xs font-bold uppercase tracking-[0.24em] text-[#D92D78]">Submission received</p>
         <h1 className="mt-4 text-4xl font-bold tracking-tight">Thanks for your interest{form.name ? `, ${form.name.split(" ")[0]}` : ""}.</h1>
-        <p className="mx-auto mt-5 max-w-lg leading-7 text-zinc-600">Your details have been submitted to Wanky. We’ll review your message and follow up if there’s a suitable next step. This is an inquiry—not an automatic signup, service commitment, or guarantee of early access.</p>
+        <p className="mx-auto mt-5 max-w-lg leading-7 text-zinc-600">{notificationSent ? "Your inquiry has been saved, and the Wanky team has been notified by email. We’ll review it and follow up if there’s a suitable next step." : "Your inquiry has been saved securely. Email notification could not be confirmed, but the team can review it in our inquiry records. We’ll follow up if there’s a suitable next step."} This is an inquiry—not an automatic signup, service commitment, or guarantee of early access.</p>
         {form.product === "ers" && <p className="mt-5 text-sm text-zinc-500">This inquiry is separate from the official ERS waitlist. You can still visit the <a className="underline underline-offset-4" href="https://ers.wankysoftware.com" target="_blank" rel="noreferrer">ERS website</a> for its current signup options.</p>}
         <div className="mt-8"><Link href="/" className="text-sm font-semibold text-zinc-500 hover:text-black">Return to Wanky</Link></div>
       </section>
