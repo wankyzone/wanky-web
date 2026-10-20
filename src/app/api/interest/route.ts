@@ -42,8 +42,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Please check your product choice, name, goal, and email address." }, { status: 400 });
     }
 
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const supabaseUrl = process.env.WANKY_NEWSLETTER_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const serviceKey = process.env.WANKY_NEWSLETTER_SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
     if (!supabaseUrl || !serviceKey) {
       console.error("Interest form is missing Supabase server configuration.");
       return NextResponse.json({ error: "The interest form is temporarily unavailable. Please try again later." }, { status: 503 });
