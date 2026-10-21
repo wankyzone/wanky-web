@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
   if (!hasFounderSession(request)) return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
   const { url, key } = config();
   if (!url || !key) return NextResponse.json({ error: "Database configuration is unavailable." }, { status: 503 });
-  const params = new URLSearchParams({ select: "id,product,name,email,organization,role,goal,details,timeline,budget,updates_consent,source_path,status,created_at,updated_at", order: "created_at.desc", limit: "200" });
+  const params = new URLSearchParams({ select: "id,product,interests,name,email,organization,role,goal,details,timeline,budget,updates_consent,source_path,status,created_at,updated_at", order: "created_at.desc", limit: "200" });
   const response = await fetch(`${url.replace(/\/$/, "")}/rest/v1/wanky_interest_submissions?${params}`, {
     headers: { apikey: key, Authorization: `Bearer ${key}` }, cache: "no-store",
   });
