@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, CheckCircle2, Cloud, Code2, Mail, ShieldCheck, Sparkles, Workflow } from "lucide-react";
 
@@ -26,26 +26,37 @@ type FormState = {
   updatesConsent: boolean; website: string; sourcePath: string;
 };
 const initial: FormState = { product: "", interests: [], name: "", email: "", organization: "", role: "", goal: "", details: "", timeline: "", budget: "", updatesConsent: false, website: "", sourcePath: "/get-started" };
-function getInitialForm(): FormState { return initial; }
+function subscribeToLocation(onChange: () => void) {
+  window.addEventListener("popstate", onChange);
+  return () => window.removeEventListener("popstate", onChange);
+}
+function getLocationSnapshot() { return `${window.location.pathname}${window.location.search}`; }
+function getServerLocationSnapshot() { return ""; }
+function formFromLocation(location: string): FormState {
+  if (!location) return initial;
+  const [pathname, search = ""] = location.split("?");
+  const query = new URLSearchParams(search);
+  const requested = [...query.getAll("interest"), ...(query.get("interests") || "").split(",").filter(Boolean), query.get("product") || ""];
+  const interests = [...new Set(requested.filter((value) => paths.some((path) => path.id === value)))];
+  const goal = query.get("goal") || "";
+  return { ...initial, product: interests[0] || "", interests, goal: goals.includes(goal) ? goal : "", details: (query.get("details") || "").slice(0, 3000), sourcePath: pathname || "/get-started" };
+}
 
 export default function InterestOnboarding() {
   const [step, setStep] = useState(0);
-  const [form, setForm] = useState<FormState>(getInitialForm);
+  const locationSnapshot = useSyncExternalStore(subscribeToLocation, getLocationSnapshot, getServerLocationSnapshot);
+  const initialForm = useMemo(() => formFromLocation(locationSnapshot), [locationSnapshot]);
+  const [formOverrides, setFormOverrides] = useState<FormState | null>(null);
+  const form = formOverrides ?? initialForm;
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [notificationSent, setNotificationSent] = useState<boolean | null>(null);
   const [error, setError] = useState("");
-  useEffect(() => {
-    const query = new URLSearchParams(window.location.search);
-    const requested = [...query.getAll("interest"), ...(query.get("interests") || "").split(",").filter(Boolean), query.get("product") || ""];
-    const interests = [...new Set(requested.filter((value) => paths.some((path) => path.id === value)))];
-    const goal = query.get("goal") || "";
-    setForm((current) => ({ ...current, product: interests[0] || "", interests, goal: goals.includes(goal) ? goal : "", details: (query.get("details") || "").slice(0, 3000), sourcePath: window.location.pathname }));
-  }, []);
   const selected = useMemo(() => paths.filter((p) => form.interests.includes(p.id)), [form.interests]);
-  const update = <K extends keyof FormState>(key: K, value: FormState[K]) => setForm((prev) => ({ ...prev, [key]: value }));
-  const toggleInterest = (id: string) => setForm((prev) => {
-    const interests = prev.interests.includes(id) ? prev.interests.filter((value) => value !== id) : [...prev.interests, id];
-    return { ...prev, interests, product: interests[0] || "" };
+  const update = <K extends keyof FormState>(key: K, value: FormState[K]) => setFormOverrides((prev) => ({ ...(prev ?? initialForm), [key]: value }));
+  const toggleInterest = (id: string) => setFormOverrides((prev) => {
+    const current = prev ?? initialForm;
+    const interests = current.interests.includes(id) ? current.interests.filter((value) => value !== id) : [...current.interests, id];
+    return { ...current, interests, product: interests[0] || "" };
   });
 
   const submit = async () => {
