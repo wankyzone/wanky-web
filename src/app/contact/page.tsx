@@ -43,8 +43,6 @@ const inquiryTypes = [
   },
 ];
 
-const email = "wankyzone@gmail.com";
-
 export default function ContactPage() {
   return (
     <main className="overflow-hidden bg-white text-zinc-950">
