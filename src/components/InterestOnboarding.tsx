@@ -10,26 +10,33 @@ const paths = [
   { id: "wanky-ai", name: "Wanky AI", description: "AI software, agents, and engineering", icon: Sparkles },
   { id: "wanky-protect", name: "Wanky Protect", description: "Security and protection initiatives", icon: ShieldCheck },
   { id: "software-services", name: "Software & engineering", description: "Product development, integrations, or technical work", icon: Code2 },
-  { id: "partnership", name: "Partnership / general inquiry", description: "Collaboration, business, or something else", icon: Mail },
+  { id: "partnership", name: "Business partnership", description: "Collaboration, strategic partners, or business development", icon: Mail },
+  { id: "investment", name: "Investment opportunities", description: "Investment, funding, or strategic capital conversations", icon: Sparkles },
+  { id: "careers", name: "Careers & opportunities", description: "Work with Wanky or explore professional opportunities", icon: Code2 },
+  { id: "classroom", name: "Wanky Classroom", description: "Learning, training, and educational opportunities", icon: Workflow },
+  { id: "other", name: "Something else", description: "A question or inquiry that does not fit another category", icon: Mail },
 ] as const;
 
 const goals = ["Get product updates", "Join an early-access or feedback group", "Discuss a project or service", "Explore a partnership", "Ask a question", "Other"];
 const budgets = ["Not sure yet", "No budget yet / just exploring", "Under ₦100,000", "₦100,000–₦500,000", "₦500,000–₦2,000,000", "Above ₦2,000,000", "Prefer not to say"];
 
 type FormState = {
-  product: string; name: string; email: string; organization: string;
+  product: string; interests: string[]; name: string; email: string; organization: string;
   role: string; goal: string; details: string; timeline: string; budget: string;
   updatesConsent: boolean; website: string;
 };
-const initial: FormState = { product: "", name: "", email: "", organization: "", role: "", goal: "", details: "", timeline: "", budget: "", updatesConsent: false, website: "" };
+const initial: FormState = { product: "", interests: [], name: "", email: "", organization: "", role: "", goal: "", details: "", timeline: "", budget: "", updatesConsent: false, website: "" };
 function getInitialForm(): FormState {
   if (typeof window === "undefined") return initial;
   const query = new URLSearchParams(window.location.search);
-  const product = query.get("product") || "";
+  const requested = [...query.getAll("interest"), ...(query.get("interests") || "").split(",").filter(Boolean), query.get("product") || ""];
+  const interests = [...new Set(requested.filter((value) => paths.some((path) => path.id === value)))];
+  const product = interests[0] || "";
   const goal = query.get("goal") || "";
   return {
     ...initial,
-    product: paths.some((path) => path.id === product) ? product : "",
+    product,
+    interests,
     goal: goals.includes(goal) ? goal : "",
     details: (query.get("details") || "").slice(0, 3000),
     sourcePath: window.location.pathname,
@@ -42,8 +49,12 @@ export default function InterestOnboarding() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [notificationSent, setNotificationSent] = useState<boolean | null>(null);
   const [error, setError] = useState("");
-  const selected = useMemo(() => paths.find((p) => p.id === form.product), [form.product]);
+  const selected = useMemo(() => paths.filter((p) => form.interests.includes(p.id)), [form.interests]);
   const update = <K extends keyof FormState>(key: K, value: FormState[K]) => setForm((prev) => ({ ...prev, [key]: value }));
+  const toggleInterest = (id: string) => setForm((prev) => {
+    const interests = prev.interests.includes(id) ? prev.interests.filter((value) => value !== id) : [...prev.interests, id];
+    return { ...prev, interests, product: interests[0] || "" };
+  });
 
   const submit = async () => {
     setStatus("submitting"); setError("");
@@ -66,7 +77,7 @@ export default function InterestOnboarding() {
         <p className="mt-7 text-xs font-bold uppercase tracking-[0.24em] text-[#D92D78]">Submission received</p>
         <h1 className="mt-4 text-4xl font-bold tracking-tight">Thanks for your interest{form.name ? `, ${form.name.split(" ")[0]}` : ""}.</h1>
         <p className="mx-auto mt-5 max-w-lg leading-7 text-zinc-600">{notificationSent ? "Your inquiry has been saved, and the Wanky team has been notified by email. We’ll review it and follow up if there’s a suitable next step." : "Your inquiry has been saved securely. Email notification could not be confirmed, but the team can review it in our inquiry records. We’ll follow up if there’s a suitable next step."} This is an inquiry—not an automatic signup, service commitment, or guarantee of early access.</p>
-        {form.product === "ers" && <p className="mt-5 text-sm text-zinc-500">This inquiry is separate from the official ERS waitlist. You can still visit the <a className="underline underline-offset-4" href="https://ers.wankysoftware.com" target="_blank" rel="noreferrer">ERS website</a> for its current signup options.</p>}
+        {form.interests.includes("ers") && <p className="mt-5 text-sm text-zinc-500">This inquiry is separate from the official ERS waitlist. You can still visit the <a className="underline underline-offset-4" href="https://ers.wankysoftware.com" target="_blank" rel="noreferrer">ERS website</a> for its current signup options.</p>}
         <div className="mt-8"><Link href="/" className="text-sm font-semibold text-zinc-500 hover:text-black">Return to Wanky</Link></div>
       </section>
     </main>
@@ -91,9 +102,9 @@ export default function InterestOnboarding() {
           {step === 0 && <>
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#D92D78]">01 · Choose your path</p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">What brings you here?</h2>
-            <p className="mt-3 text-zinc-600">Choose the closest match. You can explain the details in the next step.</p>
+            <p className="mt-3 text-zinc-600">Select every area that applies. We’ll use your selections to route your inquiry to the right team.</p>
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
-              {paths.map((path) => { const Icon = path.icon; const active = form.product === path.id; return <button type="button" key={path.id} onClick={() => update("product", path.id)} className={`rounded-2xl border p-5 text-left transition hover:-translate-y-0.5 hover:border-[#FF4D94] ${active ? "border-[#D92D78] bg-pink-50/70 ring-1 ring-[#D92D78]/20" : "border-zinc-200"}`}><div className="flex items-center justify-between"><span className={`rounded-xl p-2.5 ${active ? "bg-white text-[#D92D78]" : "bg-zinc-50 text-zinc-600"}`}><Icon size={20} /></span><span className={`h-4 w-4 rounded-full border ${active ? "border-[#D92D78] bg-[#D92D78] ring-2 ring-white" : "border-zinc-300"}`} /></div><h3 className="mt-5 font-bold">{path.name}</h3><p className="mt-1 text-sm leading-6 text-zinc-600">{path.description}</p></button>; })}
+              {paths.map((path) => { const Icon = path.icon; const active = form.interests.includes(path.id); return <button type="button" key={path.id} onClick={() => toggleInterest(path.id)} className={`rounded-2xl border p-5 text-left transition hover:-translate-y-0.5 hover:border-[#FF4D94] ${active ? "border-[#D92D78] bg-pink-50/70 ring-1 ring-[#D92D78]/20" : "border-zinc-200"}`}><div className="flex items-center justify-between"><span className={`rounded-xl p-2.5 ${active ? "bg-white text-[#D92D78]" : "bg-zinc-50 text-zinc-600"}`}><Icon size={20} /></span><span className={`h-4 w-4 rounded-full border ${active ? "border-[#D92D78] bg-[#D92D78] ring-2 ring-white" : "border-zinc-300"}`} /></div><h3 className="mt-5 font-bold">{path.name}</h3><p className="mt-1 text-sm leading-6 text-zinc-600">{path.description}</p></button>; })}
             </div>
           </>}
           {step === 1 && <>
@@ -124,10 +135,10 @@ export default function InterestOnboarding() {
           {error && <p role="alert" className="mt-6 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">{error}</p>}
           <div className="mt-9 flex flex-wrap items-center justify-between gap-3 border-t border-zinc-100 pt-6">
             <button type="button" disabled={step===0 || status==="submitting"} onClick={()=>setStep((s)=>s-1)} className="inline-flex items-center gap-2 rounded-full border border-zinc-200 px-5 py-3 text-sm font-semibold disabled:opacity-30"><ArrowLeft size={16}/> Back</button>
-            {step < 2 ? <button type="button" disabled={(step===0 && !form.product)||(step===1 && !form.goal)} onClick={()=>setStep((s)=>s+1)} className="inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#D92D78] disabled:opacity-40">Continue <ArrowRight size={16}/></button> : <button type="button" disabled={!form.name.trim() || !form.email.trim() || status==="submitting"} onClick={submit} className="inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#D92D78] disabled:opacity-40">{status==="submitting" ? "Submitting…" : "Submit inquiry"} <ArrowRight size={16}/></button>}
+            {step < 2 ? <button type="button" disabled={(step===0 && form.interests.length === 0)||(step===1 && !form.goal)} onClick={()=>setStep((s)=>s+1)} className="inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#D92D78] disabled:opacity-40">Continue <ArrowRight size={16}/></button> : <button type="button" disabled={!form.name.trim() || !form.email.trim() || status==="submitting"} onClick={submit} className="inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#D92D78] disabled:opacity-40">{status==="submitting" ? "Submitting…" : "Submit inquiry"} <ArrowRight size={16}/></button>}
           </div>
         </div>
-        <aside className="h-fit rounded-3xl bg-zinc-50 p-6 sm:p-7"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#D92D78]">Your path</p><h3 className="mt-3 text-xl font-bold">{selected?.name ?? "Choose a Wanky path"}</h3><p className="mt-2 text-sm leading-6 text-zinc-600">{selected?.description ?? "Pick the product or kind of conversation that best matches your interest."}</p><div className="mt-6 border-t border-zinc-200 pt-5"><p className="text-sm font-semibold">What happens next?</p><ul className="mt-3 space-y-3 text-sm leading-6 text-zinc-600"><li>1. Your inquiry is sent through our secure submission endpoint.</li><li>2. The Wanky team is notified by email when delivery is configured.</li><li>3. We review it and follow up where appropriate.</li></ul></div><p className="mt-6 text-xs leading-5 text-zinc-400">Interested in ERS? This form is separate from the official ERS waitlist.</p></aside>
+        <aside className="h-fit rounded-3xl bg-zinc-50 p-6 sm:p-7"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#D92D78]">Your path</p><h3 className="mt-3 text-xl font-bold">{selected.length ? `${selected.length} area${selected.length === 1 ? "" : "s"} selected` : "Choose your interests"}</h3><ul className="mt-2 space-y-2 text-sm leading-6 text-zinc-600">{selected.length ? selected.map((item) => <li key={item.id}>• {item.name}</li>) : <li>Choose one or more areas that match your inquiry.</li>}</ul><div className="mt-6 border-t border-zinc-200 pt-5"><p className="text-sm font-semibold">What happens next?</p><ul className="mt-3 space-y-3 text-sm leading-6 text-zinc-600"><li>1. Your inquiry is sent through our secure submission endpoint.</li><li>2. The Wanky team is notified by email when delivery is configured.</li><li>3. We review it and follow up where appropriate.</li></ul></div><p className="mt-6 text-xs leading-5 text-zinc-400">Interested in ERS? This form is separate from the official ERS waitlist.</p></aside>
       </section>
     </main>
   );
