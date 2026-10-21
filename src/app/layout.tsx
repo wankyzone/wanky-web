@@ -31,9 +31,17 @@ function Nav() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="/platform" className="text-[11px] font-bold uppercase tracking-widest text-slate-500 hover:text-black transition-colors">
-            Platform
-          </Link>
+          <div className="group relative">
+            <Link href="/platform" className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-widest text-slate-500 hover:text-black transition-colors" aria-haspopup="true">
+              Platform <span aria-hidden="true" className="text-[10px]">⌄</span>
+            </Link>
+            <div className="invisible absolute left-0 top-full z-50 w-60 translate-y-2 pt-3 opacity-0 transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+              <div className="rounded-2xl border border-slate-100 bg-white p-2 shadow-xl">
+                <Link href="/platform" className="block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#D92D78]">ERS Platform</Link>
+                <Link href="/classroom" className="block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#D92D78]">Wanky Classroom</Link>
+              </div>
+            </div>
+          </div>
           <div className="group relative">
             <button type="button" className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-widest text-slate-500 hover:text-black transition-colors" aria-haspopup="true">
               Solutions <span aria-hidden="true" className="text-[10px]">⌄</span>
