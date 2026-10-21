@@ -199,10 +199,10 @@ export default function Home() {
               </Link>
 
               <Link
-                href="/contact"
+                href="/get-started"
                 className="inline-flex items-center rounded-full border border-white/25 bg-white/[0.04] px-7 py-4 text-sm font-semibold text-white backdrop-blur-sm transition hover:border-white hover:bg-white/10"
               >
-                Discuss a project
+                Get Started
               </Link>
             </div>
 
@@ -373,10 +373,10 @@ export default function Home() {
 
             <div className="mt-12">
               <Link
-                href="/contact"
+                href="/get-started"
                 className="group relative inline-flex items-center gap-3 rounded-full bg-black px-12 py-6 text-white font-bold hover:bg-zinc-800 transition"
               >
-                Apply for Beta
+                Get Started
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </Link>
             </div>
