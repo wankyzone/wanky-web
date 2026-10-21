@@ -31,50 +31,38 @@ function Nav() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
-          {[
-            { name: "Platform", href: "/platform" },
-            { name: "Wanky AI", href: "/ai" },
-            { name: "Classroom", href: "/classroom" },
-            { name: "Infrastructure", href: "/systems" },
-            { name: "Principles", href: "/principles" },
-            { name: "Pricing", href: "/pricing" },
-            { name: "Blog", href: "/blog" },
-          ].map((item) => (
-            <Link 
-              key={item.name}
-              href={item.href} 
-              className="text-[11px] font-bold uppercase tracking-widest text-slate-400 hover:text-black transition-colors"
-            >
-              {item.name}
-            </Link>
-          ))}
-          <Link
-            className="rounded-full bg-black px-6 py-2.5 text-[11px] font-bold uppercase tracking-widest text-white transition-all hover:bg-[#FF4D94] active:scale-95 shadow-lg shadow-black/5"
-            href="/contact"
-          >
-            Inquire
+          <Link href="/platform" className="text-[11px] font-bold uppercase tracking-widest text-slate-500 hover:text-black transition-colors">
+            Platform
+          </Link>
+          <div className="group relative">
+            <button type="button" className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-widest text-slate-500 hover:text-black transition-colors" aria-haspopup="true">
+              Solutions <span aria-hidden="true" className="text-[10px]">⌄</span>
+            </button>
+            <div className="invisible absolute left-0 top-full z-50 w-60 translate-y-2 pt-3 opacity-0 transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+              <div className="rounded-2xl border border-slate-100 bg-white p-2 shadow-xl">
+                <Link href="/ai" className="block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#D92D78]">Wanky AI</Link>
+                <Link href="/contact" className="block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#D92D78]">Wanky Protect</Link>
+                <Link href="/contact" className="block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#D92D78]">Software &amp; Engineering</Link>
+              </div>
+            </div>
+          </div>
+          <Link href="/systems" className="text-[11px] font-bold uppercase tracking-widest text-slate-500 hover:text-black transition-colors">
+            Infrastructure
+          </Link>
+          <Link href="/blog" className="text-[11px] font-bold uppercase tracking-widest text-slate-500 hover:text-black transition-colors">
+            Blog
+          </Link>
+          <Link className="rounded-full bg-black px-6 py-2.5 text-[11px] font-bold uppercase tracking-widest text-white transition-all hover:bg-[#FF4D94] active:scale-95 shadow-lg shadow-black/5" href="/get-started">
+            Get Started
           </Link>
         </nav>
 
-        {/* Mobile Contact Only */}
-        <div className="md:hidden flex items-center gap-4">
-          <Link
-            href="/ai"
-            className="text-[10px] font-bold uppercase tracking-widest text-slate-500"
-          >
-            Wanky AI
-          </Link>
-          <Link
-            href="/blog"
-            className="text-[10px] font-bold uppercase tracking-widest text-slate-500"
-          >
-            Blog
-          </Link>
-          <Link
-            className="rounded-full bg-black px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white"
-            href="/contact"
-          >
-            Talk
+        {/* Compact mobile navigation */}
+        <div className="md:hidden flex items-center gap-3">
+          <Link href="/platform" className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Platform</Link>
+          <Link href="/blog" className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Blog</Link>
+          <Link className="rounded-full bg-black px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white" href="/get-started">
+            Get Started
           </Link>
         </div>
       </div>
@@ -109,16 +97,16 @@ function Footer() {
         { name: "Wanky AI", href: "/ai" },
         { name: "Principles", href: "/principles" },
         { name: "Roadmap", href: "/platform" },
-        { name: "Brand Assets", href: "#" },
+        { name: "Get Started", href: "/get-started" },
       ],
     },
     {
       title: "Resources",
       links: [
         { name: "Blog", href: "/blog" },
-        { name: "Documentation", href: "#" },
+        { name: "Get Started", href: "/get-started" },
         { name: "GitHub Library", href: "https://github.com/wankyzone" },
-        { name: "System Status", href: "#" },
+        { name: "Pricing", href: "/pricing" },
       ],
     },
   ];

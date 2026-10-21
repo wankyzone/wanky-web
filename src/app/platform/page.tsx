@@ -114,7 +114,7 @@ export default function PlatformPage() {
               </a>
 
               <Link
-                href="/contact"
+                href="/interest?product=ers"
                 className="inline-flex items-center gap-3 rounded-full border border-zinc-200 px-7 py-4 text-sm font-semibold transition hover:border-black"
               >
                 Contact Wanky

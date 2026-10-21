@@ -70,7 +70,7 @@ export default function PricingPage() {
             discussing scope, delivery, and cost.
           </p>
           <a
-            href="mailto:wankyzone@gmail.com?subject=Project%20Inquiry"
+            href="/interest?product=software-services"
             className="mt-10 inline-flex items-center gap-3 rounded-full bg-black px-7 py-4 text-sm font-semibold text-white transition hover:bg-[#FF4D94]"
           >
             Discuss a project <ArrowRight size={17} />
@@ -130,7 +130,7 @@ export default function PricingPage() {
                   ))}
                 </ul>
                 <a
-                  href={`mailto:wankyzone@gmail.com?subject=${encodeURIComponent(item.title + " Inquiry")}`}
+                  href={`/interest?product=software-services&goal=${encodeURIComponent("Discuss a project or service")}&details=${encodeURIComponent(item.title)}`}
                   className="mt-8 inline-flex items-center gap-2 text-sm font-semibold transition hover:text-[#D92D78]"
                 >
                   Discuss this option <ArrowRight size={16} />
@@ -176,7 +176,7 @@ export default function PricingPage() {
             </li>
           </ol>
           <Link
-            href="/contact"
+            href="/interest?product=software-services"
             className="mt-10 inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-black transition hover:bg-[#FF4D94]"
           >
             Contact Wanky <ArrowRight size={16} />

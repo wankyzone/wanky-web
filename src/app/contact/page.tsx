@@ -43,8 +43,6 @@ const inquiryTypes = [
   },
 ];
 
-const email = "wankyzone@gmail.com";
-
 export default function ContactPage() {
   return (
     <main className="overflow-hidden bg-white text-zinc-950">
@@ -83,7 +81,7 @@ export default function ContactPage() {
               return (
                 <a
                   key={item.title}
-                  href={`mailto:${email}?subject=${encodeURIComponent(item.subject)}`}
+                  href={`/interest?product=${item.title === "ERS" ? "ers" : item.title === "Wanky Cloud" ? "wanky-cloud" : item.title === "Wanky Protect" ? "wanky-protect" : "partnership"}`}
                   className="group rounded-3xl border border-zinc-200 p-6 transition hover:-translate-y-1 hover:border-[#FF4D94]/60 hover:shadow-lg hover:shadow-pink-500/5"
                 >
                   <div className="flex items-center justify-between">
@@ -116,10 +114,10 @@ export default function ContactPage() {
             like.
           </p>
           <a
-            href={`mailto:${email}?subject=${encodeURIComponent("Wanky Technologies Inquiry")}`}
+            href="/interest?product=partnership"
             className="mt-8 flex items-center justify-between gap-3 rounded-full border border-white/15 bg-white/[0.04] px-5 py-4 text-sm font-semibold transition hover:border-[#FF4D94]/60 hover:bg-white/[0.08]"
           >
-            <span className="break-all">{email}</span>
+            <span className="break-all">Start a guided inquiry</span>
             <ArrowRight size={17} className="shrink-0 text-[#FF4D94]" />
           </a>
           <p className="mt-4 text-xs leading-5 text-zinc-500">
