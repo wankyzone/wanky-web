@@ -23,12 +23,13 @@ export async function POST(request: NextRequest) {
     if (contentLength > 12_000) {
       return NextResponse.json({ error: "Your submission is too large." }, { status: 413 });
     }
-    const body = await request.json();
+    const body: Record<string, unknown> = await request.json();
     // Quietly accept honeypot submissions without storing or emailing them.
     if (clean(body.website, 200)) return NextResponse.json({ ok: true });
 
-    const rawInterests = Array.isArray(body.interests) ? body.interests : [body.product];
-    const interests = [...new Set(rawInterests.filter((value: unknown): value is string => typeof value === "string").map((value: string) => value.trim()).filter((value: string) => allowedProducts.has(value)))];
+    const rawInterests: unknown[] = Array.isArray(body.interests) ? body.interests : [body.product];
+    const validInterests = rawInterests.every((value): value is string => typeof value === "string" && allowedProducts.has(value.trim()));
+    const interests = validInterests ? [...new Set(rawInterests.map((value) => (value as string).trim()))] : [];
     const product = clean(body.product, 60) || interests[0] || "";
     const name = clean(body.name, 120);
     const email = clean(body.email, 254).toLowerCase();
@@ -40,7 +41,7 @@ export async function POST(request: NextRequest) {
     const budget = clean(body.budget, 80);
     const updatesConsent = body.updatesConsent === true;
 
-    if (!allowedProducts.has(product) || !allowedGoals.has(goal) || name.length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!validInterests || interests.length === 0 || !allowedProducts.has(product) || !allowedGoals.has(goal) || name.length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: "Please check your product choice, name, goal, and email address." }, { status: 400 });
     }
 
