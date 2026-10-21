@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const runtime = "nodejs";
 
-const allowedProducts = new Set(["ers", "wanky-cloud", "wanky-ai", "wanky-protect", "software-services", "partnership"]);
+const allowedProducts = new Set(["ers", "wanky-cloud", "wanky-ai", "wanky-protect", "software-services", "partnership", "investment", "careers", "classroom", "other"]);
 const allowedGoals = new Set(["Get product updates", "Join an early-access or feedback group", "Discuss a project or service", "Explore a partnership", "Ask a question", "Other"]);
 const clean = (value: unknown, max: number) => typeof value === "string" ? value.trim().slice(0, max) : "";
 
@@ -27,7 +27,9 @@ export async function POST(request: NextRequest) {
     // Quietly accept honeypot submissions without storing or emailing them.
     if (clean(body.website, 200)) return NextResponse.json({ ok: true });
 
-    const product = clean(body.product, 60);
+    const rawInterests = Array.isArray(body.interests) ? body.interests : [body.product];
+    const interests = [...new Set(rawInterests.filter((value: unknown): value is string => typeof value === "string").map((value: string) => value.trim()).filter((value: string) => allowedProducts.has(value)))];
+    const product = clean(body.product, 60) || interests[0] || "";
     const name = clean(body.name, 120);
     const email = clean(body.email, 254).toLowerCase();
     const organization = clean(body.organization, 180);
@@ -58,7 +60,7 @@ export async function POST(request: NextRequest) {
         Prefer: "return=representation",
       },
       body: JSON.stringify({
-        product, name, email, organization: organization || null, role: role || null,
+        product, interests, name, email, organization: organization || null, role: role || null,
         goal, details: details || null, timeline: timeline || null, budget: budget || null,
         updates_consent: updatesConsent,
         source_path: clean(body.sourcePath, 200) || "/interest",
@@ -79,7 +81,7 @@ export async function POST(request: NextRequest) {
 
     if (resendKey && fromEmail) {
       const summary = [
-        `Product: ${product}`, `Name: ${name}`, `Email: ${email}`,
+        `Interests: ${interests.join(", ")}`, `Primary interest: ${product}`, `Name: ${name}`, `Email: ${email}`,
         `Organization: ${organization || "Not provided"}`, `Role: ${role || "Not provided"}`,
         `Goal: ${goal}`, `Timeline: ${timeline || "Not provided"}`,
         `Budget: ${budget || "Not provided"}`, `Updates consent: ${updatesConsent ? "Yes" : "No"}`,
@@ -93,7 +95,7 @@ export async function POST(request: NextRequest) {
             from: fromEmail,
             to: [notifyEmail],
             reply_to: email,
-            subject: `New Wanky interest: ${product} — ${name}`,
+            subject: `New Wanky interest: ${interests.join(", ")} — ${name}`,
             text: summary,
           }),
           cache: "no-store",
