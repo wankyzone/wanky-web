@@ -10,20 +10,37 @@ export async function POST(request: NextRequest) {
   try {
     const origin = request.headers.get("origin");
     const configuredSiteUrl = process.env.WANKY_NEWSLETTER_SITE_URL;
-    if (origin && configuredSiteUrl) {
-      try {
-        if (new URL(origin).origin !== new URL(configuredSiteUrl).origin) {
-          return NextResponse.json({ error: "Invalid request origin." }, { status: 403 });
-        }
-      } catch {
+    if (!origin) {
+      return NextResponse.json({ error: "Request origin is required." }, { status: 403 });
+    }
+    try {
+      const requestOrigin = new URL(origin).origin;
+      const allowedOrigins = new Set([request.nextUrl.origin]);
+      if (configuredSiteUrl) allowedOrigins.add(new URL(configuredSiteUrl).origin);
+      if (!allowedOrigins.has(requestOrigin)) {
         return NextResponse.json({ error: "Invalid request origin." }, { status: 403 });
       }
+    } catch {
+      return NextResponse.json({ error: "Invalid request origin." }, { status: 403 });
     }
     const contentLength = Number(request.headers.get("content-length") || "0");
     if (contentLength > 12_000) {
       return NextResponse.json({ error: "Your submission is too large." }, { status: 413 });
     }
-    const body: Record<string, unknown> = await request.json();
+    const rawBody = await request.text();
+    if (new TextEncoder().encode(rawBody).byteLength > 12_000) {
+      return NextResponse.json({ error: "Your submission is too large." }, { status: 413 });
+    }
+    let body: Record<string, unknown>;
+    try {
+      const parsed: unknown = JSON.parse(rawBody);
+      if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+        return NextResponse.json({ error: "Invalid submission." }, { status: 400 });
+      }
+      body = parsed as Record<string, unknown>;
+    } catch {
+      return NextResponse.json({ error: "Invalid submission." }, { status: 400 });
+    }
     // Quietly accept honeypot submissions without storing or emailing them.
     if (clean(body.website, 200)) return NextResponse.json({ ok: true });
 
