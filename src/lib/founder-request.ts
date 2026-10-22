@@ -1,3 +1,5 @@
+import { createHmac } from "node:crypto";
+import { createClient } from "@supabase/supabase-js";
 import type { NextRequest } from "next/server";
 
 const MAX_FOUNDER_BODY_BYTES = 8_192;
@@ -37,4 +39,24 @@ export async function readFounderJson(
   } catch {
     return null;
   }
+}
+
+export async function allowFounderLoginAttempt(request: NextRequest): Promise<boolean> {
+  const address = request.headers.get("x-real-ip")?.trim()
+    || request.headers.get("x-forwarded-for")?.split(",").at(-1)?.trim();
+  const url = process.env.WANKY_NEWSLETTER_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.WANKY_NEWSLETTER_SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const secret = process.env.WANKY_NEWSLETTER_TOKEN_SECRET;
+  if (!address || address.length > 64 || !url || !key || !secret) return false;
+
+  const hash = createHmac("sha256", secret).update(`ip:${address}`).digest("hex");
+  const client = createClient(url, key, {
+    db: { schema: "wanky_newsletter" },
+    auth: { autoRefreshToken: false, detectSessionInUrl: false, persistSession: false },
+  });
+  const { data, error } = await client.rpc("consume_rate_limit", {
+    p_key_hash: hash,
+    p_limit: 5,
+  });
+  return !error && data === true;
 }
