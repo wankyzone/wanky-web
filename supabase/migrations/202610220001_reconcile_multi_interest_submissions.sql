@@ -25,7 +25,7 @@ set interests = jsonb_build_array(product)
 where interests is null or jsonb_typeof(interests) <> 'array' or interests = '[]'::jsonb;
 
 alter table public.wanky_interest_submissions
-  alter column interests set default '[]'::jsonb,
+  alter column interests drop default,
   alter column interests set not null;
 
 alter table public.wanky_interest_submissions
