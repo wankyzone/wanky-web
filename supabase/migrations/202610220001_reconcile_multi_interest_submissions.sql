@@ -45,21 +45,24 @@ alter table public.wanky_interest_submissions
 alter table public.wanky_interest_submissions
   add constraint wanky_interest_submissions_interests_check
   check (
-    jsonb_typeof(interests) = 'array'
-    and jsonb_array_length(interests) between 1 and 10
-    and (
-      interests
-        - 'ers'
-        - 'wanky-cloud'
-        - 'wanky-ai'
-        - 'wanky-protect'
-        - 'software-services'
-        - 'partnership'
-        - 'investment'
-        - 'careers'
-        - 'classroom'
-        - 'other'
-    ) = '[]'::jsonb
+    case
+      when jsonb_typeof(interests) = 'array' then
+        jsonb_array_length(interests) between 1 and 10
+        and (
+          interests
+            - 'ers'
+            - 'wanky-cloud'
+            - 'wanky-ai'
+            - 'wanky-protect'
+            - 'software-services'
+            - 'partnership'
+            - 'investment'
+            - 'careers'
+            - 'classroom'
+            - 'other'
+        ) = '[]'::jsonb
+      else false
+    end
   );
 
 create index if not exists wanky_interest_submissions_interests_idx
