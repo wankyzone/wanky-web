@@ -47,15 +47,19 @@ alter table public.wanky_interest_submissions
   check (
     jsonb_typeof(interests) = 'array'
     and jsonb_array_length(interests) between 1 and 10
-    and not exists (
-      select 1
-      from jsonb_array_elements_text(interests) as item(value)
-      where item.value not in (
-        'ers', 'wanky-cloud', 'wanky-ai', 'wanky-protect',
-        'software-services', 'partnership', 'investment',
-        'careers', 'classroom', 'other'
-      )
-    )
+    and (
+      interests
+        - 'ers'
+        - 'wanky-cloud'
+        - 'wanky-ai'
+        - 'wanky-protect'
+        - 'software-services'
+        - 'partnership'
+        - 'investment'
+        - 'careers'
+        - 'classroom'
+        - 'other'
+    ) = '[]'::jsonb
   );
 
 create index if not exists wanky_interest_submissions_interests_idx
