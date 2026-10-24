@@ -292,6 +292,69 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "beyond-the-build-systems-behind-wanky",
+    title: "Beyond the Build: Why We're Building the Systems Behind Wanky Technologies",
+    seoTitle: "Beyond the Build: Wanky Technologies Week 40 Update",
+    socialSharingTitle: "Beyond the Build: Connecting Products, People, and Operations",
+    socialSharingDescription:
+      "A Week 40 update on product-interest forms, internal operations, newsletter reliability, and ERS release validation.",
+    category: "Weekly update",
+    dateLabel: "25 October 2026",
+    author: "Wanky Technologies",
+    excerpt:
+      "Building a technology company takes more than shipping code. This week, we look at the systems connecting our products to people and supporting more reliable operations.",
+    status: "Scheduled",
+    updateNumber: "Week 40",
+    intro: [
+      "Building a technology company is often presented as a simple process: come up with an idea, build a product, launch it, and find customers. The reality is more complicated.",
+      "A product needs more than code. It needs a way for people to discover it, express interest, receive information, and eventually become users. The business behind the product also needs systems to manage inquiries, communicate responsibly, and understand what is happening across its operations.",
+      "That is the thinking behind our current work at Wanky Technologies.",
+    ],
+    sections: [
+      {
+        heading: "Products are only part of the equation",
+        paragraphs: [
+          "We're working on product-interest forms across the Wanky ecosystem. As these products develop, we need a consistent way for interested people to learn about them and register their interest.",
+          "A good form should do more than collect information. It should make the next step clear, help us understand what people are interested in, and give us a reliable starting point for follow-up. The goal is to make it easier for people to express interest while helping us organize and respond to that interest more effectively.",
+        ],
+      },
+      {
+        heading: "Building a Founder Control Centre",
+        paragraphs: [
+          "As a company grows, important information can become scattered across forms, email tools, databases, and separate product workflows. That creates unnecessary friction.",
+          "We're developing the Founder Control Centre to bring key operational activities into a more unified workspace. The broader direction includes inquiry management, product-interest visibility, newsletter operations, and other internal tools that support the business.",
+          "This is not simply about creating another dashboard. It's about building a practical operating layer for the company. The work must also account for access control, data protection, reliable information, and clear operational workflows.",
+        ],
+      },
+      {
+        heading: "Communication requires trust",
+        paragraphs: [
+          "Newsletters can help us share product updates, development progress, and information with people who choose to hear from us. But a responsible newsletter system requires more than an email editor and a send button.",
+          "It needs appropriate subscriber consent, reliable unsubscribe handling, safeguards against duplicate sends, and a way to record and inspect delivery outcomes.",
+          "We're working on the systems needed to support these requirements. Until the delivery workflow has been fully validated, campaign preparation and production sending must remain distinct.",
+        ],
+      },
+      {
+        heading: "ERS and the importance of release readiness",
+        paragraphs: [
+          "The Errand Runners System (ERS) is designed to connect clients who need errands completed with runners who can fulfil them. Bringing that experience to mobile requires more than building screens. Critical user flows, authentication, backend integrations, and operational dependencies must work together.",
+          "Our current focus remains release validation: testing the experience, identifying issues, and addressing the requirements that stand between development and a dependable production release.",
+          "We are also progressing the planned AWS migration. Because infrastructure changes can affect deployment and release readiness, we need to evaluate those dependencies carefully rather than promise a launch date prematurely.",
+        ],
+      },
+      {
+        heading: "Building for the long term",
+        paragraphs: [
+          "The work behind a technology company is not always visible to the public. Sometimes it means improving a form. Sometimes it means validating a database workflow, tightening security, testing an integration, or ensuring that an unsubscribe request is handled correctly.",
+          "These tasks may not be as immediately exciting as launching a new product, but they help establish the foundations on which sustainable products can operate.",
+          "That is the direction we're pursuing at Wanky Technologies: connect our products to the people interested in them, improve the systems that support our operations, and approach releases with care.",
+        ],
+        closingStatement:
+          "We're not just building products. We're building the systems that help those products become useful, dependable services.",
+      },
+    ],
+  },
 ];
 
 export function getBlogPost(slug: string) {
