@@ -115,6 +115,15 @@ export class SupabaseNewsletterRepository implements NewsletterRepository {
     return parseTokenResult(data, "unsubscribed", "already_unsubscribed");
   }
 
+  async unsubscribeCampaignRecipient(tokenHash: string): Promise<TokenResult> {
+    const { data, error } = await this.client.rpc("unsubscribe_campaign_recipient", {
+      p_unsubscribe_token_hash: tokenHash,
+    });
+
+    if (error) throw new Error("Newsletter unsubscribe unavailable.");
+    return parseTokenResult(data, "unsubscribed", "already_unsubscribed");
+  }
+
   async listConfirmedRecipients(): Promise<string[]> {
     const recipients: string[] = [];
     let offset = 0;
