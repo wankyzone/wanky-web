@@ -64,6 +64,10 @@ class FakeRepository implements NewsletterRepository {
     return this.tokenResult;
   }
 
+  async unsubscribeCampaignRecipient() {
+    return this.tokenResult;
+  }
+
   async listConfirmedRecipients() {
     return ["member@example.com"];
   }
