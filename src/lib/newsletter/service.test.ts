@@ -16,6 +16,7 @@ import {
 class FakeRepository implements NewsletterRepository {
   state: SubscriptionRequestState = "confirmation_required";
   tokenResult: TokenResult = "confirmed";
+  campaignTokenResult: TokenResult = "invalid";
   rateAllowed = true;
   welcomeClaim: { email: string; deliveryKey: string } | null = {
     email: "member@example.com",
@@ -65,7 +66,7 @@ class FakeRepository implements NewsletterRepository {
   }
 
   async unsubscribeCampaignRecipient() {
-    return this.tokenResult;
+    return this.campaignTokenResult;
   }
 
   async listConfirmedRecipients() {
@@ -212,6 +213,20 @@ describe("NewsletterService", () => {
   it("makes repeated unsubscribe outcomes safe and idempotent", async () => {
     repository.tokenResult = "already_unsubscribed";
     await expect(service.unsubscribe("A".repeat(43))).resolves.toBe("already_unsubscribed");
+  });
+
+  it("falls back to campaign-recipient tokens when a subscription token is unknown", async () => {
+    repository.tokenResult = "invalid";
+    repository.campaignTokenResult = "unsubscribed";
+
+    await expect(service.unsubscribe("A".repeat(43))).resolves.toBe("unsubscribed");
+  });
+
+  it("returns invalid when neither subscription nor campaign token matches", async () => {
+    repository.tokenResult = "invalid";
+    repository.campaignTokenResult = "invalid";
+
+    await expect(service.unsubscribe("A".repeat(43))).resolves.toBe("invalid");
   });
 
   it("clears the pending token and reports failed confirmation delivery", async () => {
