@@ -32,10 +32,11 @@ export default function NewsletterAction({ kind }: { kind: NewsletterActionKind 
 
   async function handleAction() {
     const fragment = new URLSearchParams(window.location.hash.slice(1));
+    const query = new URLSearchParams(window.location.search);
     const token =
       kind === "confirm"
         ? fragment.get("token")
-        : window.location.hash.slice(1);
+        : query.get("token") ?? fragment.get("token") ?? window.location.hash.slice(1);
     const unsubscribeToken =
       kind === "confirm" ? fragment.get("unsubscribeToken") : null;
 
