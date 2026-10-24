@@ -291,8 +291,7 @@ export const blogPosts: BlogPost[] = [
         ],
       },
     ],
-  },,
-
+  },
   {
     slug: "beyond-the-build-systems-behind-wanky",
     title: "Beyond the Build: Why We're Building the Systems Behind Wanky Technologies",
