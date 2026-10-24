@@ -14,17 +14,17 @@ export interface NewsletterRepository {
   }): Promise<SubscriptionRequestState>;
   clearFailedConfirmation(tokenHash: string): Promise<void>;
   confirmSubscription(tokenHash: string): Promise<TokenResult>;
-    claimWelcomeDelivery(
+  claimWelcomeDelivery(
     confirmationTokenHash: string,
     unsubscribeTokenHash: string,
   ): Promise<{ email: string; deliveryKey: string } | null>;
-
   finishWelcomeDelivery(
     confirmationTokenHash: string,
     unsubscribeTokenHash: string,
     success: boolean,
   ): Promise<boolean>;
   unsubscribe(tokenHash: string): Promise<TokenResult>;
+  unsubscribeCampaignRecipient(tokenHash: string): Promise<TokenResult>;
   listConfirmedRecipients(): Promise<string[]>;
 }
 
@@ -35,7 +35,6 @@ export interface NewsletterMailer {
     unsubscribeToken: string;
     idempotencyKey: string;
   }): Promise<void>;
-
   sendWelcome(input: {
     email: string;
     unsubscribeToken: string;
