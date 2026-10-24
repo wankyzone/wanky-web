@@ -180,7 +180,10 @@ export class NewsletterService {
 
   async unsubscribe(token: unknown): Promise<TokenResult> {
     if (!isNewsletterToken(token)) return "invalid";
-    return this.repository.unsubscribe(hashNewsletterToken(token));
+    const tokenHash = hashNewsletterToken(token);
+    const existingResult = await this.repository.unsubscribe(tokenHash);
+    if (existingResult !== "invalid") return existingResult;
+    return this.repository.unsubscribeCampaignRecipient(tokenHash);
   }
 
   async getConfirmedRecipients(): Promise<string[]> {
